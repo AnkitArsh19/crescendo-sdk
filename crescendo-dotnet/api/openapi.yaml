@@ -1,0 +1,2894 @@
+openapi: 3.1.0
+info:
+  contact:
+    name: Crescendo Developer Support
+    url: https://crescendo.run/docs
+  description: "The Crescendo API powers workflow automation and transactional email\
+    \ at scale. Authenticate with a Bearer API key (prefix: `re_...`) obtained from\
+    \ the dashboard."
+  license:
+    name: MIT
+    url: https://github.com/AnkitArsh19/crescendo/blob/main/LICENSE
+  title: Crescendo API
+  version: v1
+servers:
+- description: Production
+  url: https://api.crescendo.run
+- description: Local Development
+  url: http://localhost:8080
+tags:
+- description: Public API for email delivery metrics and analytics
+  name: Metrics
+- description: "Public API for creating, managing, and triggering workflows"
+  name: Workflows
+- description: Public API for managing contacts/audiences
+  name: Audiences (Contacts)
+- description: Public API for managing third-party app credentials
+  name: Connections
+- description: Public API for managing email domains
+  name: Domains
+- description: Public API for sending and tracking emails
+  name: Emails
+- description: Public API for retrieving supported apps and actions
+  name: App Catalog
+- description: Public API for polling execution status and logs
+  name: Workflow Runs
+- description: Public API for managing email suppressions
+  name: Suppressions
+- description: Public API for managing email templates
+  name: Templates
+- description: Public API for managing outbound webhook subscriptions
+  name: Webhooks
+- description: Public API for managing custom events that trigger or resume workflows
+  name: Custom Events
+paths:
+  /api/v1/workflows:
+    get:
+      description: Lists workflows with optional status filter and cursor pagination.
+        Requires workflow:read scope.
+      operationId: listWorkflows
+      parameters:
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: after
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WorkflowListResponse"
+          description: OK
+      summary: List workflows
+      tags:
+      - Workflows
+    post:
+      description: Creates a new workflow. Requires workflow:write scope.
+      operationId: createWorkflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkflowRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WorkflowSummaryResponse"
+          description: OK
+      summary: Create workflow
+      tags:
+      - Workflows
+  /api/v1/workflows/{workflowId}/trigger:
+    post:
+      description: Programmatically triggers an active workflow. Returns immediately
+        while execution happens asynchronously. Requires workflow:trigger scope.
+      operationId: triggerWorkflow
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: {}
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WorkflowRunSummaryResponse"
+          description: OK
+      summary: Trigger workflow
+      tags:
+      - Workflows
+  /api/v1/workflows/{workflowId}/runs/{runId}/cancel:
+    post:
+      description: Cancels a pending or currently executing run. Requires run:cancel
+        scope.
+      operationId: cancelRun
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: runId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Cancel workflow run
+      tags:
+      - Workflow Runs
+  /api/v1/workflows/{workflowId}/deactivate:
+    post:
+      description: Disables triggering for a workflow. Requires workflow:write scope.
+      operationId: deactivateWorkflow
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Deactivate workflow
+      tags:
+      - Workflows
+  /api/v1/workflows/{workflowId}/activate:
+    post:
+      description: Enables triggering for a workflow. Requires workflow:write scope.
+      operationId: activateWorkflow
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Activate workflow
+      tags:
+      - Workflows
+  /api/v1/webhooks:
+    get:
+      operationId: listSubscriptions
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/PublicWebhookListResponse"
+                type: array
+                default: null
+          description: OK
+      tags:
+      - Webhooks
+    post:
+      operationId: createSubscription
+      parameters:
+      - explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWebhookRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicWebhookResponse"
+          description: OK
+      tags:
+      - Webhooks
+  /api/v1/templates:
+    get:
+      operationId: listTemplates
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/PublicTemplateResponse"
+                type: array
+                default: null
+          description: OK
+      tags:
+      - Templates
+    post:
+      operationId: createTemplate
+      parameters:
+      - explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTemplateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicTemplateResponse"
+          description: OK
+      tags:
+      - Templates
+  /api/v1/templates/{templateId}/test:
+    post:
+      operationId: testSend
+      parameters:
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestSendRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicTestSendResponse"
+          description: OK
+      tags:
+      - Templates
+  /api/v1/templates/{templateId}/publish:
+    post:
+      operationId: publishTemplate
+      parameters:
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicTemplateResponse"
+          description: OK
+      tags:
+      - Templates
+  /api/v1/templates/clone-from-broadcast/{broadcastId}:
+    post:
+      operationId: cloneFromBroadcast
+      parameters:
+      - explode: false
+        in: path
+        name: broadcastId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicTemplateResponse"
+          description: OK
+      tags:
+      - Templates
+  /api/v1/suppressions:
+    get:
+      description: Lists all suppressed email addresses. Requires suppression:read
+        scope.
+      operationId: listSuppressions
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: after
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicPageSuppressionResponse"
+          description: OK
+      summary: List suppressions
+      tags:
+      - Suppressions
+    post:
+      description: Manually suppresses an email address. Requires suppression:write
+        scope.
+      operationId: addSuppression
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddSuppressionRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Add a suppression
+      tags:
+      - Suppressions
+  /api/v1/suppressions/import:
+    post:
+      description: Imports a bulk list of suppressions. Requires suppression:import
+        scope.
+      operationId: importSuppressions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportSuppressionsRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Bulk import suppressions
+      tags:
+      - Suppressions
+  /api/v1/emails:
+    get:
+      operationId: listEmails
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/EmailLogResponse"
+                type: array
+                default: null
+          description: OK
+      summary: List emails
+      tags:
+      - Emails
+    post:
+      operationId: sendEmail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendEmailRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/SendEmailResponse"
+          description: OK
+      tags:
+      - Emails
+  /api/v1/emails/templated:
+    post:
+      operationId: sendTemplated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendTemplatedRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/SendEmailResponse"
+          description: OK
+      tags:
+      - Emails
+  /api/v1/emails/batch:
+    post:
+      operationId: sendBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendBatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/SendBatchResponse"
+          description: OK
+      tags:
+      - Emails
+  /api/v1/email/custom-events:
+    get:
+      operationId: listEvents
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/CustomEvent"
+                type: array
+                default: null
+          description: OK
+      summary: List custom events
+      tags:
+      - Custom Events
+    post:
+      operationId: createEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomEventRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CustomEvent"
+          description: OK
+      summary: Create a custom event
+      tags:
+      - Custom Events
+  /api/v1/email/custom-events/{name}/fire:
+    post:
+      operationId: fireEvent
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FireCustomEventRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Fire a custom event
+      tags:
+      - Custom Events
+  /api/v1/domains:
+    get:
+      description: Lists all registered domains. Requires domain:read scope.
+      operationId: listDomains
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: after
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicPageDomainResponse"
+          description: OK
+      summary: List domains
+      tags:
+      - Domains
+    post:
+      description: Registers a new domain. Requires domain:write scope.
+      operationId: addDomain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddDomainRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DomainResponse"
+          description: OK
+      summary: Add a domain
+      tags:
+      - Domains
+  /api/v1/domains/{domainId}/verify:
+    post:
+      description: Triggers a DNS verification check. Requires domain:write scope.
+      operationId: verifyDomain
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DomainResponse"
+          description: OK
+      summary: Verify domain DNS
+      tags:
+      - Domains
+  /api/v1/connections:
+    get:
+      description: Lists all connections. Requires connection:read scope.
+      operationId: listConnections
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/ConnectionResponse"
+                type: array
+                default: null
+          description: OK
+      summary: List connections
+      tags:
+      - Connections
+    post:
+      description: Creates a new connection for a third-party app. Requires connection:write
+        scope.
+      operationId: createConnection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateConnectionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ConnectionResponse"
+          description: OK
+      summary: Create connection
+      tags:
+      - Connections
+  /api/v1/audiences:
+    get:
+      description: Lists all contacts. Requires contact:read scope.
+      operationId: listContacts
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: after
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicPageContactResponse"
+          description: OK
+      summary: List contacts
+      tags:
+      - Audiences (Contacts)
+    post:
+      description: Adds a new contact to your audience. Requires contact:write scope.
+      operationId: createContact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateContactRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ContactResponse"
+          description: OK
+      summary: Create a contact
+      tags:
+      - Audiences (Contacts)
+  /api/v1/workflows/{workflowId}:
+    delete:
+      description: Soft-deletes a workflow. Requires workflow:write scope.
+      operationId: deleteWorkflow
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete workflow
+      tags:
+      - Workflows
+    get:
+      description: Gets metadata and step configuration for a specific workflow. Requires
+        workflow:read scope.
+      operationId: getWorkflow
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WorkflowDetailResponse"
+          description: OK
+      summary: Get workflow details
+      tags:
+      - Workflows
+    patch:
+      description: Updates a workflow's metadata. Requires workflow:write scope.
+      operationId: updateWorkflow
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWorkflowRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Update workflow
+      tags:
+      - Workflows
+  /api/v1/templates/{templateId}:
+    delete:
+      operationId: deleteTemplate
+      parameters:
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      tags:
+      - Templates
+    get:
+      operationId: getTemplate
+      parameters:
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicTemplateResponse"
+          description: OK
+      tags:
+      - Templates
+    patch:
+      operationId: updateTemplate
+      parameters:
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTemplateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PublicTemplateResponse"
+          description: OK
+      tags:
+      - Templates
+  /api/v1/connections/{connectionId}:
+    delete:
+      description: Deletes a connection. Requires connection:write scope.
+      operationId: deleteConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete connection
+      tags:
+      - Connections
+    get:
+      description: Gets metadata for a specific connection. Credentials are never
+        returned. Requires connection:read scope.
+      operationId: getConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ConnectionResponse"
+          description: OK
+      summary: Get connection details
+      tags:
+      - Connections
+    patch:
+      description: Updates a connection's name or credentials. Requires connection:write
+        scope.
+      operationId: updateConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConnectionRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Update connection
+      tags:
+      - Connections
+  /api/v1/audiences/{contactId}:
+    delete:
+      description: Deletes a contact. Requires contact:write scope.
+      operationId: deleteContact
+      parameters:
+      - explode: false
+        in: path
+        name: contactId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete contact
+      tags:
+      - Audiences (Contacts)
+    get:
+      description: Gets details for a specific contact. Requires contact:read scope.
+      operationId: getContact
+      parameters:
+      - explode: false
+        in: path
+        name: contactId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ContactResponse"
+          description: OK
+      summary: Get contact details
+      tags:
+      - Audiences (Contacts)
+    patch:
+      description: Updates a contact. Requires contact:write scope.
+      operationId: updateContact
+      parameters:
+      - explode: false
+        in: path
+        name: contactId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateContactRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ContactResponse"
+          description: OK
+      summary: Update contact
+      tags:
+      - Audiences (Contacts)
+  /api/v1/workflows/{workflowId}/runs:
+    get:
+      description: Lists all execution runs for a specific workflow. Requires run:read
+        scope.
+      operationId: listRuns
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 20
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageWorkflowRunSummaryResponse"
+          description: OK
+      summary: List workflow runs
+      tags:
+      - Workflow Runs
+  /api/v1/workflows/{workflowId}/runs/{runId}:
+    get:
+      description: Gets execution details including step results for a specific run.
+        Requires run:read scope.
+      operationId: getRunDetail
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: runId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WorkflowRunDetailResponse"
+          description: OK
+      summary: Get run details
+      tags:
+      - Workflow Runs
+  /api/v1/workflows/{workflowId}/runs/stats:
+    get:
+      description: Gets aggregated execution statistics for a workflow. Requires run:read
+        scope.
+      operationId: getRunStats
+      parameters:
+      - explode: false
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WorkflowRunStatsResponse"
+          description: OK
+      summary: Get run statistics
+      tags:
+      - Workflow Runs
+  /api/v1/runs:
+    get:
+      description: Lists execution runs across all workflows. Requires run:read scope.
+      operationId: listAllRuns
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 20
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageWorkflowRunSummaryResponse"
+          description: OK
+      summary: List all runs
+      tags:
+      - Workflow Runs
+  /api/v1/runs/{runId}/steps:
+    get:
+      description: Lists step execution details for a specific run. Requires run:read
+        scope.
+      operationId: listStepRuns
+      parameters:
+      - explode: false
+        in: path
+        name: runId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/StepRunResponse"
+                type: array
+                default: null
+          description: OK
+      summary: List step runs
+      tags:
+      - Workflow Runs
+  /api/v1/runs/{runId}/steps/{stepRunId}:
+    get:
+      description: Gets specific step execution details. Requires run:read scope.
+      operationId: getStepRun
+      parameters:
+      - explode: false
+        in: path
+        name: runId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: stepRunId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StepRunResponse"
+          description: OK
+      summary: Get step run details
+      tags:
+      - Workflow Runs
+  /api/v1/metrics:
+    get:
+      operationId: getMetrics
+      parameters:
+      - explode: true
+        in: query
+        name: days
+        required: false
+        schema:
+          default: 30
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MetricsResponse"
+          description: OK
+      tags:
+      - Metrics
+  /api/v1/emails/{emailId}:
+    get:
+      operationId: getEmail
+      parameters:
+      - explode: false
+        in: path
+        name: emailId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/EmailLogResponse"
+          description: OK
+      summary: Get email details
+      tags:
+      - Emails
+  /api/v1/emails/search:
+    get:
+      operationId: searchEmails
+      parameters:
+      - explode: true
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/EmailLogResponse"
+                type: array
+                default: null
+          description: OK
+      summary: Search emails
+      tags:
+      - Emails
+  /api/v1/domains/{domainId}:
+    delete:
+      description: Deletes a domain. Requires domain:write scope.
+      operationId: deleteDomain
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete domain
+      tags:
+      - Domains
+    get:
+      description: Gets details and DNS records for a domain. Requires domain:read
+        scope.
+      operationId: getDomain
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DomainResponse"
+          description: OK
+      summary: Get domain details
+      tags:
+      - Domains
+  /api/v1/apps:
+    get:
+      description: Lists all supported apps in the catalog. Requires app:read scope.
+      operationId: listApps
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/AppSummaryResponse"
+                type: array
+                default: null
+          description: OK
+      summary: List apps
+      tags:
+      - App Catalog
+  /api/v1/apps/{appKey}:
+    get:
+      description: "Gets triggers, actions, and connection schemas for a specific\
+        \ app. Requires app:read scope."
+      operationId: getApp
+      parameters:
+      - explode: false
+        in: path
+        name: appKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AppDetailResponse"
+          description: OK
+      summary: Get app details
+      tags:
+      - App Catalog
+  /api/v1/webhooks/{id}:
+    delete:
+      operationId: deleteSubscription
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      tags:
+      - Webhooks
+  /api/v1/suppressions/{suppressionId}:
+    delete:
+      description: Removes an email address from the suppression list. Requires suppression:write
+        scope.
+      operationId: removeSuppression
+      parameters:
+      - explode: false
+        in: path
+        name: suppressionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete a suppression
+      tags:
+      - Suppressions
+  /api/v1/email/custom-events/{name}:
+    delete:
+      operationId: deleteEvent
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete a custom event
+      tags:
+      - Custom Events
+components:
+  schemas:
+    CreateWorkflowRequest:
+      example:
+        name: name
+        description: description
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+      required:
+      - name
+    WorkflowSummaryResponse:
+      example:
+        id: id
+        name: name
+        description: description
+        isActive: true
+        status: status
+        stepCount: 0
+        revision: 6
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        lastRunAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        isActive:
+          type: boolean
+        status:
+          type: string
+        stepCount:
+          format: int32
+          type: integer
+        revision:
+          format: int64
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        lastRunAt:
+          format: date-time
+          type: string
+    WorkflowRunSummaryResponse:
+      example:
+        id: id
+        workflowId: workflowId
+        status: status
+        errorMessage: errorMessage
+        totalSteps: 0
+        completedSteps: 6
+        failedSteps: 1
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        completedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        workflowId:
+          type: string
+        status:
+          type: string
+        errorMessage:
+          type: string
+        totalSteps:
+          format: int32
+          type: integer
+        completedSteps:
+          format: int32
+          type: integer
+        failedSteps:
+          format: int32
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        completedAt:
+          format: date-time
+          type: string
+    CreateWebhookRequest:
+      example:
+        url: url
+        subscribedEvents:
+        - subscribedEvents
+        - subscribedEvents
+      properties:
+        url:
+          minLength: 1
+          type: string
+        subscribedEvents:
+          items:
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
+          default: null
+      required:
+      - subscribedEvents
+      - url
+    PublicWebhookResponse:
+      example:
+        id: id
+        url: url
+        signingSecret: signingSecret
+        subscribedEvents:
+        - subscribedEvents
+        - subscribedEvents
+        createdAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        signingSecret:
+          type: string
+        subscribedEvents:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          default: null
+        createdAt:
+          format: date-time
+          type: string
+    CreateTemplateRequest:
+      example:
+        name: name
+        subject: subject
+        htmlBody: htmlBody
+        textBody: textBody
+        variables:
+        - name: name
+          type: STRING
+          fallbackValue: fallbackValue
+        - name: name
+          type: STRING
+          fallbackValue: fallbackValue
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        subject:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        htmlBody:
+          minLength: 1
+          type: string
+        textBody:
+          type: string
+        variables:
+          items:
+            $ref: "#/components/schemas/TemplateVariable"
+          type: array
+          default: null
+      required:
+      - htmlBody
+      - name
+      - subject
+    TemplateVariable:
+      example:
+        name: name
+        type: STRING
+        fallbackValue: fallbackValue
+      properties:
+        name:
+          type: string
+        type:
+          enum:
+          - STRING
+          - NUMBER
+          type: string
+        fallbackValue:
+          type: string
+    PublicTemplateResponse:
+      example:
+        id: id
+        name: name
+        subject: subject
+        htmlBody: htmlBody
+        textBody: textBody
+        status: status
+        variables:
+        - name: name
+          type: STRING
+          fallbackValue: fallbackValue
+        - name: name
+          type: STRING
+          fallbackValue: fallbackValue
+        hasPublishedSnapshot: true
+        publishedAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        subject:
+          type: string
+        htmlBody:
+          type: string
+        textBody:
+          type: string
+        status:
+          type: string
+        variables:
+          items:
+            $ref: "#/components/schemas/TemplateVariable"
+          type: array
+          default: null
+        hasPublishedSnapshot:
+          type: boolean
+        publishedAt:
+          format: date-time
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    TestSendRequest:
+      example:
+        toAddress: toAddress
+        variables:
+          key: ""
+      properties:
+        toAddress:
+          minLength: 1
+          type: string
+        variables:
+          additionalProperties: {}
+      required:
+      - toAddress
+    PublicTestSendResponse:
+      example:
+        emailLogId: emailLogId
+        status: status
+      properties:
+        emailLogId:
+          type: string
+        status:
+          type: string
+    AddSuppressionRequest:
+      example:
+        email: email
+      properties:
+        email:
+          format: email
+          minLength: 1
+          type: string
+      required:
+      - email
+    ImportSuppressionsRequest:
+      example:
+        emails:
+        - emails
+        - emails
+      properties:
+        emails:
+          items:
+            type: string
+          type: array
+          default: null
+    SendEmailRequest:
+      example:
+        from: from
+        to: to
+        subject: subject
+        htmlBody: htmlBody
+        textBody: textBody
+        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        templateData:
+          key: ""
+        emailType: TRANSACTIONAL
+      properties:
+        from:
+          format: email
+          minLength: 1
+          type: string
+        to:
+          format: email
+          minLength: 1
+          type: string
+        subject:
+          minLength: 1
+          type: string
+        htmlBody:
+          type: string
+        textBody:
+          type: string
+        templateId:
+          format: uuid
+          type: string
+        templateData:
+          additionalProperties: {}
+        emailType:
+          enum:
+          - TRANSACTIONAL
+          - MARKETING
+          type: string
+      required:
+      - emailType
+      - from
+      - subject
+      - to
+    SendEmailResponse:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        to: to
+        from: from
+        subject: subject
+        status: status
+      properties:
+        id:
+          format: uuid
+          type: string
+        to:
+          type: string
+        from:
+          type: string
+        subject:
+          type: string
+        status:
+          type: string
+    SendTemplatedRequest:
+      example:
+        from: from
+        to: to
+        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        templateData:
+          key: ""
+        emailType: TRANSACTIONAL
+      properties:
+        from:
+          format: email
+          minLength: 1
+          type: string
+        to:
+          format: email
+          minLength: 1
+          type: string
+        templateId:
+          format: uuid
+          type: string
+        templateData:
+          additionalProperties: {}
+        emailType:
+          enum:
+          - TRANSACTIONAL
+          - MARKETING
+          type: string
+      required:
+      - from
+      - templateId
+      - to
+    SendBatchRequest:
+      example:
+        from: from
+        subject: subject
+        htmlBody: htmlBody
+        textBody: textBody
+        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        templateData:
+          key: ""
+        emailType: TRANSACTIONAL
+        to:
+        - to
+        - to
+      properties:
+        from:
+          format: email
+          minLength: 1
+          type: string
+        subject:
+          minLength: 1
+          type: string
+        htmlBody:
+          type: string
+        textBody:
+          type: string
+        templateId:
+          format: uuid
+          type: string
+        templateData:
+          additionalProperties: {}
+        emailType:
+          enum:
+          - TRANSACTIONAL
+          - MARKETING
+          type: string
+        to:
+          items:
+            format: email
+            type: string
+          minItems: 1
+          type: array
+          default: null
+      required:
+      - from
+      - subject
+      - to
+    SendBatchResponse:
+      example:
+        emails:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          to: to
+          from: from
+          subject: subject
+          status: status
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          to: to
+          from: from
+          subject: subject
+          status: status
+      properties:
+        emails:
+          items:
+            $ref: "#/components/schemas/SendEmailResponse"
+          type: array
+          default: null
+    CreateCustomEventRequest:
+      example:
+        name: name
+        jsonSchema:
+          key: ""
+      properties:
+        name:
+          type: string
+        jsonSchema:
+          additionalProperties: {}
+    CustomEvent:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        jsonSchema:
+          key: ""
+        createdAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uuid
+          type: string
+        userId:
+          format: uuid
+          type: string
+        name:
+          type: string
+        jsonSchema:
+          additionalProperties: {}
+        createdAt:
+          format: date-time
+          type: string
+    FireCustomEventRequest:
+      example:
+        correlationKey: correlationKey
+        payload:
+          key: ""
+      properties:
+        correlationKey:
+          type: string
+        payload:
+          additionalProperties: {}
+    AddDomainRequest:
+      example:
+        domainName: domainName
+        allowedEmailType: TRANSACTIONAL_ONLY
+        credentialSource: PERSONAL
+        emailProviderConnectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        domainName:
+          minLength: 1
+          type: string
+        allowedEmailType:
+          enum:
+          - TRANSACTIONAL_ONLY
+          - MARKETING_AND_BULK
+          - BOTH
+          type: string
+        credentialSource:
+          enum:
+          - PERSONAL
+          - PLATFORM
+          type: string
+        emailProviderConnectionId:
+          format: uuid
+          type: string
+      required:
+      - domainName
+    DnsRecord:
+      example:
+        type: type
+        name: name
+        value: value
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+    DomainResponse:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        domainName: domainName
+        status: status
+        requiredDnsRecords:
+        - type: type
+          name: name
+          value: value
+        - type: type
+          name: name
+          value: value
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        verifiedAt: 2000-01-23T04:56:07.000+00:00
+        spfVerified: true
+        dkimVerified: true
+        dmarcVerified: true
+        dailySendCap: 0
+        warmingStatus: warmingStatus
+        sendReadiness: sendReadiness
+        allowedEmailType: allowedEmailType
+        credentialSource: credentialSource
+        emailProviderConnectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        healthStatus: healthStatus
+        warnings:
+        - warnings
+        - warnings
+        trackingEnabled: true
+        unsubscribeLogoUrl: unsubscribeLogoUrl
+        unsubscribePrimaryColor: unsubscribePrimaryColor
+        unsubscribeCopy: unsubscribeCopy
+        bimiLogoUrl: bimiLogoUrl
+        bimiVmcUrl: bimiVmcUrl
+      properties:
+        id:
+          format: uuid
+          type: string
+        domainName:
+          type: string
+        status:
+          type: string
+        requiredDnsRecords:
+          items:
+            $ref: "#/components/schemas/DnsRecord"
+          type: array
+          default: null
+        createdAt:
+          format: date-time
+          type: string
+        verifiedAt:
+          format: date-time
+          type: string
+        spfVerified:
+          type: boolean
+        dkimVerified:
+          type: boolean
+        dmarcVerified:
+          type: boolean
+        dailySendCap:
+          format: int32
+          type: integer
+        warmingStatus:
+          type: string
+        sendReadiness:
+          type: string
+        allowedEmailType:
+          type: string
+        credentialSource:
+          type: string
+        emailProviderConnectionId:
+          format: uuid
+          type: string
+        healthStatus:
+          type: string
+        warnings:
+          items:
+            type: string
+          type: array
+          default: null
+        trackingEnabled:
+          type: boolean
+        unsubscribeLogoUrl:
+          type: string
+        unsubscribePrimaryColor:
+          type: string
+        unsubscribeCopy:
+          type: string
+        bimiLogoUrl:
+          type: string
+        bimiVmcUrl:
+          type: string
+    CreateConnectionRequest:
+      example:
+        appKey: appKey
+        name: name
+        credentials:
+          key: ""
+      properties:
+        appKey:
+          maxLength: 100
+          minLength: 0
+          type: string
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        credentials:
+          additionalProperties: {}
+      required:
+      - appKey
+      - credentials
+      - name
+    ConnectionResponse:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        appKey: appKey
+        name: name
+        status: status
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        grantedScopes: grantedScopes
+      properties:
+        id:
+          format: uuid
+          type: string
+        appKey:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        grantedScopes:
+          type: string
+    CreateContactRequest:
+      example:
+        email: email
+        firstName: firstName
+        lastName: lastName
+      properties:
+        email:
+          format: email
+          minLength: 1
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+      required:
+      - email
+    ContactResponse:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: email
+        firstName: firstName
+        lastName: lastName
+        subscribed: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uuid
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        subscribed:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    UpdateWorkflowRequest:
+      example:
+        name: name
+        description: description
+      properties:
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+    UpdateTemplateRequest:
+      example:
+        name: name
+        subject: subject
+        htmlBody: htmlBody
+        textBody: textBody
+        variables:
+        - name: name
+          type: STRING
+          fallbackValue: fallbackValue
+        - name: name
+          type: STRING
+          fallbackValue: fallbackValue
+      properties:
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+        subject:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        htmlBody:
+          type: string
+        textBody:
+          type: string
+        variables:
+          items:
+            $ref: "#/components/schemas/TemplateVariable"
+          type: array
+          default: null
+    UpdateConnectionRequest:
+      example:
+        name: name
+        credentials:
+          key: ""
+      properties:
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+        credentials:
+          additionalProperties: {}
+    UpdateContactRequest:
+      example:
+        firstName: firstName
+        lastName: lastName
+        subscribed: true
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        subscribed:
+          type: boolean
+    WorkflowListResponse:
+      example:
+        data:
+        - id: id
+          name: name
+          description: description
+          isActive: true
+          status: status
+          stepCount: 0
+          revision: 6
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          lastRunAt: 2000-01-23T04:56:07.000+00:00
+        - id: id
+          name: name
+          description: description
+          isActive: true
+          status: status
+          stepCount: 0
+          revision: 6
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          lastRunAt: 2000-01-23T04:56:07.000+00:00
+        nextCursor: nextCursor
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/WorkflowSummaryResponse"
+          type: array
+          default: null
+        nextCursor:
+          type: string
+    StepResponse:
+      example:
+        id: id
+        name: name
+        type: type
+        order: 6.027456183070403
+        appKey: appKey
+        actionKey: actionKey
+        connectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        parentStepId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        branchKey: branchKey
+        configuration:
+          key: ""
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        order:
+          type: number
+        appKey:
+          type: string
+        actionKey:
+          type: string
+        connectionId:
+          format: uuid
+          type: string
+        parentStepId:
+          format: uuid
+          type: string
+        branchKey:
+          type: string
+        configuration:
+          additionalProperties: {}
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    WorkflowDetailResponse:
+      example:
+        id: id
+        name: name
+        description: description
+        isActive: true
+        status: status
+        revision: 0
+        steps:
+        - id: id
+          name: name
+          type: type
+          order: 6.027456183070403
+          appKey: appKey
+          actionKey: actionKey
+          connectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          parentStepId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          branchKey: branchKey
+          configuration:
+            key: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - id: id
+          name: name
+          type: type
+          order: 6.027456183070403
+          appKey: appKey
+          actionKey: actionKey
+          connectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          parentStepId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          branchKey: branchKey
+          configuration:
+            key: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        lastRunAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        isActive:
+          type: boolean
+        status:
+          type: string
+        revision:
+          format: int64
+          type: integer
+        steps:
+          items:
+            $ref: "#/components/schemas/StepResponse"
+          type: array
+          default: null
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        lastRunAt:
+          format: date-time
+          type: string
+    PageWorkflowRunSummaryResponse:
+      example:
+        totalPages: 0
+        totalElements: 6
+        pageable:
+          paged: true
+          pageNumber: 1
+          pageSize: 5
+          sort:
+            sorted: true
+            unsorted: true
+            empty: true
+          unpaged: true
+          offset: 5
+        sort:
+          sorted: true
+          unsorted: true
+          empty: true
+        first: true
+        last: true
+        numberOfElements: 2
+        size: 7
+        content:
+        - id: id
+          workflowId: workflowId
+          status: status
+          errorMessage: errorMessage
+          totalSteps: 0
+          completedSteps: 6
+          failedSteps: 1
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          completedAt: 2000-01-23T04:56:07.000+00:00
+        - id: id
+          workflowId: workflowId
+          status: status
+          errorMessage: errorMessage
+          totalSteps: 0
+          completedSteps: 6
+          failedSteps: 1
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          completedAt: 2000-01-23T04:56:07.000+00:00
+        number: 9
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/WorkflowRunSummaryResponse"
+          type: array
+          default: null
+        number:
+          format: int32
+          type: integer
+        empty:
+          type: boolean
+    PageableObject:
+      example:
+        paged: true
+        pageNumber: 1
+        pageSize: 5
+        sort:
+          sorted: true
+          unsorted: true
+          empty: true
+        unpaged: true
+        offset: 5
+      properties:
+        paged:
+          type: boolean
+        pageNumber:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        unpaged:
+          type: boolean
+        offset:
+          format: int64
+          type: integer
+    SortObject:
+      example:
+        sorted: true
+        unsorted: true
+        empty: true
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
+    StepRunResponse:
+      example:
+        id: id
+        stepId: stepId
+        status: status
+        inputData:
+          key: ""
+        outputData:
+          key: ""
+        errorMessage: errorMessage
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        completedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        stepId:
+          type: string
+        status:
+          type: string
+        inputData:
+          additionalProperties: {}
+        outputData:
+          additionalProperties: {}
+        errorMessage:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        completedAt:
+          format: date-time
+          type: string
+    WorkflowRunDetailResponse:
+      example:
+        id: id
+        workflowId: workflowId
+        status: status
+        triggerData:
+          key: ""
+        errorMessage: errorMessage
+        stepRuns:
+        - id: id
+          stepId: stepId
+          status: status
+          inputData:
+            key: ""
+          outputData:
+            key: ""
+          errorMessage: errorMessage
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          completedAt: 2000-01-23T04:56:07.000+00:00
+        - id: id
+          stepId: stepId
+          status: status
+          inputData:
+            key: ""
+          outputData:
+            key: ""
+          errorMessage: errorMessage
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          completedAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        completedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        workflowId:
+          type: string
+        status:
+          type: string
+        triggerData:
+          additionalProperties: {}
+        errorMessage:
+          type: string
+        stepRuns:
+          items:
+            $ref: "#/components/schemas/StepRunResponse"
+          type: array
+          default: null
+        createdAt:
+          format: date-time
+          type: string
+        completedAt:
+          format: date-time
+          type: string
+    WorkflowRunStatsResponse:
+      example:
+        totalRuns: 0
+        successCount: 6
+        failedCount: 1
+        runningCount: 5
+        pendingCount: 5
+      properties:
+        totalRuns:
+          format: int64
+          type: integer
+        successCount:
+          format: int64
+          type: integer
+        failedCount:
+          format: int64
+          type: integer
+        runningCount:
+          format: int64
+          type: integer
+        pendingCount:
+          format: int64
+          type: integer
+    PublicWebhookListResponse:
+      example:
+        id: id
+        url: url
+        subscribedEvents:
+        - subscribedEvents
+        - subscribedEvents
+        createdAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        subscribedEvents:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          default: null
+        createdAt:
+          format: date-time
+          type: string
+    PublicPageSuppressionResponse:
+      example:
+        data:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: email
+          reason: reason
+          createdAt: 2000-01-23T04:56:07.000+00:00
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: email
+          reason: reason
+          createdAt: 2000-01-23T04:56:07.000+00:00
+        has_more: true
+        next_cursor: next_cursor
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/SuppressionResponse"
+          type: array
+          default: null
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+    SuppressionResponse:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: email
+        reason: reason
+        createdAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uuid
+          type: string
+        email:
+          type: string
+        reason:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+    DailyCount:
+      example:
+        date: date
+        status: status
+        count: 2
+      properties:
+        date:
+          type: string
+        status:
+          type: string
+        count:
+          format: int64
+          type: integer
+    MetricsResponse:
+      example:
+        summary:
+          total: 0
+          pending: 6
+          sent: 1
+          delivered: 5
+          failed: 5
+          bounced: 2
+          suppressed: 7
+          totalOpens: 9
+          totalClicks: 3
+        daily:
+        - date: date
+          status: status
+          count: 2
+        - date: date
+          status: status
+          count: 2
+      properties:
+        summary:
+          $ref: "#/components/schemas/MetricsSummary"
+        daily:
+          items:
+            $ref: "#/components/schemas/DailyCount"
+          type: array
+          default: null
+    MetricsSummary:
+      example:
+        total: 0
+        pending: 6
+        sent: 1
+        delivered: 5
+        failed: 5
+        bounced: 2
+        suppressed: 7
+        totalOpens: 9
+        totalClicks: 3
+      properties:
+        total:
+          format: int64
+          type: integer
+        pending:
+          format: int64
+          type: integer
+        sent:
+          format: int64
+          type: integer
+        delivered:
+          format: int64
+          type: integer
+        failed:
+          format: int64
+          type: integer
+        bounced:
+          format: int64
+          type: integer
+        suppressed:
+          format: int64
+          type: integer
+        totalOpens:
+          format: int64
+          type: integer
+        totalClicks:
+          format: int64
+          type: integer
+    EmailLogResponse:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        to: to
+        from: from
+        subject: subject
+        status: status
+        provider: provider
+        providerMessageId: providerMessageId
+        error: error
+        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        sentAt: 2000-01-23T04:56:07.000+00:00
+        openedAt: 2000-01-23T04:56:07.000+00:00
+        openCount: 0
+        clickCount: 6
+      properties:
+        id:
+          format: uuid
+          type: string
+        to:
+          type: string
+        from:
+          type: string
+        subject:
+          type: string
+        status:
+          type: string
+        provider:
+          type: string
+        providerMessageId:
+          type: string
+        error:
+          type: string
+        templateId:
+          format: uuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        sentAt:
+          format: date-time
+          type: string
+        openedAt:
+          format: date-time
+          type: string
+        openCount:
+          format: int32
+          type: integer
+        clickCount:
+          format: int32
+          type: integer
+    PublicPageDomainResponse:
+      example:
+        data:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          domainName: domainName
+          status: status
+          requiredDnsRecords:
+          - type: type
+            name: name
+            value: value
+          - type: type
+            name: name
+            value: value
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          verifiedAt: 2000-01-23T04:56:07.000+00:00
+          spfVerified: true
+          dkimVerified: true
+          dmarcVerified: true
+          dailySendCap: 0
+          warmingStatus: warmingStatus
+          sendReadiness: sendReadiness
+          allowedEmailType: allowedEmailType
+          credentialSource: credentialSource
+          emailProviderConnectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          healthStatus: healthStatus
+          warnings:
+          - warnings
+          - warnings
+          trackingEnabled: true
+          unsubscribeLogoUrl: unsubscribeLogoUrl
+          unsubscribePrimaryColor: unsubscribePrimaryColor
+          unsubscribeCopy: unsubscribeCopy
+          bimiLogoUrl: bimiLogoUrl
+          bimiVmcUrl: bimiVmcUrl
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          domainName: domainName
+          status: status
+          requiredDnsRecords:
+          - type: type
+            name: name
+            value: value
+          - type: type
+            name: name
+            value: value
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          verifiedAt: 2000-01-23T04:56:07.000+00:00
+          spfVerified: true
+          dkimVerified: true
+          dmarcVerified: true
+          dailySendCap: 0
+          warmingStatus: warmingStatus
+          sendReadiness: sendReadiness
+          allowedEmailType: allowedEmailType
+          credentialSource: credentialSource
+          emailProviderConnectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          healthStatus: healthStatus
+          warnings:
+          - warnings
+          - warnings
+          trackingEnabled: true
+          unsubscribeLogoUrl: unsubscribeLogoUrl
+          unsubscribePrimaryColor: unsubscribePrimaryColor
+          unsubscribeCopy: unsubscribeCopy
+          bimiLogoUrl: bimiLogoUrl
+          bimiVmcUrl: bimiVmcUrl
+        has_more: true
+        next_cursor: next_cursor
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/DomainResponse"
+          type: array
+          default: null
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+    PublicPageContactResponse:
+      example:
+        data:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: email
+          firstName: firstName
+          lastName: lastName
+          subscribed: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: email
+          firstName: firstName
+          lastName: lastName
+          subscribed: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        has_more: true
+        next_cursor: next_cursor
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/ContactResponse"
+          type: array
+          default: null
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+    AppSummaryResponse:
+      example:
+        appKey: appKey
+        name: name
+        description: description
+        logoUrl: logoUrl
+        authType: authType
+        altAuthType: altAuthType
+        credentialSchema:
+        - key: ""
+        - key: ""
+        category: category
+        helpUrl: helpUrl
+        internal: true
+        hasPlatformKey: true
+      properties:
+        appKey:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        logoUrl:
+          type: string
+        authType:
+          type: string
+        altAuthType:
+          type: string
+        credentialSchema:
+          items:
+            additionalProperties: {}
+          type: array
+          default: null
+        category:
+          type: string
+        helpUrl:
+          type: string
+        internal:
+          type: boolean
+        hasPlatformKey:
+          type: boolean
+    AppDetailResponse:
+      example:
+        appKey: appKey
+        name: name
+        description: description
+        logoUrl: logoUrl
+        authType: authType
+        altAuthType: altAuthType
+        triggers:
+        - key: ""
+        - key: ""
+        actions:
+        - key: ""
+        - key: ""
+        credentialSchema:
+        - key: ""
+        - key: ""
+        category: category
+        helpUrl: helpUrl
+        internal: true
+        hasPlatformKey: true
+      properties:
+        appKey:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        logoUrl:
+          type: string
+        authType:
+          type: string
+        altAuthType:
+          type: string
+        triggers:
+          items:
+            additionalProperties: {}
+          type: array
+          default: null
+        actions:
+          items:
+            additionalProperties: {}
+          type: array
+          default: null
+        credentialSchema:
+          items:
+            additionalProperties: {}
+          type: array
+          default: null
+        category:
+          type: string
+        helpUrl:
+          type: string
+        internal:
+          type: boolean
+        hasPlatformKey:
+          type: boolean
+  securitySchemes:
+    ApiKeyAuth:
+      bearerFormat: API Key
+      description: Your Crescendo API key. Obtain one from the dashboard Settings
+        → API Keys. All API keys are prefixed with `re_`.
+      in: header
+      scheme: bearer
+      type: http
+

@@ -1,0 +1,21 @@
+[package]
+name = "crescendo"
+version = "1.0.0"
+authors = ["OpenAPI Generator team and contributors"]
+description = "The Crescendo API powers workflow automation and transactional email at scale. Authenticate with a Bearer API key (prefix: `re_...`) obtained from the dashboard."
+license = "MIT"
+edition = "2024"
+
+[dependencies]
+serde = { version = "^1.0", features = ["derive"] }
+serde_json = "^1.0"
+serde_repr = "^0.1"
+url = "^2.5"
+uuid = { version = "^1.8", features = ["serde", "v4"] }
+chrono = { version = "^0.4",  features = ["serde"] }
+reqwest = { version = "^0.13", default-features = false, features = ["json", "multipart", "query", "form"] }
+
+[features]
+default = ["native-tls"]
+native-tls = ["reqwest/native-tls"]
+rustls = ["reqwest/rustls"]

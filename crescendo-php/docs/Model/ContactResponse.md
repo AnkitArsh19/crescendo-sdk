@@ -1,0 +1,15 @@
+# ContactResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **string** |  | [optional]
+**email** | **string** |  | [optional]
+**first_name** | **string** |  | [optional]
+**last_name** | **string** |  | [optional]
+**subscribed** | **bool** |  | [optional]
+**created_at** | **\DateTime** |  | [optional]
+**updated_at** | **\DateTime** |  | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

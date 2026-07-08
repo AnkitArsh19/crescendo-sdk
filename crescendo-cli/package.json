@@ -1,0 +1,20 @@
+{
+  "name": "@crescendo/cli",
+  "version": "1.0.0",
+  "description": "Official CLI for the Crescendo Email Service",
+  "main": "crescendo.js",
+  "bin": {
+    "crescendo": "./crescendo.js"
+  },
+  "files": [
+    "crescendo.js"
+  ],
+  "keywords": ["crescendo", "email", "cli"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@crescendo/email": "file:../crescendo-sdk-node"
+  }
+}
