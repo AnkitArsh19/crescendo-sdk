@@ -1,8 +1,10 @@
 name: Regenerate SDKs on OpenAPI Spec Change
 
 on:
-  repository_dispatch:
-    types: [spec_updated]
+  push:
+    branches: [main]
+    paths:
+      - 'spec/openapi.json'
   workflow_dispatch:
     inputs:
       version:
