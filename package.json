@@ -1,0 +1,15 @@
+{
+  "name": "crescendo-sdk-monorepo",
+  "private": true,
+  "description": "Crescendo SDK monorepo — Node, CLI, and MCP packages. Python SDK is managed separately.",
+  "workspaces": [
+    "crescendo-sdk-node",
+    "crescendo-cli",
+    "crescendo-mcp"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm test --workspaces --if-present"
+  }
+}
