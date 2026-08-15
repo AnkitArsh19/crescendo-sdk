@@ -12,9 +12,11 @@
  *  - Email Logs: list (with tag/status filtering), get
  *  - Metrics: get domain metrics rollup
  *  - Outbound Webhooks: create, list, delete
+ *  - Workflows: list, get, create, update, delete, activate, deactivate, trigger
+ *  - Connections: list, get, create, update, delete
+ *  - Apps & Catalog: list, get
+ *  - Runs: listAll, listByWorkflow, get, cancel, getStats, listSteps, getStep
  */
-
-const BASE_URL = process.env.CRESCENDO_BASE_URL || 'https://api.crescendo.run';
 
 class CrescendoError extends Error {
   constructor(message, statusCode, response) {
@@ -25,8 +27,18 @@ class CrescendoError extends Error {
   }
 }
 
-async function request(apiKey, method, path, body) {
-  const url = `${BASE_URL}${path}`;
+function cleanParams(obj) {
+  const clean = {};
+  for (const [k, v] of Object.entries(obj || {})) {
+    if (v !== undefined && v !== null && v !== '') {
+      clean[k] = v;
+    }
+  }
+  return clean;
+}
+
+async function request(apiKey, baseUrl, method, path, body) {
+  const url = `${baseUrl}${path}`;
   const headers = {
     'Authorization': `Bearer ${apiKey}`,
     'Content-Type': 'application/json',
@@ -58,13 +70,15 @@ async function request(apiKey, method, path, body) {
  *
  * @example
  * import { crescendo } from '@crescendo/email';
- * const client = crescendo({ apiKey: 'cm_sk_...' });
+ * const client = crescendo({ apiKey: 'cm_sk_...', baseUrl: 'http://localhost:8080' });
  * await client.emails.send({ from: 'hi@myapp.com', to: 'user@example.com', subject: 'Hello', htmlBody: '<h1>Hi</h1>' });
  */
-function crescendo({ apiKey }) {
-  if (!apiKey) throw new Error('crescendo: apiKey is required');
+function crescendo({ apiKey, baseUrl = process.env.CRESCENDO_BASE_URL || 'https://api.crescendo.run' } = {}) {
+  const key = apiKey || process.env.CRESCENDO_API_KEY;
+  if (!key) throw new Error('crescendo: apiKey is required (or set CRESCENDO_API_KEY)');
 
-  const r = (method, path, body) => request(apiKey, method, path, body);
+  const base = baseUrl.replace(/\/+$/, '');
+  const r = (method, path, body) => request(key, base, method, path, body);
 
   return {
     // ── Emails ──────────────────────────────────────────────────────────────
@@ -116,7 +130,7 @@ function crescendo({ apiKey }) {
        * @param {Record<string,string>} [filters.tags]
        */
       list: (filters = {}) => {
-        const q = new URLSearchParams(filters).toString();
+        const q = new URLSearchParams(cleanParams(filters)).toString();
         return r('GET', `/api/v1/emails${q ? '?' + q : ''}`);
       },
     },
@@ -258,7 +272,7 @@ function crescendo({ apiKey }) {
        * @param {number} [params.days=30] - number of days to look back
        */
       get: (params = {}) => {
-        const q = new URLSearchParams(params).toString();
+        const q = new URLSearchParams(cleanParams(params)).toString();
         return r('GET', `/api/v1/metrics${q ? '?' + q : ''}`);
       },
     },
@@ -273,11 +287,13 @@ function crescendo({ apiKey }) {
        * Create a new webhook subscription.
        * @param {Object} params
        * @param {string} params.url - HTTPS endpoint to deliver events to
-       * @param {string[]} params.subscribedEvents - Event types to subscribe to
+       * @param {string[]} [params.subscribedEvents] - Event types to subscribe to
+       * @param {string[]} [params.events] - Alias for subscribedEvents
        * @example
        * client.webhooks.create({ url: 'https://myapp.com/hooks/email', subscribedEvents: ['email.delivered', 'email.bounced'] })
        */
-      create: ({ url, subscribedEvents }) => r('POST', '/api/v1/webhooks', { url, subscribedEvents }),
+      create: ({ url, subscribedEvents, events }) =>
+        r('POST', '/api/v1/webhooks', { url, subscribedEvents: subscribedEvents || events || [] }),
 
       /** Delete a webhook subscription. */
       delete: (id) => r('DELETE', `/api/v1/webhooks/${id}`),
@@ -287,7 +303,7 @@ function crescendo({ apiKey }) {
 
     workflows: {
       list: (params = {}) => {
-        const q = new URLSearchParams(params).toString();
+        const q = new URLSearchParams(cleanParams(params)).toString();
         return r('GET', `/api/v1/workflows${q ? '?' + q : ''}`);
       },
       get: (id) => r('GET', `/api/v1/workflows/${id}`),
@@ -303,7 +319,7 @@ function crescendo({ apiKey }) {
 
     connections: {
       list: (params = {}) => {
-        const q = new URLSearchParams(params).toString();
+        const q = new URLSearchParams(cleanParams(params)).toString();
         return r('GET', `/api/v1/connections${q ? '?' + q : ''}`);
       },
       get: (id) => r('GET', `/api/v1/connections/${id}`),
@@ -323,11 +339,11 @@ function crescendo({ apiKey }) {
 
     runs: {
       listAll: (params = {}) => {
-        const q = new URLSearchParams(params).toString();
+        const q = new URLSearchParams(cleanParams(params)).toString();
         return r('GET', `/api/v1/runs${q ? '?' + q : ''}`);
       },
       listByWorkflow: (workflowId, params = {}) => {
-        const q = new URLSearchParams(params).toString();
+        const q = new URLSearchParams(cleanParams(params)).toString();
         return r('GET', `/api/v1/workflows/${workflowId}/runs${q ? '?' + q : ''}`);
       },
       get: (workflowId, runId) => r('GET', `/api/v1/workflows/${workflowId}/runs/${runId}`),

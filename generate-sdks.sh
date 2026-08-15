@@ -25,7 +25,7 @@ set -euo pipefail
 # ── Configuration ─────────────────────────────────────────────────────────────
 SPEC_URL="${SPEC_URL:-http://localhost:8080/api-docs/crescendo-public-api-v1}"
 API_VERSION="${API_VERSION:-1.0.0}"
-SDK_DIR="$(cd "$(dirname "$0")" SDK_DIR="$(cd "$(dirname "$0")" && pwd)/sdk"SDK_DIR="$(cd "$(dirname "$0")" && pwd)/sdk" pwd)"
+SDK_DIR="$(cd "$(dirname "$0")" && pwd)"
 SPEC_DIR="$SDK_DIR/spec"
 SPEC_FILE="$SPEC_DIR/openapi.json"
 GENERATOR="npx --yes @openapitools/openapi-generator-cli"
@@ -138,8 +138,8 @@ echo "  ✓ Java: Gradle files removed (Maven/pom.xml kept)"
 
 # Rust: generator hardcodes edition = "2021" regardless of config;
 # patch it to edition = "2024" (the latest stable edition as of 2025).
-if [ -f crescendo-rust/Cargo.toml ]; then
-  sed -i '' 's/edition = "2021"/edition = "2024"/' crescendo-rust/Cargo.toml
+if [ -f "$SDK_DIR/crescendo-rust/Cargo.toml" ]; then
+  sed -i 's/edition = "2021"/edition = "2024"/' "$SDK_DIR/crescendo-rust/Cargo.toml" 2>/dev/null || sed -i '' 's/edition = "2021"/edition = "2024"/' "$SDK_DIR/crescendo-rust/Cargo.toml"
   echo "  ✓ Rust: edition bumped to 2024"
 fi
 

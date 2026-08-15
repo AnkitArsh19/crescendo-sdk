@@ -43,17 +43,27 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { crescendo, CrescendoError } from '@crescendo/email';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+let crescendo, CrescendoError;
+try {
+  ({ crescendo, CrescendoError } = require('@crescendo/email'));
+} catch (e) {
+  ({ crescendo, CrescendoError } = require('../crescendo-sdk-node/index.js'));
+}
 
 // ─── Bootstrap ─────────────────────────────────────────────────────────────────
 
 const apiKey = process.env.CRESCENDO_API_KEY;
+const baseUrl = process.env.CRESCENDO_BASE_URL || 'https://api.crescendo.run';
+
 if (!apiKey) {
   process.stderr.write('Error: CRESCENDO_API_KEY environment variable is required.\n');
   process.exit(1);
 }
 
-const client = crescendo({ apiKey });
+const client = crescendo({ apiKey, baseUrl });
 
 // ─── MCP Server ────────────────────────────────────────────────────────────────
 

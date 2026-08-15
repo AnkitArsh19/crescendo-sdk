@@ -6,7 +6,7 @@ Official Python SDK for the Crescendo Email Service API.
 Usage:
     from crescendo import Crescendo
 
-    client = Crescendo(api_key="cm_sk_...")
+    client = Crescendo(api_key="cm_sk_...", base_url="http://localhost:8080")
 
     # Send a transactional email
     result = client.emails.send(
@@ -30,10 +30,7 @@ import json
 from typing import Any, Dict, List, Optional, Union
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
-from urllib.parse import urlencode
-
-
-BASE_URL = os.environ.get("CRESCENDO_BASE_URL", "https://api.crescendo.run")
+from urllib.parse import urlencode, quote
 
 
 class CrescendoError(Exception):
@@ -45,8 +42,12 @@ class CrescendoError(Exception):
         self.response = response
 
 
-def _request(api_key: str, method: str, path: str, body: Optional[dict] = None) -> Any:
-    url = f"{BASE_URL}{path}"
+def _clean_params(params: dict) -> dict:
+    return {k: v for k, v in params.items() if v is not None}
+
+
+def _request(api_key: str, base_url: str, method: str, path: str, body: Optional[dict] = None) -> Any:
+    url = f"{base_url.rstrip('/')}{path}"
     data = json.dumps(body).encode() if body is not None else None
     req = Request(
         url,
@@ -77,8 +78,9 @@ def _request(api_key: str, method: str, path: str, body: Optional[dict] = None) 
 
 
 class _Emails:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def send(
         self,
@@ -103,7 +105,7 @@ class _Emails:
             payload["textBody"] = text_body
         if tags:
             payload["tags"] = tags
-        return _request(self._key, "POST", "/api/v1/emails", payload)
+        return _request(self._key, self._base, "POST", "/api/v1/emails", payload)
 
     def send_templated(
         self,
@@ -123,7 +125,7 @@ class _Emails:
         }
         if variables:
             payload["variables"] = variables
-        return _request(self._key, "POST", "/api/v1/emails/templated", payload)
+        return _request(self._key, self._base, "POST", "/api/v1/emails/templated", payload)
 
     def send_batch(
         self,
@@ -135,7 +137,7 @@ class _Emails:
         email_type: str = "TRANSACTIONAL",
     ) -> dict:
         """Send emails to multiple recipients in a single request (max 100)."""
-        return _request(self._key, "POST", "/api/v1/emails/batch", {
+        return _request(self._key, self._base, "POST", "/api/v1/emails/batch", {
             "from": from_address,
             "subject": subject,
             "htmlBody": html_body,
@@ -145,7 +147,7 @@ class _Emails:
 
     def get(self, email_id: str) -> dict:
         """Get the delivery status of a sent email."""
-        return _request(self._key, "GET", f"/api/v1/emails/{email_id}")
+        return _request(self._key, self._base, "GET", f"/api/v1/emails/{email_id}")
 
     def list(
         self,
@@ -167,19 +169,20 @@ class _Emails:
         if tags:
             for k, v in tags.items():
                 params[f"tag.{k}"] = v
-        query = urlencode(params)
-        return _request(self._key, "GET", f"/api/v1/emails?{query}")
+        query = urlencode(_clean_params(params))
+        return _request(self._key, self._base, "GET", f"/api/v1/emails?{query}")
 
 
 class _Templates:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list(self) -> list:
-        return _request(self._key, "GET", "/api/v1/templates")
+        return _request(self._key, self._base, "GET", "/api/v1/templates")
 
     def get(self, template_id: str) -> dict:
-        return _request(self._key, "GET", f"/api/v1/templates/{template_id}")
+        return _request(self._key, self._base, "GET", f"/api/v1/templates/{template_id}")
 
     def create(
         self,
@@ -196,7 +199,7 @@ class _Templates:
             payload["textBody"] = text_body
         if variables:
             payload["variables"] = variables
-        return _request(self._key, "POST", "/api/v1/templates", payload)
+        return _request(self._key, self._base, "POST", "/api/v1/templates", payload)
 
     def update(self, template_id: str, **kwargs) -> dict:
         payload = {k: v for k, v in {
@@ -206,200 +209,210 @@ class _Templates:
             "textBody": kwargs.get("text_body"),
             "variables": kwargs.get("variables"),
         }.items() if v is not None}
-        return _request(self._key, "PATCH", f"/api/v1/templates/{template_id}", payload)
+        return _request(self._key, self._base, "PATCH", f"/api/v1/templates/{template_id}", payload)
 
     def delete(self, template_id: str) -> None:
-        _request(self._key, "DELETE", f"/api/v1/templates/{template_id}")
+        _request(self._key, self._base, "DELETE", f"/api/v1/templates/{template_id}")
 
     def publish(self, template_id: str) -> dict:
         """Validate all {{variables}} and freeze a publish snapshot."""
-        return _request(self._key, "POST", f"/api/v1/templates/{template_id}/publish")
+        return _request(self._key, self._base, "POST", f"/api/v1/templates/{template_id}/publish")
 
     def test_send(self, template_id: str, *, to_address: str, variables: Optional[dict] = None) -> dict:
         """Send a test email; does not count against production quotas."""
-        return _request(self._key, "POST", f"/api/v1/templates/{template_id}/test", {
+        return _request(self._key, self._base, "POST", f"/api/v1/templates/{template_id}/test", {
             "toAddress": to_address,
             "variables": variables or {},
         })
 
     def clone_from_broadcast(self, broadcast_id: str) -> dict:
         """Clone a broadcast's content into a new draft template."""
-        return _request(self._key, "POST", f"/api/v1/templates/clone-from-broadcast/{broadcast_id}")
+        return _request(self._key, self._base, "POST", f"/api/v1/templates/clone-from-broadcast/{broadcast_id}")
 
 
 class _Suppressions:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list(self) -> list:
-        return _request(self._key, "GET", "/api/v1/suppressions")
+        return _request(self._key, self._base, "GET", "/api/v1/suppressions")
 
     def suppress(self, email: str, reason: str = "MANUAL") -> dict:
-        return _request(self._key, "POST", "/api/v1/suppressions", {"email": email, "reason": reason})
+        return _request(self._key, self._base, "POST", "/api/v1/suppressions", {"email": email, "reason": reason})
 
     def unsuppress(self, email: str) -> None:
-        from urllib.parse import quote
-        _request(self._key, "DELETE", f"/api/v1/suppressions/{quote(email, safe='')}")
+        _request(self._key, self._base, "DELETE", f"/api/v1/suppressions/{quote(email, safe='')}")
 
 
 class _Domains:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list(self) -> list:
-        return _request(self._key, "GET", "/api/v1/domains")
+        return _request(self._key, self._base, "GET", "/api/v1/domains")
 
     def add(self, domain_name: str) -> dict:
-        return _request(self._key, "POST", "/api/v1/domains", {"domainName": domain_name})
+        return _request(self._key, self._base, "POST", "/api/v1/domains", {"domainName": domain_name})
 
     def verify(self, domain_id: str) -> dict:
-        return _request(self._key, "POST", f"/api/v1/domains/{domain_id}/verify")
+        return _request(self._key, self._base, "POST", f"/api/v1/domains/{domain_id}/verify")
 
     def delete(self, domain_id: str) -> None:
-        _request(self._key, "DELETE", f"/api/v1/domains/{domain_id}")
+        _request(self._key, self._base, "DELETE", f"/api/v1/domains/{domain_id}")
 
 
 class _Metrics:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def get(self, *, domain_id: Optional[str] = None, days: int = 30) -> dict:
         params: Dict[str, Any] = {"days": days}
         if domain_id:
             params["domainId"] = domain_id
-        return _request(self._key, "GET", f"/api/v1/metrics?{urlencode(params)}")
+        return _request(self._key, self._base, "GET", f"/api/v1/metrics?{urlencode(_clean_params(params))}")
 
 
 class _Webhooks:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list(self) -> list:
-        return _request(self._key, "GET", "/api/v1/webhooks")
+        return _request(self._key, self._base, "GET", "/api/v1/webhooks")
 
-    def create(self, *, url: str, subscribed_events: List[str]) -> dict:
-        """Create a webhook subscription. Use subscribed_events (not events)."""
-        return _request(self._key, "POST", "/api/v1/webhooks", {"url": url, "subscribedEvents": subscribed_events})
+    def create(self, *, url: str, subscribed_events: Optional[List[str]] = None, events: Optional[List[str]] = None) -> dict:
+        """Create a webhook subscription. Supports subscribed_events or events alias."""
+        evts = subscribed_events or events or []
+        return _request(self._key, self._base, "POST", "/api/v1/webhooks", {"url": url, "subscribedEvents": evts})
 
     def delete(self, webhook_id: str) -> None:
-        _request(self._key, "DELETE", f"/api/v1/webhooks/{webhook_id}")
+        _request(self._key, self._base, "DELETE", f"/api/v1/webhooks/{webhook_id}")
 
 
 class _Workflows:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list(self, **kwargs) -> dict:
-        return _request(self._key, "GET", f"/api/v1/workflows?{urlencode(kwargs)}" if kwargs else "/api/v1/workflows")
+        q = urlencode(_clean_params(kwargs))
+        return _request(self._key, self._base, "GET", f"/api/v1/workflows?{q}" if q else "/api/v1/workflows")
 
     def get(self, workflow_id: str) -> dict:
-        return _request(self._key, "GET", f"/api/v1/workflows/{workflow_id}")
+        return _request(self._key, self._base, "GET", f"/api/v1/workflows/{workflow_id}")
 
     def create(self, **kwargs) -> dict:
-        return _request(self._key, "POST", "/api/v1/workflows", kwargs)
+        return _request(self._key, self._base, "POST", "/api/v1/workflows", kwargs)
 
     def update(self, workflow_id: str, **kwargs) -> dict:
-        return _request(self._key, "PATCH", f"/api/v1/workflows/{workflow_id}", kwargs)
+        return _request(self._key, self._base, "PATCH", f"/api/v1/workflows/{workflow_id}", kwargs)
 
     def delete(self, workflow_id: str) -> None:
-        _request(self._key, "DELETE", f"/api/v1/workflows/{workflow_id}")
+        _request(self._key, self._base, "DELETE", f"/api/v1/workflows/{workflow_id}")
 
     def activate(self, workflow_id: str) -> None:
-        _request(self._key, "POST", f"/api/v1/workflows/{workflow_id}/activate")
+        _request(self._key, self._base, "POST", f"/api/v1/workflows/{workflow_id}/activate")
 
     def deactivate(self, workflow_id: str) -> None:
-        _request(self._key, "POST", f"/api/v1/workflows/{workflow_id}/deactivate")
+        _request(self._key, self._base, "POST", f"/api/v1/workflows/{workflow_id}/deactivate")
 
     def trigger(self, workflow_id: str, **kwargs) -> dict:
-        return _request(self._key, "POST", f"/api/v1/workflows/{workflow_id}/trigger", kwargs)
+        return _request(self._key, self._base, "POST", f"/api/v1/workflows/{workflow_id}/trigger", kwargs)
 
 
 class _Connections:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list(self, **kwargs) -> dict:
-        return _request(self._key, "GET", f"/api/v1/connections?{urlencode(kwargs)}" if kwargs else "/api/v1/connections")
+        q = urlencode(_clean_params(kwargs))
+        return _request(self._key, self._base, "GET", f"/api/v1/connections?{q}" if q else "/api/v1/connections")
 
     def get(self, connection_id: str) -> dict:
-        return _request(self._key, "GET", f"/api/v1/connections/{connection_id}")
+        return _request(self._key, self._base, "GET", f"/api/v1/connections/{connection_id}")
 
     def create(self, **kwargs) -> dict:
-        return _request(self._key, "POST", "/api/v1/connections", kwargs)
+        return _request(self._key, self._base, "POST", "/api/v1/connections", kwargs)
 
     def update(self, connection_id: str, **kwargs) -> dict:
-        return _request(self._key, "PATCH", f"/api/v1/connections/{connection_id}", kwargs)
+        return _request(self._key, self._base, "PATCH", f"/api/v1/connections/{connection_id}", kwargs)
 
     def delete(self, connection_id: str) -> None:
-        _request(self._key, "DELETE", f"/api/v1/connections/{connection_id}")
+        _request(self._key, self._base, "DELETE", f"/api/v1/connections/{connection_id}")
 
 
 class _Apps:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list(self) -> list:
-        return _request(self._key, "GET", "/api/v1/apps")
+        return _request(self._key, self._base, "GET", "/api/v1/apps")
 
     def get(self, app_key: str) -> dict:
-        return _request(self._key, "GET", f"/api/v1/apps/{app_key}")
+        return _request(self._key, self._base, "GET", f"/api/v1/apps/{app_key}")
 
 
 class _Runs:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def list_all(self, **kwargs) -> dict:
-        return _request(self._key, "GET", f"/api/v1/runs?{urlencode(kwargs)}" if kwargs else "/api/v1/runs")
+        q = urlencode(_clean_params(kwargs))
+        return _request(self._key, self._base, "GET", f"/api/v1/runs?{q}" if q else "/api/v1/runs")
 
     def list_by_workflow(self, workflow_id: str, **kwargs) -> dict:
-        return _request(self._key, "GET", f"/api/v1/workflows/{workflow_id}/runs?{urlencode(kwargs)}" if kwargs else f"/api/v1/workflows/{workflow_id}/runs")
+        q = urlencode(_clean_params(kwargs))
+        return _request(self._key, self._base, "GET", f"/api/v1/workflows/{workflow_id}/runs?{q}" if q else f"/api/v1/workflows/{workflow_id}/runs")
 
     def get(self, workflow_id: str, run_id: str) -> dict:
-        return _request(self._key, "GET", f"/api/v1/workflows/{workflow_id}/runs/{run_id}")
+        return _request(self._key, self._base, "GET", f"/api/v1/workflows/{workflow_id}/runs/{run_id}")
 
     def cancel(self, workflow_id: str, run_id: str) -> None:
-        _request(self._key, "POST", f"/api/v1/workflows/{workflow_id}/runs/{run_id}/cancel")
+        _request(self._key, self._base, "POST", f"/api/v1/workflows/{workflow_id}/runs/{run_id}/cancel")
 
     def get_stats(self, workflow_id: str) -> dict:
-        return _request(self._key, "GET", f"/api/v1/workflows/{workflow_id}/runs/stats")
+        return _request(self._key, self._base, "GET", f"/api/v1/workflows/{workflow_id}/runs/stats")
 
     def list_steps(self, run_id: str) -> list:
-        return _request(self._key, "GET", f"/api/v1/runs/{run_id}/steps")
+        return _request(self._key, self._base, "GET", f"/api/v1/runs/{run_id}/steps")
 
     def get_step(self, run_id: str, step_id: str) -> dict:
-        return _request(self._key, "GET", f"/api/v1/runs/{run_id}/steps/{step_id}")
+        return _request(self._key, self._base, "GET", f"/api/v1/runs/{run_id}/steps/{step_id}")
 
 
 class _Contacts:
     """Audience/contact management. Backend routes are /api/v1/audiences."""
 
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, base_url: str):
         self._key = api_key
+        self._base = base_url
 
     def upsert(self, **kwargs) -> dict:
         """Create or update a contact (audience member) by email address."""
-        return _request(self._key, "POST", "/api/v1/audiences", kwargs)
+        return _request(self._key, self._base, "POST", "/api/v1/audiences", kwargs)
 
     def get(self, email: str) -> dict:
         """Get a contact by their email address."""
-        from urllib.parse import quote
-        return _request(self._key, "GET", f"/api/v1/audiences/{quote(email, safe='')}")
+        return _request(self._key, self._base, "GET", f"/api/v1/audiences/{quote(email, safe='')}")
 
     def set_property(self, email: str, property: str, value) -> dict:
         """Set a custom property on a contact (drives dynamic audience segments)."""
-        from urllib.parse import quote
-        return _request(self._key, "PATCH", f"/api/v1/audiences/{quote(email, safe='')}/properties",
+        return _request(self._key, self._base, "PATCH", f"/api/v1/audiences/{quote(email, safe='')}/properties",
                         {"property": property, "value": value})
 
     def add_to_audience(self, email: str, audience_id: str) -> dict:
         """Add a contact to an audience."""
-        return _request(self._key, "POST", f"/api/v1/audiences/{audience_id}/contacts", {"email": email})
+        return _request(self._key, self._base, "POST", f"/api/v1/audiences/{audience_id}/contacts", {"email": email})
 
     def remove_from_audience(self, email: str, audience_id: str) -> None:
         """Remove a contact from an audience."""
-        from urllib.parse import quote
-        _request(self._key, "DELETE", f"/api/v1/audiences/{audience_id}/contacts/{quote(email, safe='')}")
+        _request(self._key, self._base, "DELETE", f"/api/v1/audiences/{audience_id}/contacts/{quote(email, safe='')}")
 
 
 class Crescendo:
@@ -407,26 +420,28 @@ class Crescendo:
     Crescendo Email Service client.
 
     Args:
-        api_key: Your Crescendo API key (starts with `cm_sk_`).
+        api_key: Your Crescendo API key (starts with `cm_sk_` or `re_live_`).
                  Can also be set via the CRESCENDO_API_KEY environment variable.
+        base_url: Optional base URL (defaults to CRESCENDO_BASE_URL or https://api.crescendo.run).
 
     Example:
-        client = Crescendo(api_key="cm_sk_...")
+        client = Crescendo(api_key="cm_sk_...", base_url="http://localhost:8080")
         client.emails.send(from_address="hi@app.com", to="user@example.com", subject="Hi", html_body="<p>Hello</p>")
     """
 
-    def __init__(self, api_key: Optional[str] = None):
+    def __init__(self, api_key: Optional[str] = None, base_url: Optional[str] = None):
         key = api_key or os.environ.get("CRESCENDO_API_KEY")
         if not key:
             raise ValueError("Crescendo: api_key is required. Pass it directly or set CRESCENDO_API_KEY.")
-        self.emails       = _Emails(key)
-        self.templates    = _Templates(key)
-        self.suppressions = _Suppressions(key)
-        self.domains      = _Domains(key)
-        self.metrics      = _Metrics(key)
-        self.webhooks     = _Webhooks(key)
-        self.workflows    = _Workflows(key)
-        self.connections  = _Connections(key)
-        self.apps         = _Apps(key)
-        self.runs         = _Runs(key)
-        self.contacts     = _Contacts(key)
+        base = base_url or os.environ.get("CRESCENDO_BASE_URL", "https://api.crescendo.run")
+        self.emails       = _Emails(key, base)
+        self.templates    = _Templates(key, base)
+        self.suppressions = _Suppressions(key, base)
+        self.domains      = _Domains(key, base)
+        self.metrics      = _Metrics(key, base)
+        self.webhooks     = _Webhooks(key, base)
+        self.workflows    = _Workflows(key, base)
+        self.connections  = _Connections(key, base)
+        self.apps         = _Apps(key, base)
+        self.runs         = _Runs(key, base)
+        self.contacts     = _Contacts(key, base)

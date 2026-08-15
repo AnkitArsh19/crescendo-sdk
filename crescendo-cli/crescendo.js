@@ -17,9 +17,12 @@
  *   crescendo webhooks add --url https://myapp.com/hook --events email.delivered,email.bounced
  */
 
-'use strict';
-
-const { crescendo, CrescendoError } = require('@crescendo/email');
+let crescendo, CrescendoError;
+try {
+  ({ crescendo, CrescendoError } = require('@crescendo/email'));
+} catch (e) {
+  ({ crescendo, CrescendoError } = require('../crescendo-sdk-node'));
+}
 const fs = require('fs');
 
 // ─── Parse args ────────────────────────────────────────────────────────────────
@@ -36,19 +39,17 @@ function hasFlag(name) {
   return args.includes(`--${name}`);
 }
 
-function positional(idx) {
-  return args.filter(a => !a.startsWith('--'))[idx];
-}
-
 // ─── Config ────────────────────────────────────────────────────────────────────
 
 const apiKey = process.env.CRESCENDO_API_KEY || flag('api-key');
-if (!apiKey) {
+const baseUrl = flag('base-url') || process.env.CRESCENDO_BASE_URL || 'https://api.crescendo.run';
+
+if (!apiKey && !hasFlag('help') && !hasFlag('h') && args.length > 0 && args[0] !== 'help') {
   console.error('Error: CRESCENDO_API_KEY environment variable or --api-key flag is required.');
   process.exit(1);
 }
 
-const client = crescendo({ apiKey });
+const client = apiKey ? crescendo({ apiKey, baseUrl }) : null;
 
 // ─── Output helpers ────────────────────────────────────────────────────────────
 
@@ -67,7 +68,7 @@ function prettyPrint(data) {
   }
   if (typeof data === 'object' && data !== null) {
     Object.entries(data).forEach(([k, v]) => {
-      console.log(`  ${k.padEnd(24)} ${v}`);
+      console.log(`  ${k.padEnd(24)} ${typeof v === 'object' ? JSON.stringify(v) : v}`);
     });
     console.log('');
   } else {
@@ -82,7 +83,13 @@ function err(msg) {
 
 // ─── Commands ──────────────────────────────────────────────────────────────────
 
-const [cmd, subcmd, ...rest] = args.filter(a => !a.startsWith('--'));
+const nonFlagArgs = args.filter((a, i) => {
+  if (a.startsWith('--')) return false;
+  if (i > 0 && args[i - 1].startsWith('--')) return false;
+  return true;
+});
+
+const [cmd, subcmd, ...rest] = nonFlagArgs;
 
 async function run() {
   try {
@@ -103,7 +110,7 @@ async function run() {
         const result = await client.emails.send({
           from, to, subject, htmlBody: html, textBody: text, emailType: type,
         });
-        console.log(`\x1b[32m✓\x1b[0m Queued email: ${result.emailId}`);
+        console.log(`\x1b[32m✓\x1b[0m Queued email: ${result.emailId || result.id}`);
         out(result);
         break;
       }
@@ -113,10 +120,11 @@ async function run() {
         switch (subcmd) {
           case 'list': {
             const list = await client.templates.list();
-            if (list.length === 0) { console.log('No templates found.'); break; }
-            list.forEach(t => {
+            const items = Array.isArray(list) ? list : (list.content || []);
+            if (items.length === 0) { console.log('No templates found.'); break; }
+            items.forEach(t => {
               const badge = t.status === 'PUBLISHED' ? '\x1b[32mPUBLISHED\x1b[0m' : '\x1b[33mDRAFT\x1b[0m';
-              console.log(`  ${t.id}  ${t.name.padEnd(32)}  ${badge}`);
+              console.log(`  ${t.id}  ${(t.name || '').padEnd(32)}  ${badge}`);
             });
             break;
           }
@@ -128,7 +136,7 @@ async function run() {
           case 'publish': {
             const id = rest[0]; if (!id) err('templates publish requires a template ID');
             const result = await client.templates.publish(id);
-            console.log(`\x1b[32m✓\x1b[0m Published template: ${result.name}`);
+            console.log(`\x1b[32m✓\x1b[0m Published template: ${result.name || id}`);
             break;
           }
           case 'delete': {
@@ -149,10 +157,11 @@ async function run() {
         switch (subcmd) {
           case 'list': {
             const list = await client.domains.list();
-            if (list.length === 0) { console.log('No domains found.'); break; }
-            list.forEach(d => {
+            const items = Array.isArray(list) ? list : (list.content || []);
+            if (items.length === 0) { console.log('No domains found.'); break; }
+            items.forEach(d => {
               const badge = d.status === 'VERIFIED' ? '\x1b[32mVERIFIED\x1b[0m' : '\x1b[33mPENDING\x1b[0m';
-              console.log(`  ${d.id}  ${d.domainName.padEnd(40)}  ${badge}`);
+              console.log(`  ${d.id}  ${(d.domainName || '').padEnd(40)}  ${badge}`);
             });
             break;
           }
@@ -162,7 +171,7 @@ async function run() {
             console.log(`\x1b[32m✓\x1b[0m Domain added: ${result.domainName}`);
             console.log('\nAdd these DNS records:');
             (result.dnsRecords || []).forEach(r => {
-              console.log(`  ${r.type.padEnd(6)} ${r.name.padEnd(40)} ${r.value}`);
+              console.log(`  ${(r.type || '').padEnd(6)} ${(r.name || '').padEnd(40)} ${r.value}`);
             });
             break;
           }
@@ -191,11 +200,11 @@ async function run() {
           const status = flag('status');
           const limit  = parseInt(flag('limit', '20'), 10);
           const result = await client.emails.list({ status, limit });
-          const items  = result.content || result;
+          const items  = Array.isArray(result) ? result : (result.content || []);
           if (!items.length) { console.log('No email logs found.'); break; }
           items.forEach(log => {
-            const s = log.status.padEnd(12);
-            console.log(`  ${log.id}  ${s}  ${log.toAddress.padEnd(36)}  ${log.subject}`);
+            const s = (log.status || '').padEnd(12);
+            console.log(`  ${log.id}  ${s}  ${(log.toAddress || '').padEnd(36)}  ${log.subject}`);
           });
         } else {
           console.error('Available: logs list [--status STATUS] [--limit N]');
@@ -208,8 +217,9 @@ async function run() {
         switch (subcmd) {
           case 'list': {
             const list = await client.suppressions.list();
-            if (!list.length) { console.log('No suppressions.'); break; }
-            list.forEach(s => console.log(`  ${s.email.padEnd(40)}  ${s.reason}`));
+            const items = Array.isArray(list) ? list : (list.content || []);
+            if (!items.length) { console.log('No suppressions.'); break; }
+            items.forEach(s => console.log(`  ${(s.email || '').padEnd(40)}  ${s.reason}`));
             break;
           }
           case 'add': {
@@ -236,10 +246,12 @@ async function run() {
         switch (subcmd) {
           case 'list': {
             const list = await client.webhooks.list();
-            if (!list.length) { console.log('No webhook subscriptions.'); break; }
-            list.forEach(w => {
+            const items = Array.isArray(list) ? list : (list.content || []);
+            if (!items.length) { console.log('No webhook subscriptions.'); break; }
+            items.forEach(w => {
+              const events = w.subscribedEvents || w.events || [];
               console.log(`  ${w.id}  ${w.url}`);
-              console.log(`       Events: ${w.events.join(', ')}`);
+              console.log(`       Events: ${events.join(', ')}`);
             });
             break;
           }
@@ -247,9 +259,9 @@ async function run() {
             const url    = flag('url'); if (!url) err('webhooks add requires --url');
             const events = (flag('events') || '').split(',').map(e => e.trim()).filter(Boolean);
             if (!events.length) err('webhooks add requires --events (comma-separated)');
-            const result = await client.webhooks.create({ url, events });
+            const result = await client.webhooks.create({ url, subscribedEvents: events });
             console.log(`\x1b[32m✓\x1b[0m Webhook created: ${result.id}`);
-            console.log(`  Secret: ${result.secret}`);
+            if (result.secret) console.log(`  Secret: ${result.secret}`);
             break;
           }
           case 'delete': {
@@ -275,7 +287,7 @@ async function run() {
           case 'trigger': {
             const id = rest[0]; if (!id) err('workflows trigger requires a workflow ID');
             const result = await client.workflows.trigger(id, {});
-            console.log(`\x1b[32m✓\x1b[0m Workflow triggered: Run ID ${result.runId}`);
+            console.log(`\x1b[32m✓\x1b[0m Workflow triggered: Run ID ${result.runId || result.id}`);
             break;
           }
           case 'activate': {
@@ -354,6 +366,7 @@ async function run() {
 function printHelp() {
   console.log(`
 \x1b[1mCrescendo CLI\x1b[0m — Email & Workflow Automation
+
 \x1b[36mWorkflows\x1b[0m
   crescendo workflows list
   crescendo workflows trigger <id>
@@ -394,6 +407,7 @@ function printHelp() {
 
 \x1b[36mGlobal flags\x1b[0m
   --api-key <key>   Override CRESCENDO_API_KEY env var
+  --base-url <url>  Override API base URL (e.g. http://localhost:8080)
   --json            Output raw JSON instead of formatted output
 `);
 }

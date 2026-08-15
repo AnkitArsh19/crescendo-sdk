@@ -7,7 +7,7 @@
 # =============================================================================
 
 set -euo pipefail
-SDK_DIR="$(cd "$(dirname "$0")" && pwd)/sdk"
+SDK_DIR="$(cd "$(dirname "$0")" && pwd)"
 LOG_DIR="$SDK_DIR/.smoke-logs"
 mkdir -p "$LOG_DIR"
 PASS=0; FAIL=0; SKIP=0
