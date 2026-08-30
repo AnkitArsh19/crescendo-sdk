@@ -38,7 +38,7 @@ import io.crescendo.ApiClient;
   UpdateConnectionRequest.JSON_PROPERTY_NAME,
   UpdateConnectionRequest.JSON_PROPERTY_CREDENTIALS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T10:56:08.153732648Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T11:09:48.656601755Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class UpdateConnectionRequest {
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nullable

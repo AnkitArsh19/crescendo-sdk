@@ -39,7 +39,7 @@ import io.crescendo.ApiClient;
   AddDomainRequest.JSON_PROPERTY_CREDENTIAL_SOURCE,
   AddDomainRequest.JSON_PROPERTY_EMAIL_PROVIDER_CONNECTION_ID
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T10:56:08.153732648Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T11:09:48.656601755Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class AddDomainRequest {
   public static final String JSON_PROPERTY_DOMAIN_NAME = "domainName";
   @jakarta.annotation.Nonnull

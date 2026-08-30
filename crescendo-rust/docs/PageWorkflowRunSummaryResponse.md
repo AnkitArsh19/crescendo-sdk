@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **number** | Option<**i32**> |  | [optional]
 **pageable** | Option<[**models::PageableObject**](PageableObject.md)> |  | [optional]
 **sort** | Option<[**models::SortObject**](SortObject.md)> |  | [optional]
+**number_of_elements** | Option<**i32**> |  | [optional]
 **first** | Option<**bool**> |  | [optional]
 **last** | Option<**bool**> |  | [optional]
-**number_of_elements** | Option<**i32**> |  | [optional]
 **empty** | Option<**bool**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
