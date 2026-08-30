@@ -14,9 +14,9 @@
 |**number** | **Integer** |  |  [optional] |
 |**pageable** | [**PageableObject**](PageableObject.md) |  |  [optional] |
 |**sort** | [**SortObject**](SortObject.md) |  |  [optional] |
-|**numberOfElements** | **Integer** |  |  [optional] |
 |**first** | **Boolean** |  |  [optional] |
 |**last** | **Boolean** |  |  [optional] |
+|**numberOfElements** | **Integer** |  |  [optional] |
 |**empty** | **Boolean** |  |  [optional] |
 
 

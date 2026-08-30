@@ -64,9 +64,9 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
         'number' => 'int',
         'pageable' => '\Crescendo\Model\PageableObject',
         'sort' => '\Crescendo\Model\SortObject',
-        'number_of_elements' => 'int',
         'first' => 'bool',
         'last' => 'bool',
+        'number_of_elements' => 'int',
         'empty' => 'bool'
     ];
 
@@ -85,9 +85,9 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
         'number' => 'int32',
         'pageable' => null,
         'sort' => null,
-        'number_of_elements' => 'int32',
         'first' => null,
         'last' => null,
+        'number_of_elements' => 'int32',
         'empty' => null
     ];
 
@@ -104,9 +104,9 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
         'number' => false,
         'pageable' => false,
         'sort' => false,
-        'number_of_elements' => false,
         'first' => false,
         'last' => false,
+        'number_of_elements' => false,
         'empty' => false
     ];
 
@@ -203,9 +203,9 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
         'number' => 'number',
         'pageable' => 'pageable',
         'sort' => 'sort',
-        'number_of_elements' => 'numberOfElements',
         'first' => 'first',
         'last' => 'last',
+        'number_of_elements' => 'numberOfElements',
         'empty' => 'empty'
     ];
 
@@ -222,9 +222,9 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
         'number' => 'setNumber',
         'pageable' => 'setPageable',
         'sort' => 'setSort',
-        'number_of_elements' => 'setNumberOfElements',
         'first' => 'setFirst',
         'last' => 'setLast',
+        'number_of_elements' => 'setNumberOfElements',
         'empty' => 'setEmpty'
     ];
 
@@ -241,9 +241,9 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
         'number' => 'getNumber',
         'pageable' => 'getPageable',
         'sort' => 'getSort',
-        'number_of_elements' => 'getNumberOfElements',
         'first' => 'getFirst',
         'last' => 'getLast',
+        'number_of_elements' => 'getNumberOfElements',
         'empty' => 'getEmpty'
     ];
 
@@ -311,9 +311,9 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('pageable', $data ?? [], null);
         $this->setIfExists('sort', $data ?? [], null);
-        $this->setIfExists('number_of_elements', $data ?? [], null);
         $this->setIfExists('first', $data ?? [], null);
         $this->setIfExists('last', $data ?? [], null);
+        $this->setIfExists('number_of_elements', $data ?? [], null);
         $this->setIfExists('empty', $data ?? [], null);
     }
 
@@ -549,33 +549,6 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
-     * Gets number_of_elements
-     *
-     * @return int|null
-     */
-    public function getNumberOfElements()
-    {
-        return $this->container['number_of_elements'];
-    }
-
-    /**
-     * Sets number_of_elements
-     *
-     * @param int|null $number_of_elements number_of_elements
-     *
-     * @return self
-     */
-    public function setNumberOfElements($number_of_elements)
-    {
-        if (is_null($number_of_elements)) {
-            throw new \InvalidArgumentException('non-nullable number_of_elements cannot be null');
-        }
-        $this->container['number_of_elements'] = $number_of_elements;
-
-        return $this;
-    }
-
-    /**
      * Gets first
      *
      * @return bool|null
@@ -625,6 +598,33 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable last cannot be null');
         }
         $this->container['last'] = $last;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_of_elements
+     *
+     * @return int|null
+     */
+    public function getNumberOfElements()
+    {
+        return $this->container['number_of_elements'];
+    }
+
+    /**
+     * Sets number_of_elements
+     *
+     * @param int|null $number_of_elements number_of_elements
+     *
+     * @return self
+     */
+    public function setNumberOfElements($number_of_elements)
+    {
+        if (is_null($number_of_elements)) {
+            throw new \InvalidArgumentException('non-nullable number_of_elements cannot be null');
+        }
+        $this->container['number_of_elements'] = $number_of_elements;
 
         return $this;
     }
