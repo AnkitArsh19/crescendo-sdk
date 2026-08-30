@@ -38,6 +38,14 @@ class SortObjectTest {
     }
 
     /**
+     * Test the property 'empty'
+     */
+    @Test
+    void emptyTest() {
+        // TODO: test empty
+    }
+
+    /**
      * Test the property 'sorted'
      */
     @Test
@@ -51,14 +59,6 @@ class SortObjectTest {
     @Test
     void unsortedTest() {
         // TODO: test unsorted
-    }
-
-    /**
-     * Test the property 'empty'
-     */
-    @Test
-    void emptyTest() {
-        // TODO: test empty
     }
 
 }

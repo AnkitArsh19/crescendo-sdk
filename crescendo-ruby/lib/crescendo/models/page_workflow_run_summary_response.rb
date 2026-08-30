@@ -19,6 +19,12 @@ module Crescendo
 
     attr_accessor :total_elements
 
+    attr_accessor :size
+
+    attr_accessor :content
+
+    attr_accessor :number
+
     attr_accessor :pageable
 
     attr_accessor :sort
@@ -29,12 +35,6 @@ module Crescendo
 
     attr_accessor :number_of_elements
 
-    attr_accessor :size
-
-    attr_accessor :content
-
-    attr_accessor :number
-
     attr_accessor :empty
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -42,14 +42,14 @@ module Crescendo
       {
         :'total_pages' => :'totalPages',
         :'total_elements' => :'totalElements',
+        :'size' => :'size',
+        :'content' => :'content',
+        :'number' => :'number',
         :'pageable' => :'pageable',
         :'sort' => :'sort',
         :'first' => :'first',
         :'last' => :'last',
         :'number_of_elements' => :'numberOfElements',
-        :'size' => :'size',
-        :'content' => :'content',
-        :'number' => :'number',
         :'empty' => :'empty'
       }
     end
@@ -69,14 +69,14 @@ module Crescendo
       {
         :'total_pages' => :'Integer',
         :'total_elements' => :'Integer',
+        :'size' => :'Integer',
+        :'content' => :'Array<WorkflowRunSummaryResponse>',
+        :'number' => :'Integer',
         :'pageable' => :'PageableObject',
         :'sort' => :'SortObject',
         :'first' => :'Boolean',
         :'last' => :'Boolean',
         :'number_of_elements' => :'Integer',
-        :'size' => :'Integer',
-        :'content' => :'Array<WorkflowRunSummaryResponse>',
-        :'number' => :'Integer',
         :'empty' => :'Boolean'
       }
     end
@@ -111,6 +111,20 @@ module Crescendo
         self.total_elements = attributes[:'total_elements']
       end
 
+      if attributes.key?(:'size')
+        self.size = attributes[:'size']
+      end
+
+      if attributes.key?(:'content')
+        if (value = attributes[:'content']).is_a?(Array)
+          self.content = value
+        end
+      end
+
+      if attributes.key?(:'number')
+        self.number = attributes[:'number']
+      end
+
       if attributes.key?(:'pageable')
         self.pageable = attributes[:'pageable']
       end
@@ -129,20 +143,6 @@ module Crescendo
 
       if attributes.key?(:'number_of_elements')
         self.number_of_elements = attributes[:'number_of_elements']
-      end
-
-      if attributes.key?(:'size')
-        self.size = attributes[:'size']
-      end
-
-      if attributes.key?(:'content')
-        if (value = attributes[:'content']).is_a?(Array)
-          self.content = value
-        end
-      end
-
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
       end
 
       if attributes.key?(:'empty')
@@ -172,14 +172,14 @@ module Crescendo
       self.class == o.class &&
           total_pages == o.total_pages &&
           total_elements == o.total_elements &&
+          size == o.size &&
+          content == o.content &&
+          number == o.number &&
           pageable == o.pageable &&
           sort == o.sort &&
           first == o.first &&
           last == o.last &&
           number_of_elements == o.number_of_elements &&
-          size == o.size &&
-          content == o.content &&
-          number == o.number &&
           empty == o.empty
     end
 
@@ -192,7 +192,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_pages, total_elements, pageable, sort, first, last, number_of_elements, size, content, number, empty].hash
+      [total_pages, total_elements, size, content, number, pageable, sort, first, last, number_of_elements, empty].hash
     end
 
     # Builds the object from hash

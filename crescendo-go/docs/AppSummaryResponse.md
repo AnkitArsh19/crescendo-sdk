@@ -15,6 +15,10 @@ Name | Type | Description | Notes
 **HelpUrl** | Pointer to **string** |  | [optional] 
 **Internal** | Pointer to **bool** |  | [optional] 
 **HasPlatformKey** | Pointer to **bool** |  | [optional] 
+**HasTriggers** | Pointer to **bool** |  | [optional] 
+**HasActions** | Pointer to **bool** |  | [optional] 
+**TriggerCount** | Pointer to **int32** |  | [optional] 
+**ActionCount** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -309,6 +313,106 @@ SetHasPlatformKey sets HasPlatformKey field to given value.
 `func (o *AppSummaryResponse) HasHasPlatformKey() bool`
 
 HasHasPlatformKey returns a boolean if a field has been set.
+
+### GetHasTriggers
+
+`func (o *AppSummaryResponse) GetHasTriggers() bool`
+
+GetHasTriggers returns the HasTriggers field if non-nil, zero value otherwise.
+
+### GetHasTriggersOk
+
+`func (o *AppSummaryResponse) GetHasTriggersOk() (*bool, bool)`
+
+GetHasTriggersOk returns a tuple with the HasTriggers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasTriggers
+
+`func (o *AppSummaryResponse) SetHasTriggers(v bool)`
+
+SetHasTriggers sets HasTriggers field to given value.
+
+### HasHasTriggers
+
+`func (o *AppSummaryResponse) HasHasTriggers() bool`
+
+HasHasTriggers returns a boolean if a field has been set.
+
+### GetHasActions
+
+`func (o *AppSummaryResponse) GetHasActions() bool`
+
+GetHasActions returns the HasActions field if non-nil, zero value otherwise.
+
+### GetHasActionsOk
+
+`func (o *AppSummaryResponse) GetHasActionsOk() (*bool, bool)`
+
+GetHasActionsOk returns a tuple with the HasActions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasActions
+
+`func (o *AppSummaryResponse) SetHasActions(v bool)`
+
+SetHasActions sets HasActions field to given value.
+
+### HasHasActions
+
+`func (o *AppSummaryResponse) HasHasActions() bool`
+
+HasHasActions returns a boolean if a field has been set.
+
+### GetTriggerCount
+
+`func (o *AppSummaryResponse) GetTriggerCount() int32`
+
+GetTriggerCount returns the TriggerCount field if non-nil, zero value otherwise.
+
+### GetTriggerCountOk
+
+`func (o *AppSummaryResponse) GetTriggerCountOk() (*int32, bool)`
+
+GetTriggerCountOk returns a tuple with the TriggerCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTriggerCount
+
+`func (o *AppSummaryResponse) SetTriggerCount(v int32)`
+
+SetTriggerCount sets TriggerCount field to given value.
+
+### HasTriggerCount
+
+`func (o *AppSummaryResponse) HasTriggerCount() bool`
+
+HasTriggerCount returns a boolean if a field has been set.
+
+### GetActionCount
+
+`func (o *AppSummaryResponse) GetActionCount() int32`
+
+GetActionCount returns the ActionCount field if non-nil, zero value otherwise.
+
+### GetActionCountOk
+
+`func (o *AppSummaryResponse) GetActionCountOk() (*int32, bool)`
+
+GetActionCountOk returns a tuple with the ActionCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionCount
+
+`func (o *AppSummaryResponse) SetActionCount(v int32)`
+
+SetActionCount sets ActionCount field to given value.
+
+### HasActionCount
+
+`func (o *AppSummaryResponse) HasActionCount() bool`
+
+HasActionCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

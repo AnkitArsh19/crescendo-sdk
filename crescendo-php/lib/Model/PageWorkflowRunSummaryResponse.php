@@ -59,14 +59,14 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     protected static $openAPITypes = [
         'total_pages' => 'int',
         'total_elements' => 'int',
+        'size' => 'int',
+        'content' => '\Crescendo\Model\WorkflowRunSummaryResponse[]',
+        'number' => 'int',
         'pageable' => '\Crescendo\Model\PageableObject',
         'sort' => '\Crescendo\Model\SortObject',
         'first' => 'bool',
         'last' => 'bool',
         'number_of_elements' => 'int',
-        'size' => 'int',
-        'content' => '\Crescendo\Model\WorkflowRunSummaryResponse[]',
-        'number' => 'int',
         'empty' => 'bool'
     ];
 
@@ -80,14 +80,14 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     protected static $openAPIFormats = [
         'total_pages' => 'int32',
         'total_elements' => 'int64',
+        'size' => 'int32',
+        'content' => null,
+        'number' => 'int32',
         'pageable' => null,
         'sort' => null,
         'first' => null,
         'last' => null,
         'number_of_elements' => 'int32',
-        'size' => 'int32',
-        'content' => null,
-        'number' => 'int32',
         'empty' => null
     ];
 
@@ -99,14 +99,14 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     protected static array $openAPINullables = [
         'total_pages' => false,
         'total_elements' => false,
+        'size' => false,
+        'content' => false,
+        'number' => false,
         'pageable' => false,
         'sort' => false,
         'first' => false,
         'last' => false,
         'number_of_elements' => false,
-        'size' => false,
-        'content' => false,
-        'number' => false,
         'empty' => false
     ];
 
@@ -198,14 +198,14 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     protected static $attributeMap = [
         'total_pages' => 'totalPages',
         'total_elements' => 'totalElements',
+        'size' => 'size',
+        'content' => 'content',
+        'number' => 'number',
         'pageable' => 'pageable',
         'sort' => 'sort',
         'first' => 'first',
         'last' => 'last',
         'number_of_elements' => 'numberOfElements',
-        'size' => 'size',
-        'content' => 'content',
-        'number' => 'number',
         'empty' => 'empty'
     ];
 
@@ -217,14 +217,14 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     protected static $setters = [
         'total_pages' => 'setTotalPages',
         'total_elements' => 'setTotalElements',
+        'size' => 'setSize',
+        'content' => 'setContent',
+        'number' => 'setNumber',
         'pageable' => 'setPageable',
         'sort' => 'setSort',
         'first' => 'setFirst',
         'last' => 'setLast',
         'number_of_elements' => 'setNumberOfElements',
-        'size' => 'setSize',
-        'content' => 'setContent',
-        'number' => 'setNumber',
         'empty' => 'setEmpty'
     ];
 
@@ -236,14 +236,14 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     protected static $getters = [
         'total_pages' => 'getTotalPages',
         'total_elements' => 'getTotalElements',
+        'size' => 'getSize',
+        'content' => 'getContent',
+        'number' => 'getNumber',
         'pageable' => 'getPageable',
         'sort' => 'getSort',
         'first' => 'getFirst',
         'last' => 'getLast',
         'number_of_elements' => 'getNumberOfElements',
-        'size' => 'getSize',
-        'content' => 'getContent',
-        'number' => 'getNumber',
         'empty' => 'getEmpty'
     ];
 
@@ -306,14 +306,14 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
     {
         $this->setIfExists('total_pages', $data ?? [], null);
         $this->setIfExists('total_elements', $data ?? [], null);
+        $this->setIfExists('size', $data ?? [], null);
+        $this->setIfExists('content', $data ?? [], null);
+        $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('pageable', $data ?? [], null);
         $this->setIfExists('sort', $data ?? [], null);
         $this->setIfExists('first', $data ?? [], null);
         $this->setIfExists('last', $data ?? [], null);
         $this->setIfExists('number_of_elements', $data ?? [], null);
-        $this->setIfExists('size', $data ?? [], null);
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('empty', $data ?? [], null);
     }
 
@@ -409,6 +409,87 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable total_elements cannot be null');
         }
         $this->container['total_elements'] = $total_elements;
+
+        return $this;
+    }
+
+    /**
+     * Gets size
+     *
+     * @return int|null
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param int|null $size size
+     *
+     * @return self
+     */
+    public function setSize($size)
+    {
+        if (is_null($size)) {
+            throw new \InvalidArgumentException('non-nullable size cannot be null');
+        }
+        $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets content
+     *
+     * @return \Crescendo\Model\WorkflowRunSummaryResponse[]|null
+     */
+    public function getContent()
+    {
+        return $this->container['content'];
+    }
+
+    /**
+     * Sets content
+     *
+     * @param \Crescendo\Model\WorkflowRunSummaryResponse[]|null $content content
+     *
+     * @return self
+     */
+    public function setContent($content)
+    {
+        if (is_null($content)) {
+            throw new \InvalidArgumentException('non-nullable content cannot be null');
+        }
+        $this->container['content'] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Gets number
+     *
+     * @return int|null
+     */
+    public function getNumber()
+    {
+        return $this->container['number'];
+    }
+
+    /**
+     * Sets number
+     *
+     * @param int|null $number number
+     *
+     * @return self
+     */
+    public function setNumber($number)
+    {
+        if (is_null($number)) {
+            throw new \InvalidArgumentException('non-nullable number cannot be null');
+        }
+        $this->container['number'] = $number;
 
         return $this;
     }
@@ -544,87 +625,6 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable number_of_elements cannot be null');
         }
         $this->container['number_of_elements'] = $number_of_elements;
-
-        return $this;
-    }
-
-    /**
-     * Gets size
-     *
-     * @return int|null
-     */
-    public function getSize()
-    {
-        return $this->container['size'];
-    }
-
-    /**
-     * Sets size
-     *
-     * @param int|null $size size
-     *
-     * @return self
-     */
-    public function setSize($size)
-    {
-        if (is_null($size)) {
-            throw new \InvalidArgumentException('non-nullable size cannot be null');
-        }
-        $this->container['size'] = $size;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return \Crescendo\Model\WorkflowRunSummaryResponse[]|null
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param \Crescendo\Model\WorkflowRunSummaryResponse[]|null $content content
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        if (is_null($content)) {
-            throw new \InvalidArgumentException('non-nullable content cannot be null');
-        }
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets number
-     *
-     * @return int|null
-     */
-    public function getNumber()
-    {
-        return $this->container['number'];
-    }
-
-    /**
-     * Sets number
-     *
-     * @param int|null $number number
-     *
-     * @return self
-     */
-    public function setNumber($number)
-    {
-        if (is_null($number)) {
-            throw new \InvalidArgumentException('non-nullable number cannot be null');
-        }
-        $this->container['number'] = $number;
 
         return $this;
     }

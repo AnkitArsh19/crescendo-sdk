@@ -15,5 +15,9 @@ Name | Type | Description | Notes
 **help_url** | **string** |  | [optional]
 **internal** | **bool** |  | [optional]
 **has_platform_key** | **bool** |  | [optional]
+**has_triggers** | **bool** |  | [optional]
+**has_actions** | **bool** |  | [optional]
+**trigger_count** | **int** |  | [optional]
+**action_count** | **int** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

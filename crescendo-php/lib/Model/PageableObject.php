@@ -57,12 +57,12 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
+        'offset' => 'int',
         'paged' => 'bool',
         'page_number' => 'int',
         'page_size' => 'int',
         'sort' => '\Crescendo\Model\SortObject',
-        'unpaged' => 'bool',
-        'offset' => 'int'
+        'unpaged' => 'bool'
     ];
 
     /**
@@ -73,12 +73,12 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
+        'offset' => 'int64',
         'paged' => null,
         'page_number' => 'int32',
         'page_size' => 'int32',
         'sort' => null,
-        'unpaged' => null,
-        'offset' => 'int64'
+        'unpaged' => null
     ];
 
     /**
@@ -87,12 +87,12 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
+        'offset' => false,
         'paged' => false,
         'page_number' => false,
         'page_size' => false,
         'sort' => false,
-        'unpaged' => false,
-        'offset' => false
+        'unpaged' => false
     ];
 
     /**
@@ -181,12 +181,12 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'offset' => 'offset',
         'paged' => 'paged',
         'page_number' => 'pageNumber',
         'page_size' => 'pageSize',
         'sort' => 'sort',
-        'unpaged' => 'unpaged',
-        'offset' => 'offset'
+        'unpaged' => 'unpaged'
     ];
 
     /**
@@ -195,12 +195,12 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'offset' => 'setOffset',
         'paged' => 'setPaged',
         'page_number' => 'setPageNumber',
         'page_size' => 'setPageSize',
         'sort' => 'setSort',
-        'unpaged' => 'setUnpaged',
-        'offset' => 'setOffset'
+        'unpaged' => 'setUnpaged'
     ];
 
     /**
@@ -209,12 +209,12 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'offset' => 'getOffset',
         'paged' => 'getPaged',
         'page_number' => 'getPageNumber',
         'page_size' => 'getPageSize',
         'sort' => 'getSort',
-        'unpaged' => 'getUnpaged',
-        'offset' => 'getOffset'
+        'unpaged' => 'getUnpaged'
     ];
 
     /**
@@ -274,12 +274,12 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('offset', $data ?? [], null);
         $this->setIfExists('paged', $data ?? [], null);
         $this->setIfExists('page_number', $data ?? [], null);
         $this->setIfExists('page_size', $data ?? [], null);
         $this->setIfExists('sort', $data ?? [], null);
         $this->setIfExists('unpaged', $data ?? [], null);
-        $this->setIfExists('offset', $data ?? [], null);
     }
 
     /**
@@ -323,6 +323,33 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets offset
+     *
+     * @return int|null
+     */
+    public function getOffset()
+    {
+        return $this->container['offset'];
+    }
+
+    /**
+     * Sets offset
+     *
+     * @param int|null $offset offset
+     *
+     * @return self
+     */
+    public function setOffset($offset)
+    {
+        if (is_null($offset)) {
+            throw new \InvalidArgumentException('non-nullable offset cannot be null');
+        }
+        $this->container['offset'] = $offset;
+
+        return $this;
+    }
 
     /**
      * Gets paged
@@ -455,33 +482,6 @@ class PageableObject implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable unpaged cannot be null');
         }
         $this->container['unpaged'] = $unpaged;
-
-        return $this;
-    }
-
-    /**
-     * Gets offset
-     *
-     * @return int|null
-     */
-    public function getOffset()
-    {
-        return $this->container['offset'];
-    }
-
-    /**
-     * Sets offset
-     *
-     * @param int|null $offset offset
-     *
-     * @return self
-     */
-    public function setOffset($offset)
-    {
-        if (is_null($offset)) {
-            throw new \InvalidArgumentException('non-nullable offset cannot be null');
-        }
-        $this->container['offset'] = $offset;
 
         return $this;
     }

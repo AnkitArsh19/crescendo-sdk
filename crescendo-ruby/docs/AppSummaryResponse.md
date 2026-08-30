@@ -15,6 +15,10 @@
 | **help_url** | **String** |  | [optional] |
 | **internal** | **Boolean** |  | [optional] |
 | **has_platform_key** | **Boolean** |  | [optional] |
+| **has_triggers** | **Boolean** |  | [optional] |
+| **has_actions** | **Boolean** |  | [optional] |
+| **trigger_count** | **Integer** |  | [optional] |
+| **action_count** | **Integer** |  | [optional] |
 
 ## Example
 
@@ -32,7 +36,11 @@ instance = Crescendo::AppSummaryResponse.new(
   category: null,
   help_url: null,
   internal: null,
-  has_platform_key: null
+  has_platform_key: null,
+  has_triggers: null,
+  has_actions: null,
+  trigger_count: null,
+  action_count: null
 )
 ```
 

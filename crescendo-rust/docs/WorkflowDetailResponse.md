@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **status** | Option<**String**> |  | [optional]
 **revision** | Option<**i64**> |  | [optional]
 **steps** | Option<[**Vec<models::StepResponse>**](StepResponse.md)> |  | [optional]
+**edges** | Option<[**Vec<models::EdgeResponse>**](EdgeResponse.md)> |  | [optional]
 **created_at** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]
 **updated_at** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]
 **last_run_at** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]

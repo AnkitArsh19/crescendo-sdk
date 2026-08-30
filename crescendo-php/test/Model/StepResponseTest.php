@@ -143,24 +143,6 @@ class StepResponseTest extends TestCase
     }
 
     /**
-     * Test attribute "parent_step_id"
-     */
-    public function testPropertyParentStepId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "branch_key"
-     */
-    public function testPropertyBranchKey()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "configuration"
      */
     public function testPropertyConfiguration()

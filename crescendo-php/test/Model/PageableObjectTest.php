@@ -80,6 +80,15 @@ class PageableObjectTest extends TestCase
     }
 
     /**
+     * Test attribute "offset"
+     */
+    public function testPropertyOffset()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "paged"
      */
     public function testPropertyPaged()
@@ -119,15 +128,6 @@ class PageableObjectTest extends TestCase
      * Test attribute "unpaged"
      */
     public function testPropertyUnpaged()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "offset"
-     */
-    public function testPropertyOffset()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

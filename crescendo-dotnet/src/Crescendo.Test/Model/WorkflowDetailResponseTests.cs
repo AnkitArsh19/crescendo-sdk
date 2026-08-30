@@ -117,6 +117,15 @@ namespace Crescendo.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Edges'
+        /// </summary>
+        [Fact]
+        public void EdgesTest()
+        {
+            // TODO unit test for the property 'Edges'
+        }
+
+        /// <summary>
         /// Test the property 'CreatedAt'
         /// </summary>
         [Fact]

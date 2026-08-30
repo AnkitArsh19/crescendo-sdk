@@ -29,10 +29,6 @@ module Crescendo
 
     attr_accessor :connection_id
 
-    attr_accessor :parent_step_id
-
-    attr_accessor :branch_key
-
     attr_accessor :configuration
 
     attr_accessor :created_at
@@ -49,8 +45,6 @@ module Crescendo
         :'app_key' => :'appKey',
         :'action_key' => :'actionKey',
         :'connection_id' => :'connectionId',
-        :'parent_step_id' => :'parentStepId',
-        :'branch_key' => :'branchKey',
         :'configuration' => :'configuration',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt'
@@ -77,8 +71,6 @@ module Crescendo
         :'app_key' => :'String',
         :'action_key' => :'String',
         :'connection_id' => :'String',
-        :'parent_step_id' => :'String',
-        :'branch_key' => :'String',
         :'configuration' => :'Hash<String, Object>',
         :'created_at' => :'Time',
         :'updated_at' => :'Time'
@@ -135,14 +127,6 @@ module Crescendo
         self.connection_id = attributes[:'connection_id']
       end
 
-      if attributes.key?(:'parent_step_id')
-        self.parent_step_id = attributes[:'parent_step_id']
-      end
-
-      if attributes.key?(:'branch_key')
-        self.branch_key = attributes[:'branch_key']
-      end
-
       if attributes.key?(:'configuration')
         if (value = attributes[:'configuration']).is_a?(Hash)
           self.configuration = value
@@ -185,8 +169,6 @@ module Crescendo
           app_key == o.app_key &&
           action_key == o.action_key &&
           connection_id == o.connection_id &&
-          parent_step_id == o.parent_step_id &&
-          branch_key == o.branch_key &&
           configuration == o.configuration &&
           created_at == o.created_at &&
           updated_at == o.updated_at
@@ -201,7 +183,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, type, order, app_key, action_key, connection_id, parent_step_id, branch_key, configuration, created_at, updated_at].hash
+      [id, name, type, order, app_key, action_key, connection_id, configuration, created_at, updated_at].hash
     end
 
     # Builds the object from hash

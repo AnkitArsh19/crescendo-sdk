@@ -4,7 +4,7 @@ Crescendo API
 
 - API version: v1
 
-- Build date: 2026-07-07T13:05:45.810490+05:30[Asia/Kolkata]
+- Build date: 2026-08-30T10:56:08.153732648Z[Etc/UTC]
 
 - Generator version: 7.23.0
 
@@ -246,6 +246,7 @@ Class | Method | HTTP request | Description
  - [DailyCount](docs/DailyCount.md)
  - [DnsRecord](docs/DnsRecord.md)
  - [DomainResponse](docs/DomainResponse.md)
+ - [EdgeResponse](docs/EdgeResponse.md)
  - [EmailLogResponse](docs/EmailLogResponse.md)
  - [FireCustomEventRequest](docs/FireCustomEventRequest.md)
  - [ImportSuppressionsRequest](docs/ImportSuppressionsRequest.md)

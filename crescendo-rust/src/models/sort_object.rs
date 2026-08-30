@@ -13,20 +13,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SortObject {
+    #[serde(rename = "empty", skip_serializing_if = "Option::is_none")]
+    pub empty: Option<bool>,
     #[serde(rename = "sorted", skip_serializing_if = "Option::is_none")]
     pub sorted: Option<bool>,
     #[serde(rename = "unsorted", skip_serializing_if = "Option::is_none")]
     pub unsorted: Option<bool>,
-    #[serde(rename = "empty", skip_serializing_if = "Option::is_none")]
-    pub empty: Option<bool>,
 }
 
 impl SortObject {
     pub fn new() -> SortObject {
         SortObject {
+            empty: None,
             sorted: None,
             unsorted: None,
-            empty: None,
         }
     }
 }

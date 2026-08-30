@@ -64,8 +64,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_key' => 'string',
         'action_key' => 'string',
         'connection_id' => 'string',
-        'parent_step_id' => 'string',
-        'branch_key' => 'string',
         'configuration' => 'array<string,mixed>',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
@@ -86,8 +84,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_key' => null,
         'action_key' => null,
         'connection_id' => 'uuid',
-        'parent_step_id' => 'uuid',
-        'branch_key' => null,
         'configuration' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
@@ -106,8 +102,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_key' => false,
         'action_key' => false,
         'connection_id' => false,
-        'parent_step_id' => false,
-        'branch_key' => false,
         'configuration' => false,
         'created_at' => false,
         'updated_at' => false
@@ -206,8 +200,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_key' => 'appKey',
         'action_key' => 'actionKey',
         'connection_id' => 'connectionId',
-        'parent_step_id' => 'parentStepId',
-        'branch_key' => 'branchKey',
         'configuration' => 'configuration',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
@@ -226,8 +218,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_key' => 'setAppKey',
         'action_key' => 'setActionKey',
         'connection_id' => 'setConnectionId',
-        'parent_step_id' => 'setParentStepId',
-        'branch_key' => 'setBranchKey',
         'configuration' => 'setConfiguration',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
@@ -246,8 +236,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_key' => 'getAppKey',
         'action_key' => 'getActionKey',
         'connection_id' => 'getConnectionId',
-        'parent_step_id' => 'getParentStepId',
-        'branch_key' => 'getBranchKey',
         'configuration' => 'getConfiguration',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
@@ -317,8 +305,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_key', $data ?? [], null);
         $this->setIfExists('action_key', $data ?? [], null);
         $this->setIfExists('connection_id', $data ?? [], null);
-        $this->setIfExists('parent_step_id', $data ?? [], null);
-        $this->setIfExists('branch_key', $data ?? [], null);
         $this->setIfExists('configuration', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -551,60 +537,6 @@ class StepResponse implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable connection_id cannot be null');
         }
         $this->container['connection_id'] = $connection_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets parent_step_id
-     *
-     * @return string|null
-     */
-    public function getParentStepId()
-    {
-        return $this->container['parent_step_id'];
-    }
-
-    /**
-     * Sets parent_step_id
-     *
-     * @param string|null $parent_step_id parent_step_id
-     *
-     * @return self
-     */
-    public function setParentStepId($parent_step_id)
-    {
-        if (is_null($parent_step_id)) {
-            throw new \InvalidArgumentException('non-nullable parent_step_id cannot be null');
-        }
-        $this->container['parent_step_id'] = $parent_step_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets branch_key
-     *
-     * @return string|null
-     */
-    public function getBranchKey()
-    {
-        return $this->container['branch_key'];
-    }
-
-    /**
-     * Sets branch_key
-     *
-     * @param string|null $branch_key branch_key
-     *
-     * @return self
-     */
-    public function setBranchKey($branch_key)
-    {
-        if (is_null($branch_key)) {
-            throw new \InvalidArgumentException('non-nullable branch_key cannot be null');
-        }
-        $this->container['branch_key'] = $branch_key;
 
         return $this;
     }

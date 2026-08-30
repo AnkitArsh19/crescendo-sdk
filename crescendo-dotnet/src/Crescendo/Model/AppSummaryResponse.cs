@@ -44,8 +44,12 @@ namespace Crescendo.Model
         /// <param name="helpUrl">helpUrl</param>
         /// <param name="internal">internal</param>
         /// <param name="hasPlatformKey">hasPlatformKey</param>
+        /// <param name="hasTriggers">hasTriggers</param>
+        /// <param name="hasActions">hasActions</param>
+        /// <param name="triggerCount">triggerCount</param>
+        /// <param name="actionCount">actionCount</param>
         [JsonConstructor]
-        public AppSummaryResponse(Option<string?> appKey = default, Option<string?> name = default, Option<string?> description = default, Option<string?> logoUrl = default, Option<string?> authType = default, Option<string?> altAuthType = default, Option<List<Dictionary<string, Object>>?> credentialSchema = default, Option<string?> category = default, Option<string?> helpUrl = default, Option<bool?> @internal = default, Option<bool?> hasPlatformKey = default)
+        public AppSummaryResponse(Option<string?> appKey = default, Option<string?> name = default, Option<string?> description = default, Option<string?> logoUrl = default, Option<string?> authType = default, Option<string?> altAuthType = default, Option<List<Dictionary<string, Object>>?> credentialSchema = default, Option<string?> category = default, Option<string?> helpUrl = default, Option<bool?> @internal = default, Option<bool?> hasPlatformKey = default, Option<bool?> hasTriggers = default, Option<bool?> hasActions = default, Option<int?> triggerCount = default, Option<int?> actionCount = default)
         {
             AppKeyOption = appKey;
             NameOption = name;
@@ -58,6 +62,10 @@ namespace Crescendo.Model
             HelpUrlOption = helpUrl;
             InternalOption = @internal;
             HasPlatformKeyOption = hasPlatformKey;
+            HasTriggersOption = hasTriggers;
+            HasActionsOption = hasActions;
+            TriggerCountOption = triggerCount;
+            ActionCountOption = actionCount;
             OnCreated();
         }
 
@@ -207,6 +215,58 @@ namespace Crescendo.Model
         public bool? HasPlatformKey { get { return this.HasPlatformKeyOption.Value; } set { this.HasPlatformKeyOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of HasTriggers
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> HasTriggersOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets HasTriggers
+        /// </summary>
+        [JsonPropertyName("hasTriggers")]
+        public bool? HasTriggers { get { return this.HasTriggersOption.Value; } set { this.HasTriggersOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of HasActions
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> HasActionsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets HasActions
+        /// </summary>
+        [JsonPropertyName("hasActions")]
+        public bool? HasActions { get { return this.HasActionsOption.Value; } set { this.HasActionsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TriggerCount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> TriggerCountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TriggerCount
+        /// </summary>
+        [JsonPropertyName("triggerCount")]
+        public int? TriggerCount { get { return this.TriggerCountOption.Value; } set { this.TriggerCountOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ActionCount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> ActionCountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ActionCount
+        /// </summary>
+        [JsonPropertyName("actionCount")]
+        public int? ActionCount { get { return this.ActionCountOption.Value; } set { this.ActionCountOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -225,6 +285,10 @@ namespace Crescendo.Model
             sb.Append("  HelpUrl: ").Append(HelpUrl).Append("\n");
             sb.Append("  Internal: ").Append(Internal).Append("\n");
             sb.Append("  HasPlatformKey: ").Append(HasPlatformKey).Append("\n");
+            sb.Append("  HasTriggers: ").Append(HasTriggers).Append("\n");
+            sb.Append("  HasActions: ").Append(HasActions).Append("\n");
+            sb.Append("  TriggerCount: ").Append(TriggerCount).Append("\n");
+            sb.Append("  ActionCount: ").Append(ActionCount).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -273,6 +337,10 @@ namespace Crescendo.Model
             Option<string?> helpUrl = default;
             Option<bool?> varInternal = default;
             Option<bool?> hasPlatformKey = default;
+            Option<bool?> hasTriggers = default;
+            Option<bool?> hasActions = default;
+            Option<int?> triggerCount = default;
+            Option<int?> actionCount = default;
 
             while (utf8JsonReader.Read())
             {
@@ -322,6 +390,18 @@ namespace Crescendo.Model
                         case "hasPlatformKey":
                             hasPlatformKey = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
+                        case "hasTriggers":
+                            hasTriggers = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "hasActions":
+                            hasActions = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "triggerCount":
+                            triggerCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "actionCount":
+                            actionCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
                         default:
                             break;
                     }
@@ -361,7 +441,19 @@ namespace Crescendo.Model
             if (hasPlatformKey.IsSet && hasPlatformKey.Value == null)
                 throw new ArgumentNullException(nameof(hasPlatformKey), "Property is not nullable for class AppSummaryResponse.");
 
-            return new AppSummaryResponse(appKey, name, description, logoUrl, authType, altAuthType, credentialSchema, category, helpUrl, varInternal, hasPlatformKey);
+            if (hasTriggers.IsSet && hasTriggers.Value == null)
+                throw new ArgumentNullException(nameof(hasTriggers), "Property is not nullable for class AppSummaryResponse.");
+
+            if (hasActions.IsSet && hasActions.Value == null)
+                throw new ArgumentNullException(nameof(hasActions), "Property is not nullable for class AppSummaryResponse.");
+
+            if (triggerCount.IsSet && triggerCount.Value == null)
+                throw new ArgumentNullException(nameof(triggerCount), "Property is not nullable for class AppSummaryResponse.");
+
+            if (actionCount.IsSet && actionCount.Value == null)
+                throw new ArgumentNullException(nameof(actionCount), "Property is not nullable for class AppSummaryResponse.");
+
+            return new AppSummaryResponse(appKey, name, description, logoUrl, authType, altAuthType, credentialSchema, category, helpUrl, varInternal, hasPlatformKey, hasTriggers, hasActions, triggerCount, actionCount);
         }
 
         /// <summary>
@@ -449,6 +541,18 @@ namespace Crescendo.Model
 
             if (appSummaryResponse.HasPlatformKeyOption.IsSet)
                 writer.WriteBoolean("hasPlatformKey", appSummaryResponse.HasPlatformKeyOption.Value!.Value);
+
+            if (appSummaryResponse.HasTriggersOption.IsSet)
+                writer.WriteBoolean("hasTriggers", appSummaryResponse.HasTriggersOption.Value!.Value);
+
+            if (appSummaryResponse.HasActionsOption.IsSet)
+                writer.WriteBoolean("hasActions", appSummaryResponse.HasActionsOption.Value!.Value);
+
+            if (appSummaryResponse.TriggerCountOption.IsSet)
+                writer.WriteNumber("triggerCount", appSummaryResponse.TriggerCountOption.Value!.Value);
+
+            if (appSummaryResponse.ActionCountOption.IsSet)
+                writer.WriteNumber("actionCount", appSummaryResponse.ActionCountOption.Value!.Value);
         }
     }
 }

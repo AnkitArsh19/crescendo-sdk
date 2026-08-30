@@ -19,9 +19,9 @@ var _ MappedNullable = &SortObject{}
 
 // SortObject struct for SortObject
 type SortObject struct {
+	Empty *bool `json:"empty,omitempty"`
 	Sorted *bool `json:"sorted,omitempty"`
 	Unsorted *bool `json:"unsorted,omitempty"`
-	Empty *bool `json:"empty,omitempty"`
 }
 
 // NewSortObject instantiates a new SortObject object
@@ -39,6 +39,38 @@ func NewSortObject() *SortObject {
 func NewSortObjectWithDefaults() *SortObject {
 	this := SortObject{}
 	return &this
+}
+
+// GetEmpty returns the Empty field value if set, zero value otherwise.
+func (o *SortObject) GetEmpty() bool {
+	if o == nil || IsNil(o.Empty) {
+		var ret bool
+		return ret
+	}
+	return *o.Empty
+}
+
+// GetEmptyOk returns a tuple with the Empty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SortObject) GetEmptyOk() (*bool, bool) {
+	if o == nil || IsNil(o.Empty) {
+		return nil, false
+	}
+	return o.Empty, true
+}
+
+// HasEmpty returns a boolean if a field has been set.
+func (o *SortObject) HasEmpty() bool {
+	if o != nil && !IsNil(o.Empty) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmpty gets a reference to the given bool and assigns it to the Empty field.
+func (o *SortObject) SetEmpty(v bool) {
+	o.Empty = &v
 }
 
 // GetSorted returns the Sorted field value if set, zero value otherwise.
@@ -105,38 +137,6 @@ func (o *SortObject) SetUnsorted(v bool) {
 	o.Unsorted = &v
 }
 
-// GetEmpty returns the Empty field value if set, zero value otherwise.
-func (o *SortObject) GetEmpty() bool {
-	if o == nil || IsNil(o.Empty) {
-		var ret bool
-		return ret
-	}
-	return *o.Empty
-}
-
-// GetEmptyOk returns a tuple with the Empty field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SortObject) GetEmptyOk() (*bool, bool) {
-	if o == nil || IsNil(o.Empty) {
-		return nil, false
-	}
-	return o.Empty, true
-}
-
-// HasEmpty returns a boolean if a field has been set.
-func (o *SortObject) HasEmpty() bool {
-	if o != nil && !IsNil(o.Empty) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmpty gets a reference to the given bool and assigns it to the Empty field.
-func (o *SortObject) SetEmpty(v bool) {
-	o.Empty = &v
-}
-
 func (o SortObject) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -147,14 +147,14 @@ func (o SortObject) MarshalJSON() ([]byte, error) {
 
 func (o SortObject) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Empty) {
+		toSerialize["empty"] = o.Empty
+	}
 	if !IsNil(o.Sorted) {
 		toSerialize["sorted"] = o.Sorted
 	}
 	if !IsNil(o.Unsorted) {
 		toSerialize["unsorted"] = o.Unsorted
-	}
-	if !IsNil(o.Empty) {
-		toSerialize["empty"] = o.Empty
 	}
 	return toSerialize, nil
 }

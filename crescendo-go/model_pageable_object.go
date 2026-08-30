@@ -19,12 +19,12 @@ var _ MappedNullable = &PageableObject{}
 
 // PageableObject struct for PageableObject
 type PageableObject struct {
+	Offset *int64 `json:"offset,omitempty"`
 	Paged *bool `json:"paged,omitempty"`
 	PageNumber *int32 `json:"pageNumber,omitempty"`
 	PageSize *int32 `json:"pageSize,omitempty"`
 	Sort *SortObject `json:"sort,omitempty"`
 	Unpaged *bool `json:"unpaged,omitempty"`
-	Offset *int64 `json:"offset,omitempty"`
 }
 
 // NewPageableObject instantiates a new PageableObject object
@@ -42,6 +42,38 @@ func NewPageableObject() *PageableObject {
 func NewPageableObjectWithDefaults() *PageableObject {
 	this := PageableObject{}
 	return &this
+}
+
+// GetOffset returns the Offset field value if set, zero value otherwise.
+func (o *PageableObject) GetOffset() int64 {
+	if o == nil || IsNil(o.Offset) {
+		var ret int64
+		return ret
+	}
+	return *o.Offset
+}
+
+// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PageableObject) GetOffsetOk() (*int64, bool) {
+	if o == nil || IsNil(o.Offset) {
+		return nil, false
+	}
+	return o.Offset, true
+}
+
+// HasOffset returns a boolean if a field has been set.
+func (o *PageableObject) HasOffset() bool {
+	if o != nil && !IsNil(o.Offset) {
+		return true
+	}
+
+	return false
+}
+
+// SetOffset gets a reference to the given int64 and assigns it to the Offset field.
+func (o *PageableObject) SetOffset(v int64) {
+	o.Offset = &v
 }
 
 // GetPaged returns the Paged field value if set, zero value otherwise.
@@ -204,38 +236,6 @@ func (o *PageableObject) SetUnpaged(v bool) {
 	o.Unpaged = &v
 }
 
-// GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *PageableObject) GetOffset() int64 {
-	if o == nil || IsNil(o.Offset) {
-		var ret int64
-		return ret
-	}
-	return *o.Offset
-}
-
-// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PageableObject) GetOffsetOk() (*int64, bool) {
-	if o == nil || IsNil(o.Offset) {
-		return nil, false
-	}
-	return o.Offset, true
-}
-
-// HasOffset returns a boolean if a field has been set.
-func (o *PageableObject) HasOffset() bool {
-	if o != nil && !IsNil(o.Offset) {
-		return true
-	}
-
-	return false
-}
-
-// SetOffset gets a reference to the given int64 and assigns it to the Offset field.
-func (o *PageableObject) SetOffset(v int64) {
-	o.Offset = &v
-}
-
 func (o PageableObject) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -246,6 +246,9 @@ func (o PageableObject) MarshalJSON() ([]byte, error) {
 
 func (o PageableObject) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Offset) {
+		toSerialize["offset"] = o.Offset
+	}
 	if !IsNil(o.Paged) {
 		toSerialize["paged"] = o.Paged
 	}
@@ -260,9 +263,6 @@ func (o PageableObject) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Unpaged) {
 		toSerialize["unpaged"] = o.Unpaged
-	}
-	if !IsNil(o.Offset) {
-		toSerialize["offset"] = o.Offset
 	}
 	return toSerialize, nil
 }

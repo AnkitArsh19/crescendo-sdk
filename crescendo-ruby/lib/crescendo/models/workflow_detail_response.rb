@@ -29,6 +29,8 @@ module Crescendo
 
     attr_accessor :steps
 
+    attr_accessor :edges
+
     attr_accessor :created_at
 
     attr_accessor :updated_at
@@ -45,6 +47,7 @@ module Crescendo
         :'status' => :'status',
         :'revision' => :'revision',
         :'steps' => :'steps',
+        :'edges' => :'edges',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt',
         :'last_run_at' => :'lastRunAt'
@@ -71,6 +74,7 @@ module Crescendo
         :'status' => :'String',
         :'revision' => :'Integer',
         :'steps' => :'Array<StepResponse>',
+        :'edges' => :'Array<EdgeResponse>',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
         :'last_run_at' => :'Time'
@@ -129,6 +133,12 @@ module Crescendo
         end
       end
 
+      if attributes.key?(:'edges')
+        if (value = attributes[:'edges']).is_a?(Array)
+          self.edges = value
+        end
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
       end
@@ -169,6 +179,7 @@ module Crescendo
           status == o.status &&
           revision == o.revision &&
           steps == o.steps &&
+          edges == o.edges &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
           last_run_at == o.last_run_at
@@ -183,7 +194,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, description, is_active, status, revision, steps, created_at, updated_at, last_run_at].hash
+      [id, name, description, is_active, status, revision, steps, edges, created_at, updated_at, last_run_at].hash
     end
 
     # Builds the object from hash

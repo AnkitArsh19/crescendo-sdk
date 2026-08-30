@@ -14,8 +14,6 @@
 |**appKey** | **String** |  |  [optional] |
 |**actionKey** | **String** |  |  [optional] |
 |**connectionId** | **UUID** |  |  [optional] |
-|**parentStepId** | **UUID** |  |  [optional] |
-|**branchKey** | **String** |  |  [optional] |
 |**_configuration** | **Map&lt;String, Object&gt;** |  |  [optional] |
 |**createdAt** | **OffsetDateTime** |  |  [optional] |
 |**updatedAt** | **OffsetDateTime** |  |  [optional] |

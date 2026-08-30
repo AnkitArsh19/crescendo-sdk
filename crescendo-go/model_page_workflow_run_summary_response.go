@@ -21,14 +21,14 @@ var _ MappedNullable = &PageWorkflowRunSummaryResponse{}
 type PageWorkflowRunSummaryResponse struct {
 	TotalPages *int32 `json:"totalPages,omitempty"`
 	TotalElements *int64 `json:"totalElements,omitempty"`
+	Size *int32 `json:"size,omitempty"`
+	Content []WorkflowRunSummaryResponse `json:"content,omitempty"`
+	Number *int32 `json:"number,omitempty"`
 	Pageable *PageableObject `json:"pageable,omitempty"`
 	Sort *SortObject `json:"sort,omitempty"`
 	First *bool `json:"first,omitempty"`
 	Last *bool `json:"last,omitempty"`
 	NumberOfElements *int32 `json:"numberOfElements,omitempty"`
-	Size *int32 `json:"size,omitempty"`
-	Content []WorkflowRunSummaryResponse `json:"content,omitempty"`
-	Number *int32 `json:"number,omitempty"`
 	Empty *bool `json:"empty,omitempty"`
 }
 
@@ -111,6 +111,102 @@ func (o *PageWorkflowRunSummaryResponse) HasTotalElements() bool {
 // SetTotalElements gets a reference to the given int64 and assigns it to the TotalElements field.
 func (o *PageWorkflowRunSummaryResponse) SetTotalElements(v int64) {
 	o.TotalElements = &v
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *PageWorkflowRunSummaryResponse) GetSize() int32 {
+	if o == nil || IsNil(o.Size) {
+		var ret int32
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PageWorkflowRunSummaryResponse) GetSizeOk() (*int32, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *PageWorkflowRunSummaryResponse) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given int32 and assigns it to the Size field.
+func (o *PageWorkflowRunSummaryResponse) SetSize(v int32) {
+	o.Size = &v
+}
+
+// GetContent returns the Content field value if set, zero value otherwise.
+func (o *PageWorkflowRunSummaryResponse) GetContent() []WorkflowRunSummaryResponse {
+	if o == nil || IsNil(o.Content) {
+		var ret []WorkflowRunSummaryResponse
+		return ret
+	}
+	return o.Content
+}
+
+// GetContentOk returns a tuple with the Content field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PageWorkflowRunSummaryResponse) GetContentOk() ([]WorkflowRunSummaryResponse, bool) {
+	if o == nil || IsNil(o.Content) {
+		return nil, false
+	}
+	return o.Content, true
+}
+
+// HasContent returns a boolean if a field has been set.
+func (o *PageWorkflowRunSummaryResponse) HasContent() bool {
+	if o != nil && !IsNil(o.Content) {
+		return true
+	}
+
+	return false
+}
+
+// SetContent gets a reference to the given []WorkflowRunSummaryResponse and assigns it to the Content field.
+func (o *PageWorkflowRunSummaryResponse) SetContent(v []WorkflowRunSummaryResponse) {
+	o.Content = v
+}
+
+// GetNumber returns the Number field value if set, zero value otherwise.
+func (o *PageWorkflowRunSummaryResponse) GetNumber() int32 {
+	if o == nil || IsNil(o.Number) {
+		var ret int32
+		return ret
+	}
+	return *o.Number
+}
+
+// GetNumberOk returns a tuple with the Number field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PageWorkflowRunSummaryResponse) GetNumberOk() (*int32, bool) {
+	if o == nil || IsNil(o.Number) {
+		return nil, false
+	}
+	return o.Number, true
+}
+
+// HasNumber returns a boolean if a field has been set.
+func (o *PageWorkflowRunSummaryResponse) HasNumber() bool {
+	if o != nil && !IsNil(o.Number) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumber gets a reference to the given int32 and assigns it to the Number field.
+func (o *PageWorkflowRunSummaryResponse) SetNumber(v int32) {
+	o.Number = &v
 }
 
 // GetPageable returns the Pageable field value if set, zero value otherwise.
@@ -273,102 +369,6 @@ func (o *PageWorkflowRunSummaryResponse) SetNumberOfElements(v int32) {
 	o.NumberOfElements = &v
 }
 
-// GetSize returns the Size field value if set, zero value otherwise.
-func (o *PageWorkflowRunSummaryResponse) GetSize() int32 {
-	if o == nil || IsNil(o.Size) {
-		var ret int32
-		return ret
-	}
-	return *o.Size
-}
-
-// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PageWorkflowRunSummaryResponse) GetSizeOk() (*int32, bool) {
-	if o == nil || IsNil(o.Size) {
-		return nil, false
-	}
-	return o.Size, true
-}
-
-// HasSize returns a boolean if a field has been set.
-func (o *PageWorkflowRunSummaryResponse) HasSize() bool {
-	if o != nil && !IsNil(o.Size) {
-		return true
-	}
-
-	return false
-}
-
-// SetSize gets a reference to the given int32 and assigns it to the Size field.
-func (o *PageWorkflowRunSummaryResponse) SetSize(v int32) {
-	o.Size = &v
-}
-
-// GetContent returns the Content field value if set, zero value otherwise.
-func (o *PageWorkflowRunSummaryResponse) GetContent() []WorkflowRunSummaryResponse {
-	if o == nil || IsNil(o.Content) {
-		var ret []WorkflowRunSummaryResponse
-		return ret
-	}
-	return o.Content
-}
-
-// GetContentOk returns a tuple with the Content field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PageWorkflowRunSummaryResponse) GetContentOk() ([]WorkflowRunSummaryResponse, bool) {
-	if o == nil || IsNil(o.Content) {
-		return nil, false
-	}
-	return o.Content, true
-}
-
-// HasContent returns a boolean if a field has been set.
-func (o *PageWorkflowRunSummaryResponse) HasContent() bool {
-	if o != nil && !IsNil(o.Content) {
-		return true
-	}
-
-	return false
-}
-
-// SetContent gets a reference to the given []WorkflowRunSummaryResponse and assigns it to the Content field.
-func (o *PageWorkflowRunSummaryResponse) SetContent(v []WorkflowRunSummaryResponse) {
-	o.Content = v
-}
-
-// GetNumber returns the Number field value if set, zero value otherwise.
-func (o *PageWorkflowRunSummaryResponse) GetNumber() int32 {
-	if o == nil || IsNil(o.Number) {
-		var ret int32
-		return ret
-	}
-	return *o.Number
-}
-
-// GetNumberOk returns a tuple with the Number field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PageWorkflowRunSummaryResponse) GetNumberOk() (*int32, bool) {
-	if o == nil || IsNil(o.Number) {
-		return nil, false
-	}
-	return o.Number, true
-}
-
-// HasNumber returns a boolean if a field has been set.
-func (o *PageWorkflowRunSummaryResponse) HasNumber() bool {
-	if o != nil && !IsNil(o.Number) {
-		return true
-	}
-
-	return false
-}
-
-// SetNumber gets a reference to the given int32 and assigns it to the Number field.
-func (o *PageWorkflowRunSummaryResponse) SetNumber(v int32) {
-	o.Number = &v
-}
-
 // GetEmpty returns the Empty field value if set, zero value otherwise.
 func (o *PageWorkflowRunSummaryResponse) GetEmpty() bool {
 	if o == nil || IsNil(o.Empty) {
@@ -417,6 +417,15 @@ func (o PageWorkflowRunSummaryResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.TotalElements) {
 		toSerialize["totalElements"] = o.TotalElements
 	}
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
+	if !IsNil(o.Content) {
+		toSerialize["content"] = o.Content
+	}
+	if !IsNil(o.Number) {
+		toSerialize["number"] = o.Number
+	}
 	if !IsNil(o.Pageable) {
 		toSerialize["pageable"] = o.Pageable
 	}
@@ -431,15 +440,6 @@ func (o PageWorkflowRunSummaryResponse) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.NumberOfElements) {
 		toSerialize["numberOfElements"] = o.NumberOfElements
-	}
-	if !IsNil(o.Size) {
-		toSerialize["size"] = o.Size
-	}
-	if !IsNil(o.Content) {
-		toSerialize["content"] = o.Content
-	}
-	if !IsNil(o.Number) {
-		toSerialize["number"] = o.Number
 	}
 	if !IsNil(o.Empty) {
 		toSerialize["empty"] = o.Empty

@@ -27,6 +27,8 @@ pub struct WorkflowDetailResponse {
     pub revision: Option<i64>,
     #[serde(rename = "steps", skip_serializing_if = "Option::is_none")]
     pub steps: Option<Vec<models::StepResponse>>,
+    #[serde(rename = "edges", skip_serializing_if = "Option::is_none")]
+    pub edges: Option<Vec<models::EdgeResponse>>,
     #[serde(rename = "createdAt", skip_serializing_if = "Option::is_none")]
     pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "updatedAt", skip_serializing_if = "Option::is_none")]
@@ -45,6 +47,7 @@ impl WorkflowDetailResponse {
             status: None,
             revision: None,
             steps: None,
+            edges: None,
             created_at: None,
             updated_at: None,
             last_run_at: None,

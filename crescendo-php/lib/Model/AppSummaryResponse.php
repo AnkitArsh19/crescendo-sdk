@@ -67,7 +67,11 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         'category' => 'string',
         'help_url' => 'string',
         'internal' => 'bool',
-        'has_platform_key' => 'bool'
+        'has_platform_key' => 'bool',
+        'has_triggers' => 'bool',
+        'has_actions' => 'bool',
+        'trigger_count' => 'int',
+        'action_count' => 'int'
     ];
 
     /**
@@ -88,7 +92,11 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         'category' => null,
         'help_url' => null,
         'internal' => null,
-        'has_platform_key' => null
+        'has_platform_key' => null,
+        'has_triggers' => null,
+        'has_actions' => null,
+        'trigger_count' => 'int32',
+        'action_count' => 'int32'
     ];
 
     /**
@@ -107,7 +115,11 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         'category' => false,
         'help_url' => false,
         'internal' => false,
-        'has_platform_key' => false
+        'has_platform_key' => false,
+        'has_triggers' => false,
+        'has_actions' => false,
+        'trigger_count' => false,
+        'action_count' => false
     ];
 
     /**
@@ -206,7 +218,11 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         'category' => 'category',
         'help_url' => 'helpUrl',
         'internal' => 'internal',
-        'has_platform_key' => 'hasPlatformKey'
+        'has_platform_key' => 'hasPlatformKey',
+        'has_triggers' => 'hasTriggers',
+        'has_actions' => 'hasActions',
+        'trigger_count' => 'triggerCount',
+        'action_count' => 'actionCount'
     ];
 
     /**
@@ -225,7 +241,11 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         'category' => 'setCategory',
         'help_url' => 'setHelpUrl',
         'internal' => 'setInternal',
-        'has_platform_key' => 'setHasPlatformKey'
+        'has_platform_key' => 'setHasPlatformKey',
+        'has_triggers' => 'setHasTriggers',
+        'has_actions' => 'setHasActions',
+        'trigger_count' => 'setTriggerCount',
+        'action_count' => 'setActionCount'
     ];
 
     /**
@@ -244,7 +264,11 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         'category' => 'getCategory',
         'help_url' => 'getHelpUrl',
         'internal' => 'getInternal',
-        'has_platform_key' => 'getHasPlatformKey'
+        'has_platform_key' => 'getHasPlatformKey',
+        'has_triggers' => 'getHasTriggers',
+        'has_actions' => 'getHasActions',
+        'trigger_count' => 'getTriggerCount',
+        'action_count' => 'getActionCount'
     ];
 
     /**
@@ -315,6 +339,10 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('help_url', $data ?? [], null);
         $this->setIfExists('internal', $data ?? [], null);
         $this->setIfExists('has_platform_key', $data ?? [], null);
+        $this->setIfExists('has_triggers', $data ?? [], null);
+        $this->setIfExists('has_actions', $data ?? [], null);
+        $this->setIfExists('trigger_count', $data ?? [], null);
+        $this->setIfExists('action_count', $data ?? [], null);
     }
 
     /**
@@ -652,6 +680,114 @@ class AppSummaryResponse implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable has_platform_key cannot be null');
         }
         $this->container['has_platform_key'] = $has_platform_key;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_triggers
+     *
+     * @return bool|null
+     */
+    public function getHasTriggers()
+    {
+        return $this->container['has_triggers'];
+    }
+
+    /**
+     * Sets has_triggers
+     *
+     * @param bool|null $has_triggers has_triggers
+     *
+     * @return self
+     */
+    public function setHasTriggers($has_triggers)
+    {
+        if (is_null($has_triggers)) {
+            throw new \InvalidArgumentException('non-nullable has_triggers cannot be null');
+        }
+        $this->container['has_triggers'] = $has_triggers;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_actions
+     *
+     * @return bool|null
+     */
+    public function getHasActions()
+    {
+        return $this->container['has_actions'];
+    }
+
+    /**
+     * Sets has_actions
+     *
+     * @param bool|null $has_actions has_actions
+     *
+     * @return self
+     */
+    public function setHasActions($has_actions)
+    {
+        if (is_null($has_actions)) {
+            throw new \InvalidArgumentException('non-nullable has_actions cannot be null');
+        }
+        $this->container['has_actions'] = $has_actions;
+
+        return $this;
+    }
+
+    /**
+     * Gets trigger_count
+     *
+     * @return int|null
+     */
+    public function getTriggerCount()
+    {
+        return $this->container['trigger_count'];
+    }
+
+    /**
+     * Sets trigger_count
+     *
+     * @param int|null $trigger_count trigger_count
+     *
+     * @return self
+     */
+    public function setTriggerCount($trigger_count)
+    {
+        if (is_null($trigger_count)) {
+            throw new \InvalidArgumentException('non-nullable trigger_count cannot be null');
+        }
+        $this->container['trigger_count'] = $trigger_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets action_count
+     *
+     * @return int|null
+     */
+    public function getActionCount()
+    {
+        return $this->container['action_count'];
+    }
+
+    /**
+     * Sets action_count
+     *
+     * @param int|null $action_count action_count
+     *
+     * @return self
+     */
+    public function setActionCount($action_count)
+    {
+        if (is_null($action_count)) {
+            throw new \InvalidArgumentException('non-nullable action_count cannot be null');
+        }
+        $this->container['action_count'] = $action_count;
 
         return $this;
     }

@@ -151,5 +151,41 @@ namespace Crescendo.Test.Model
         {
             // TODO unit test for the property 'HasPlatformKey'
         }
+
+        /// <summary>
+        /// Test the property 'HasTriggers'
+        /// </summary>
+        [Fact]
+        public void HasTriggersTest()
+        {
+            // TODO unit test for the property 'HasTriggers'
+        }
+
+        /// <summary>
+        /// Test the property 'HasActions'
+        /// </summary>
+        [Fact]
+        public void HasActionsTest()
+        {
+            // TODO unit test for the property 'HasActions'
+        }
+
+        /// <summary>
+        /// Test the property 'TriggerCount'
+        /// </summary>
+        [Fact]
+        public void TriggerCountTest()
+        {
+            // TODO unit test for the property 'TriggerCount'
+        }
+
+        /// <summary>
+        /// Test the property 'ActionCount'
+        /// </summary>
+        [Fact]
+        public void ActionCountTest()
+        {
+            // TODO unit test for the property 'ActionCount'
+        }
     }
 }

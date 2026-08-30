@@ -128,4 +128,36 @@ class AppSummaryResponseTest {
         // TODO: test hasPlatformKey
     }
 
+    /**
+     * Test the property 'hasTriggers'
+     */
+    @Test
+    void hasTriggersTest() {
+        // TODO: test hasTriggers
+    }
+
+    /**
+     * Test the property 'hasActions'
+     */
+    @Test
+    void hasActionsTest() {
+        // TODO: test hasActions
+    }
+
+    /**
+     * Test the property 'triggerCount'
+     */
+    @Test
+    void triggerCountTest() {
+        // TODO: test triggerCount
+    }
+
+    /**
+     * Test the property 'actionCount'
+     */
+    @Test
+    void actionCountTest() {
+        // TODO: test actionCount
+    }
+
 }

@@ -59,6 +59,7 @@ namespace Crescendo.Client
             _jsonOptions.Converters.Add(new DailyCountJsonConverter());
             _jsonOptions.Converters.Add(new DnsRecordJsonConverter());
             _jsonOptions.Converters.Add(new DomainResponseJsonConverter());
+            _jsonOptions.Converters.Add(new EdgeResponseJsonConverter());
             _jsonOptions.Converters.Add(new EmailLogResponseJsonConverter());
             _jsonOptions.Converters.Add(new FireCustomEventRequestJsonConverter());
             _jsonOptions.Converters.Add(new ImportSuppressionsRequestJsonConverter());

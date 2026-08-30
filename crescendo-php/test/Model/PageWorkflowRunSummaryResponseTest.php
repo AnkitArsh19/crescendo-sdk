@@ -98,6 +98,33 @@ class PageWorkflowRunSummaryResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "size"
+     */
+    public function testPropertySize()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "content"
+     */
+    public function testPropertyContent()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "number"
+     */
+    public function testPropertyNumber()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "pageable"
      */
     public function testPropertyPageable()
@@ -137,33 +164,6 @@ class PageWorkflowRunSummaryResponseTest extends TestCase
      * Test attribute "number_of_elements"
      */
     public function testPropertyNumberOfElements()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "size"
-     */
-    public function testPropertySize()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "content"
-     */
-    public function testPropertyContent()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "number"
-     */
-    public function testPropertyNumber()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -40,11 +40,12 @@ namespace Crescendo.Model
         /// <param name="status">status</param>
         /// <param name="revision">revision</param>
         /// <param name="steps">steps</param>
+        /// <param name="edges">edges</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="lastRunAt">lastRunAt</param>
         [JsonConstructor]
-        public WorkflowDetailResponse(Option<string?> id = default, Option<string?> name = default, Option<string?> description = default, Option<bool?> isActive = default, Option<string?> status = default, Option<long?> revision = default, Option<List<StepResponse>?> steps = default, Option<DateTime?> createdAt = default, Option<DateTime?> updatedAt = default, Option<DateTime?> lastRunAt = default)
+        public WorkflowDetailResponse(Option<string?> id = default, Option<string?> name = default, Option<string?> description = default, Option<bool?> isActive = default, Option<string?> status = default, Option<long?> revision = default, Option<List<StepResponse>?> steps = default, Option<List<EdgeResponse>?> edges = default, Option<DateTime?> createdAt = default, Option<DateTime?> updatedAt = default, Option<DateTime?> lastRunAt = default)
         {
             IdOption = id;
             NameOption = name;
@@ -53,6 +54,7 @@ namespace Crescendo.Model
             StatusOption = status;
             RevisionOption = revision;
             StepsOption = steps;
+            EdgesOption = edges;
             CreatedAtOption = createdAt;
             UpdatedAtOption = updatedAt;
             LastRunAtOption = lastRunAt;
@@ -153,6 +155,19 @@ namespace Crescendo.Model
         public List<StepResponse>? Steps { get { return this.StepsOption.Value; } set { this.StepsOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Edges
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<EdgeResponse>?> EdgesOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Edges
+        /// </summary>
+        [JsonPropertyName("edges")]
+        public List<EdgeResponse>? Edges { get { return this.EdgesOption.Value; } set { this.EdgesOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of CreatedAt
         /// </summary>
         [JsonIgnore]
@@ -206,6 +221,7 @@ namespace Crescendo.Model
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Revision: ").Append(Revision).Append("\n");
             sb.Append("  Steps: ").Append(Steps).Append("\n");
+            sb.Append("  Edges: ").Append(Edges).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  LastRunAt: ").Append(LastRunAt).Append("\n");
@@ -268,6 +284,7 @@ namespace Crescendo.Model
             Option<string?> status = default;
             Option<long?> revision = default;
             Option<List<StepResponse>?> steps = default;
+            Option<List<EdgeResponse>?> edges = default;
             Option<DateTime?> createdAt = default;
             Option<DateTime?> updatedAt = default;
             Option<DateTime?> lastRunAt = default;
@@ -308,6 +325,9 @@ namespace Crescendo.Model
                         case "steps":
                             steps = new Option<List<StepResponse>?>(JsonSerializer.Deserialize<List<StepResponse>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "edges":
+                            edges = new Option<List<EdgeResponse>?>(JsonSerializer.Deserialize<List<EdgeResponse>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "createdAt":
                             createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
@@ -344,6 +364,9 @@ namespace Crescendo.Model
             if (steps.IsSet && steps.Value == null)
                 throw new ArgumentNullException(nameof(steps), "Property is not nullable for class WorkflowDetailResponse.");
 
+            if (edges.IsSet && edges.Value == null)
+                throw new ArgumentNullException(nameof(edges), "Property is not nullable for class WorkflowDetailResponse.");
+
             if (createdAt.IsSet && createdAt.Value == null)
                 throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class WorkflowDetailResponse.");
 
@@ -353,7 +376,7 @@ namespace Crescendo.Model
             if (lastRunAt.IsSet && lastRunAt.Value == null)
                 throw new ArgumentNullException(nameof(lastRunAt), "Property is not nullable for class WorkflowDetailResponse.");
 
-            return new WorkflowDetailResponse(id, name, description, isActive, status, revision, steps, createdAt, updatedAt, lastRunAt);
+            return new WorkflowDetailResponse(id, name, description, isActive, status, revision, steps, edges, createdAt, updatedAt, lastRunAt);
         }
 
         /// <summary>
@@ -395,6 +418,9 @@ namespace Crescendo.Model
             if (workflowDetailResponse.StepsOption.IsSet && workflowDetailResponse.Steps == null)
                 throw new ArgumentNullException(nameof(workflowDetailResponse.Steps), "Property is required for class WorkflowDetailResponse.");
 
+            if (workflowDetailResponse.EdgesOption.IsSet && workflowDetailResponse.Edges == null)
+                throw new ArgumentNullException(nameof(workflowDetailResponse.Edges), "Property is required for class WorkflowDetailResponse.");
+
             if (workflowDetailResponse.IdOption.IsSet)
                 writer.WriteString("id", workflowDetailResponse.Id);
 
@@ -417,6 +443,11 @@ namespace Crescendo.Model
             {
                 writer.WritePropertyName("steps");
                 JsonSerializer.Serialize(writer, workflowDetailResponse.Steps, jsonSerializerOptions);
+            }
+            if (workflowDetailResponse.EdgesOption.IsSet)
+            {
+                writer.WritePropertyName("edges");
+                JsonSerializer.Serialize(writer, workflowDetailResponse.Edges, jsonSerializerOptions);
             }
             if (workflowDetailResponse.CreatedAtOption.IsSet)
                 writer.WriteString("createdAt", workflowDetailResponse.CreatedAtOption.Value!.Value.ToString(CreatedAtFormat));

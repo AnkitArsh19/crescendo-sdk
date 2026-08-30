@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **app_key** | Option<**String**> |  | [optional]
 **action_key** | Option<**String**> |  | [optional]
 **connection_id** | Option<**uuid::Uuid**> |  | [optional]
-**parent_step_id** | Option<**uuid::Uuid**> |  | [optional]
-**branch_key** | Option<**String**> |  | [optional]
 **configuration** | Option<**std::collections::HashMap<String, serde_json::Value>**> |  | [optional]
 **created_at** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]
 **updated_at** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]

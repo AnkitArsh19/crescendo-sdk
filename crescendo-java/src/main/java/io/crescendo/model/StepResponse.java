@@ -45,13 +45,11 @@ import io.crescendo.ApiClient;
   StepResponse.JSON_PROPERTY_APP_KEY,
   StepResponse.JSON_PROPERTY_ACTION_KEY,
   StepResponse.JSON_PROPERTY_CONNECTION_ID,
-  StepResponse.JSON_PROPERTY_PARENT_STEP_ID,
-  StepResponse.JSON_PROPERTY_BRANCH_KEY,
   StepResponse.JSON_PROPERTY_CONFIGURATION,
   StepResponse.JSON_PROPERTY_CREATED_AT,
   StepResponse.JSON_PROPERTY_UPDATED_AT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-07T13:05:45.810490+05:30[Asia/Kolkata]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T10:56:08.153732648Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class StepResponse {
   public static final String JSON_PROPERTY_ID = "id";
   @jakarta.annotation.Nullable
@@ -80,14 +78,6 @@ public class StepResponse {
   public static final String JSON_PROPERTY_CONNECTION_ID = "connectionId";
   @jakarta.annotation.Nullable
   private UUID connectionId;
-
-  public static final String JSON_PROPERTY_PARENT_STEP_ID = "parentStepId";
-  @jakarta.annotation.Nullable
-  private UUID parentStepId;
-
-  public static final String JSON_PROPERTY_BRANCH_KEY = "branchKey";
-  @jakarta.annotation.Nullable
-  private String branchKey;
 
   public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
   @jakarta.annotation.Nullable
@@ -272,54 +262,6 @@ public class StepResponse {
   }
 
 
-  public StepResponse parentStepId(@jakarta.annotation.Nullable UUID parentStepId) {
-    this.parentStepId = parentStepId;
-    return this;
-  }
-
-  /**
-   * Get parentStepId
-   * @return parentStepId
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PARENT_STEP_ID, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public UUID getParentStepId() {
-    return parentStepId;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_PARENT_STEP_ID, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setParentStepId(@jakarta.annotation.Nullable UUID parentStepId) {
-    this.parentStepId = parentStepId;
-  }
-
-
-  public StepResponse branchKey(@jakarta.annotation.Nullable String branchKey) {
-    this.branchKey = branchKey;
-    return this;
-  }
-
-  /**
-   * Get branchKey
-   * @return branchKey
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BRANCH_KEY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public String getBranchKey() {
-    return branchKey;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_BRANCH_KEY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBranchKey(@jakarta.annotation.Nullable String branchKey) {
-    this.branchKey = branchKey;
-  }
-
-
   public StepResponse _configuration(@jakarta.annotation.Nullable Map<String, Object> _configuration) {
     this._configuration = _configuration;
     return this;
@@ -419,8 +361,6 @@ public class StepResponse {
         Objects.equals(this.appKey, stepResponse.appKey) &&
         Objects.equals(this.actionKey, stepResponse.actionKey) &&
         Objects.equals(this.connectionId, stepResponse.connectionId) &&
-        Objects.equals(this.parentStepId, stepResponse.parentStepId) &&
-        Objects.equals(this.branchKey, stepResponse.branchKey) &&
         Objects.equals(this._configuration, stepResponse._configuration) &&
         Objects.equals(this.createdAt, stepResponse.createdAt) &&
         Objects.equals(this.updatedAt, stepResponse.updatedAt);
@@ -428,7 +368,7 @@ public class StepResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, type, order, appKey, actionKey, connectionId, parentStepId, branchKey, _configuration, createdAt, updatedAt);
+    return Objects.hash(id, name, type, order, appKey, actionKey, connectionId, _configuration, createdAt, updatedAt);
   }
 
   @Override
@@ -442,8 +382,6 @@ public class StepResponse {
     sb.append("    appKey: ").append(toIndentedString(appKey)).append("\n");
     sb.append("    actionKey: ").append(toIndentedString(actionKey)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
-    sb.append("    parentStepId: ").append(toIndentedString(parentStepId)).append("\n");
-    sb.append("    branchKey: ").append(toIndentedString(branchKey)).append("\n");
     sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
@@ -524,16 +462,6 @@ public class StepResponse {
     // add `connectionId` to the URL query string
     if (getConnectionId() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sconnectionId%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getConnectionId()))));
-    }
-
-    // add `parentStepId` to the URL query string
-    if (getParentStepId() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sparentStepId%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getParentStepId()))));
-    }
-
-    // add `branchKey` to the URL query string
-    if (getBranchKey() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sbranchKey%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBranchKey()))));
     }
 
     // add `configuration` to the URL query string

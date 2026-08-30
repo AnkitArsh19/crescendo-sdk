@@ -33,19 +33,32 @@ namespace Crescendo.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SortObject" /> class.
         /// </summary>
+        /// <param name="empty">empty</param>
         /// <param name="sorted">sorted</param>
         /// <param name="unsorted">unsorted</param>
-        /// <param name="empty">empty</param>
         [JsonConstructor]
-        public SortObject(Option<bool?> sorted = default, Option<bool?> unsorted = default, Option<bool?> empty = default)
+        public SortObject(Option<bool?> empty = default, Option<bool?> sorted = default, Option<bool?> unsorted = default)
         {
+            EmptyOption = empty;
             SortedOption = sorted;
             UnsortedOption = unsorted;
-            EmptyOption = empty;
             OnCreated();
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Used to track the state of Empty
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> EmptyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Empty
+        /// </summary>
+        [JsonPropertyName("empty")]
+        public bool? Empty { get { return this.EmptyOption.Value; } set { this.EmptyOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Sorted
@@ -74,19 +87,6 @@ namespace Crescendo.Model
         public bool? Unsorted { get { return this.UnsortedOption.Value; } set { this.UnsortedOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of Empty
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> EmptyOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Empty
-        /// </summary>
-        [JsonPropertyName("empty")]
-        public bool? Empty { get { return this.EmptyOption.Value; } set { this.EmptyOption = new(value); } }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -94,9 +94,9 @@ namespace Crescendo.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class SortObject {\n");
+            sb.Append("  Empty: ").Append(Empty).Append("\n");
             sb.Append("  Sorted: ").Append(Sorted).Append("\n");
             sb.Append("  Unsorted: ").Append(Unsorted).Append("\n");
-            sb.Append("  Empty: ").Append(Empty).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -134,9 +134,9 @@ namespace Crescendo.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<bool?> empty = default;
             Option<bool?> sorted = default;
             Option<bool?> unsorted = default;
-            Option<bool?> empty = default;
 
             while (utf8JsonReader.Read())
             {
@@ -153,14 +153,14 @@ namespace Crescendo.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "empty":
+                            empty = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
                         case "sorted":
                             sorted = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "unsorted":
                             unsorted = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
-                            break;
-                        case "empty":
-                            empty = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -168,16 +168,16 @@ namespace Crescendo.Model
                 }
             }
 
+            if (empty.IsSet && empty.Value == null)
+                throw new ArgumentNullException(nameof(empty), "Property is not nullable for class SortObject.");
+
             if (sorted.IsSet && sorted.Value == null)
                 throw new ArgumentNullException(nameof(sorted), "Property is not nullable for class SortObject.");
 
             if (unsorted.IsSet && unsorted.Value == null)
                 throw new ArgumentNullException(nameof(unsorted), "Property is not nullable for class SortObject.");
 
-            if (empty.IsSet && empty.Value == null)
-                throw new ArgumentNullException(nameof(empty), "Property is not nullable for class SortObject.");
-
-            return new SortObject(sorted, unsorted, empty);
+            return new SortObject(empty, sorted, unsorted);
         }
 
         /// <summary>
@@ -204,14 +204,14 @@ namespace Crescendo.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, SortObject sortObject, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (sortObject.EmptyOption.IsSet)
+                writer.WriteBoolean("empty", sortObject.EmptyOption.Value!.Value);
+
             if (sortObject.SortedOption.IsSet)
                 writer.WriteBoolean("sorted", sortObject.SortedOption.Value!.Value);
 
             if (sortObject.UnsortedOption.IsSet)
                 writer.WriteBoolean("unsorted", sortObject.UnsortedOption.Value!.Value);
-
-            if (sortObject.EmptyOption.IsSet)
-                writer.WriteBoolean("empty", sortObject.EmptyOption.Value!.Value);
         }
     }
 }

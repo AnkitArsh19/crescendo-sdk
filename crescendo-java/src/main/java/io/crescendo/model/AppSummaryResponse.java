@@ -46,9 +46,13 @@ import io.crescendo.ApiClient;
   AppSummaryResponse.JSON_PROPERTY_CATEGORY,
   AppSummaryResponse.JSON_PROPERTY_HELP_URL,
   AppSummaryResponse.JSON_PROPERTY_INTERNAL,
-  AppSummaryResponse.JSON_PROPERTY_HAS_PLATFORM_KEY
+  AppSummaryResponse.JSON_PROPERTY_HAS_PLATFORM_KEY,
+  AppSummaryResponse.JSON_PROPERTY_HAS_TRIGGERS,
+  AppSummaryResponse.JSON_PROPERTY_HAS_ACTIONS,
+  AppSummaryResponse.JSON_PROPERTY_TRIGGER_COUNT,
+  AppSummaryResponse.JSON_PROPERTY_ACTION_COUNT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-07T13:05:45.810490+05:30[Asia/Kolkata]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T10:56:08.153732648Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class AppSummaryResponse {
   public static final String JSON_PROPERTY_APP_KEY = "appKey";
   @jakarta.annotation.Nullable
@@ -93,6 +97,22 @@ public class AppSummaryResponse {
   public static final String JSON_PROPERTY_HAS_PLATFORM_KEY = "hasPlatformKey";
   @jakarta.annotation.Nullable
   private Boolean hasPlatformKey;
+
+  public static final String JSON_PROPERTY_HAS_TRIGGERS = "hasTriggers";
+  @jakarta.annotation.Nullable
+  private Boolean hasTriggers;
+
+  public static final String JSON_PROPERTY_HAS_ACTIONS = "hasActions";
+  @jakarta.annotation.Nullable
+  private Boolean hasActions;
+
+  public static final String JSON_PROPERTY_TRIGGER_COUNT = "triggerCount";
+  @jakarta.annotation.Nullable
+  private Integer triggerCount;
+
+  public static final String JSON_PROPERTY_ACTION_COUNT = "actionCount";
+  @jakarta.annotation.Nullable
+  private Integer actionCount;
 
   public AppSummaryResponse() { 
   }
@@ -369,6 +389,102 @@ public class AppSummaryResponse {
   }
 
 
+  public AppSummaryResponse hasTriggers(@jakarta.annotation.Nullable Boolean hasTriggers) {
+    this.hasTriggers = hasTriggers;
+    return this;
+  }
+
+  /**
+   * Get hasTriggers
+   * @return hasTriggers
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_HAS_TRIGGERS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getHasTriggers() {
+    return hasTriggers;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_HAS_TRIGGERS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setHasTriggers(@jakarta.annotation.Nullable Boolean hasTriggers) {
+    this.hasTriggers = hasTriggers;
+  }
+
+
+  public AppSummaryResponse hasActions(@jakarta.annotation.Nullable Boolean hasActions) {
+    this.hasActions = hasActions;
+    return this;
+  }
+
+  /**
+   * Get hasActions
+   * @return hasActions
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_HAS_ACTIONS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getHasActions() {
+    return hasActions;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_HAS_ACTIONS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setHasActions(@jakarta.annotation.Nullable Boolean hasActions) {
+    this.hasActions = hasActions;
+  }
+
+
+  public AppSummaryResponse triggerCount(@jakarta.annotation.Nullable Integer triggerCount) {
+    this.triggerCount = triggerCount;
+    return this;
+  }
+
+  /**
+   * Get triggerCount
+   * @return triggerCount
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TRIGGER_COUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Integer getTriggerCount() {
+    return triggerCount;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_TRIGGER_COUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTriggerCount(@jakarta.annotation.Nullable Integer triggerCount) {
+    this.triggerCount = triggerCount;
+  }
+
+
+  public AppSummaryResponse actionCount(@jakarta.annotation.Nullable Integer actionCount) {
+    this.actionCount = actionCount;
+    return this;
+  }
+
+  /**
+   * Get actionCount
+   * @return actionCount
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ACTION_COUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Integer getActionCount() {
+    return actionCount;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_ACTION_COUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setActionCount(@jakarta.annotation.Nullable Integer actionCount) {
+    this.actionCount = actionCount;
+  }
+
+
   /**
    * Return true if this AppSummaryResponse object is equal to o.
    */
@@ -391,12 +507,16 @@ public class AppSummaryResponse {
         Objects.equals(this.category, appSummaryResponse.category) &&
         Objects.equals(this.helpUrl, appSummaryResponse.helpUrl) &&
         Objects.equals(this.internal, appSummaryResponse.internal) &&
-        Objects.equals(this.hasPlatformKey, appSummaryResponse.hasPlatformKey);
+        Objects.equals(this.hasPlatformKey, appSummaryResponse.hasPlatformKey) &&
+        Objects.equals(this.hasTriggers, appSummaryResponse.hasTriggers) &&
+        Objects.equals(this.hasActions, appSummaryResponse.hasActions) &&
+        Objects.equals(this.triggerCount, appSummaryResponse.triggerCount) &&
+        Objects.equals(this.actionCount, appSummaryResponse.actionCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(appKey, name, description, logoUrl, authType, altAuthType, credentialSchema, category, helpUrl, internal, hasPlatformKey);
+    return Objects.hash(appKey, name, description, logoUrl, authType, altAuthType, credentialSchema, category, helpUrl, internal, hasPlatformKey, hasTriggers, hasActions, triggerCount, actionCount);
   }
 
   @Override
@@ -414,6 +534,10 @@ public class AppSummaryResponse {
     sb.append("    helpUrl: ").append(toIndentedString(helpUrl)).append("\n");
     sb.append("    internal: ").append(toIndentedString(internal)).append("\n");
     sb.append("    hasPlatformKey: ").append(toIndentedString(hasPlatformKey)).append("\n");
+    sb.append("    hasTriggers: ").append(toIndentedString(hasTriggers)).append("\n");
+    sb.append("    hasActions: ").append(toIndentedString(hasActions)).append("\n");
+    sb.append("    triggerCount: ").append(toIndentedString(triggerCount)).append("\n");
+    sb.append("    actionCount: ").append(toIndentedString(actionCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -515,6 +639,26 @@ public class AppSummaryResponse {
     // add `hasPlatformKey` to the URL query string
     if (getHasPlatformKey() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%shasPlatformKey%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getHasPlatformKey()))));
+    }
+
+    // add `hasTriggers` to the URL query string
+    if (getHasTriggers() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%shasTriggers%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getHasTriggers()))));
+    }
+
+    // add `hasActions` to the URL query string
+    if (getHasActions() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%shasActions%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getHasActions()))));
+    }
+
+    // add `triggerCount` to the URL query string
+    if (getTriggerCount() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%striggerCount%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getTriggerCount()))));
+    }
+
+    // add `actionCount` to the URL query string
+    if (getActionCount() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sactionCount%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getActionCount()))));
     }
 
     return joiner.toString();

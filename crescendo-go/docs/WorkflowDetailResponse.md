@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** |  | [optional] 
 **Revision** | Pointer to **int64** |  | [optional] 
 **Steps** | Pointer to [**[]StepResponse**](StepResponse.md) |  | [optional] 
+**Edges** | Pointer to [**[]EdgeResponse**](EdgeResponse.md) |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 **LastRunAt** | Pointer to **time.Time** |  | [optional] 
@@ -208,6 +209,31 @@ SetSteps sets Steps field to given value.
 `func (o *WorkflowDetailResponse) HasSteps() bool`
 
 HasSteps returns a boolean if a field has been set.
+
+### GetEdges
+
+`func (o *WorkflowDetailResponse) GetEdges() []EdgeResponse`
+
+GetEdges returns the Edges field if non-nil, zero value otherwise.
+
+### GetEdgesOk
+
+`func (o *WorkflowDetailResponse) GetEdgesOk() (*[]EdgeResponse, bool)`
+
+GetEdgesOk returns a tuple with the Edges field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEdges
+
+`func (o *WorkflowDetailResponse) SetEdges(v []EdgeResponse)`
+
+SetEdges sets Edges field to given value.
+
+### HasEdges
+
+`func (o *WorkflowDetailResponse) HasEdges() bool`
+
+HasEdges returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

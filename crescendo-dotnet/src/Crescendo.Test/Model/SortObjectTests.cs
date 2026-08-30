@@ -54,6 +54,15 @@ namespace Crescendo.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Empty'
+        /// </summary>
+        [Fact]
+        public void EmptyTest()
+        {
+            // TODO unit test for the property 'Empty'
+        }
+
+        /// <summary>
         /// Test the property 'Sorted'
         /// </summary>
         [Fact]
@@ -69,15 +78,6 @@ namespace Crescendo.Test.Model
         public void UnsortedTest()
         {
             // TODO unit test for the property 'Unsorted'
-        }
-
-        /// <summary>
-        /// Test the property 'Empty'
-        /// </summary>
-        [Fact]
-        public void EmptyTest()
-        {
-            // TODO unit test for the property 'Empty'
         }
     }
 }

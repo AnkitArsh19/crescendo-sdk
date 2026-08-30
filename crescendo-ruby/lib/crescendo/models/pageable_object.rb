@@ -15,6 +15,8 @@ require 'time'
 
 module Crescendo
   class PageableObject < ApiModelBase
+    attr_accessor :offset
+
     attr_accessor :paged
 
     attr_accessor :page_number
@@ -25,17 +27,15 @@ module Crescendo
 
     attr_accessor :unpaged
 
-    attr_accessor :offset
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'offset' => :'offset',
         :'paged' => :'paged',
         :'page_number' => :'pageNumber',
         :'page_size' => :'pageSize',
         :'sort' => :'sort',
-        :'unpaged' => :'unpaged',
-        :'offset' => :'offset'
+        :'unpaged' => :'unpaged'
       }
     end
 
@@ -52,12 +52,12 @@ module Crescendo
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'offset' => :'Integer',
         :'paged' => :'Boolean',
         :'page_number' => :'Integer',
         :'page_size' => :'Integer',
         :'sort' => :'SortObject',
-        :'unpaged' => :'Boolean',
-        :'offset' => :'Integer'
+        :'unpaged' => :'Boolean'
       }
     end
 
@@ -83,6 +83,10 @@ module Crescendo
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'offset')
+        self.offset = attributes[:'offset']
+      end
+
       if attributes.key?(:'paged')
         self.paged = attributes[:'paged']
       end
@@ -101,10 +105,6 @@ module Crescendo
 
       if attributes.key?(:'unpaged')
         self.unpaged = attributes[:'unpaged']
-      end
-
-      if attributes.key?(:'offset')
-        self.offset = attributes[:'offset']
       end
     end
 
@@ -128,12 +128,12 @@ module Crescendo
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          offset == o.offset &&
           paged == o.paged &&
           page_number == o.page_number &&
           page_size == o.page_size &&
           sort == o.sort &&
-          unpaged == o.unpaged &&
-          offset == o.offset
+          unpaged == o.unpaged
     end
 
     # @see the `==` method
@@ -145,7 +145,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [paged, page_number, page_size, sort, unpaged, offset].hash
+      [offset, paged, page_number, page_size, sort, unpaged].hash
     end
 
     # Builds the object from hash

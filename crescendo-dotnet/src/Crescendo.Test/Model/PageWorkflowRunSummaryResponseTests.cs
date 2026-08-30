@@ -72,6 +72,33 @@ namespace Crescendo.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Size'
+        /// </summary>
+        [Fact]
+        public void SizeTest()
+        {
+            // TODO unit test for the property 'Size'
+        }
+
+        /// <summary>
+        /// Test the property 'Content'
+        /// </summary>
+        [Fact]
+        public void ContentTest()
+        {
+            // TODO unit test for the property 'Content'
+        }
+
+        /// <summary>
+        /// Test the property 'Number'
+        /// </summary>
+        [Fact]
+        public void NumberTest()
+        {
+            // TODO unit test for the property 'Number'
+        }
+
+        /// <summary>
         /// Test the property 'Pageable'
         /// </summary>
         [Fact]
@@ -114,33 +141,6 @@ namespace Crescendo.Test.Model
         public void NumberOfElementsTest()
         {
             // TODO unit test for the property 'NumberOfElements'
-        }
-
-        /// <summary>
-        /// Test the property 'Size'
-        /// </summary>
-        [Fact]
-        public void SizeTest()
-        {
-            // TODO unit test for the property 'Size'
-        }
-
-        /// <summary>
-        /// Test the property 'Content'
-        /// </summary>
-        [Fact]
-        public void ContentTest()
-        {
-            // TODO unit test for the property 'Content'
-        }
-
-        /// <summary>
-        /// Test the property 'Number'
-        /// </summary>
-        [Fact]
-        public void NumberTest()
-        {
-            // TODO unit test for the property 'Number'
         }
 
         /// <summary>

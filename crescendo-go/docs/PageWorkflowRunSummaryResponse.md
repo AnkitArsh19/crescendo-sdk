@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TotalPages** | Pointer to **int32** |  | [optional] 
 **TotalElements** | Pointer to **int64** |  | [optional] 
+**Size** | Pointer to **int32** |  | [optional] 
+**Content** | Pointer to [**[]WorkflowRunSummaryResponse**](WorkflowRunSummaryResponse.md) |  | [optional] 
+**Number** | Pointer to **int32** |  | [optional] 
 **Pageable** | Pointer to [**PageableObject**](PageableObject.md) |  | [optional] 
 **Sort** | Pointer to [**SortObject**](SortObject.md) |  | [optional] 
 **First** | Pointer to **bool** |  | [optional] 
 **Last** | Pointer to **bool** |  | [optional] 
 **NumberOfElements** | Pointer to **int32** |  | [optional] 
-**Size** | Pointer to **int32** |  | [optional] 
-**Content** | Pointer to [**[]WorkflowRunSummaryResponse**](WorkflowRunSummaryResponse.md) |  | [optional] 
-**Number** | Pointer to **int32** |  | [optional] 
 **Empty** | Pointer to **bool** |  | [optional] 
 
 ## Methods
@@ -84,6 +84,81 @@ SetTotalElements sets TotalElements field to given value.
 `func (o *PageWorkflowRunSummaryResponse) HasTotalElements() bool`
 
 HasTotalElements returns a boolean if a field has been set.
+
+### GetSize
+
+`func (o *PageWorkflowRunSummaryResponse) GetSize() int32`
+
+GetSize returns the Size field if non-nil, zero value otherwise.
+
+### GetSizeOk
+
+`func (o *PageWorkflowRunSummaryResponse) GetSizeOk() (*int32, bool)`
+
+GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSize
+
+`func (o *PageWorkflowRunSummaryResponse) SetSize(v int32)`
+
+SetSize sets Size field to given value.
+
+### HasSize
+
+`func (o *PageWorkflowRunSummaryResponse) HasSize() bool`
+
+HasSize returns a boolean if a field has been set.
+
+### GetContent
+
+`func (o *PageWorkflowRunSummaryResponse) GetContent() []WorkflowRunSummaryResponse`
+
+GetContent returns the Content field if non-nil, zero value otherwise.
+
+### GetContentOk
+
+`func (o *PageWorkflowRunSummaryResponse) GetContentOk() (*[]WorkflowRunSummaryResponse, bool)`
+
+GetContentOk returns a tuple with the Content field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContent
+
+`func (o *PageWorkflowRunSummaryResponse) SetContent(v []WorkflowRunSummaryResponse)`
+
+SetContent sets Content field to given value.
+
+### HasContent
+
+`func (o *PageWorkflowRunSummaryResponse) HasContent() bool`
+
+HasContent returns a boolean if a field has been set.
+
+### GetNumber
+
+`func (o *PageWorkflowRunSummaryResponse) GetNumber() int32`
+
+GetNumber returns the Number field if non-nil, zero value otherwise.
+
+### GetNumberOk
+
+`func (o *PageWorkflowRunSummaryResponse) GetNumberOk() (*int32, bool)`
+
+GetNumberOk returns a tuple with the Number field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumber
+
+`func (o *PageWorkflowRunSummaryResponse) SetNumber(v int32)`
+
+SetNumber sets Number field to given value.
+
+### HasNumber
+
+`func (o *PageWorkflowRunSummaryResponse) HasNumber() bool`
+
+HasNumber returns a boolean if a field has been set.
 
 ### GetPageable
 
@@ -209,81 +284,6 @@ SetNumberOfElements sets NumberOfElements field to given value.
 `func (o *PageWorkflowRunSummaryResponse) HasNumberOfElements() bool`
 
 HasNumberOfElements returns a boolean if a field has been set.
-
-### GetSize
-
-`func (o *PageWorkflowRunSummaryResponse) GetSize() int32`
-
-GetSize returns the Size field if non-nil, zero value otherwise.
-
-### GetSizeOk
-
-`func (o *PageWorkflowRunSummaryResponse) GetSizeOk() (*int32, bool)`
-
-GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSize
-
-`func (o *PageWorkflowRunSummaryResponse) SetSize(v int32)`
-
-SetSize sets Size field to given value.
-
-### HasSize
-
-`func (o *PageWorkflowRunSummaryResponse) HasSize() bool`
-
-HasSize returns a boolean if a field has been set.
-
-### GetContent
-
-`func (o *PageWorkflowRunSummaryResponse) GetContent() []WorkflowRunSummaryResponse`
-
-GetContent returns the Content field if non-nil, zero value otherwise.
-
-### GetContentOk
-
-`func (o *PageWorkflowRunSummaryResponse) GetContentOk() (*[]WorkflowRunSummaryResponse, bool)`
-
-GetContentOk returns a tuple with the Content field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetContent
-
-`func (o *PageWorkflowRunSummaryResponse) SetContent(v []WorkflowRunSummaryResponse)`
-
-SetContent sets Content field to given value.
-
-### HasContent
-
-`func (o *PageWorkflowRunSummaryResponse) HasContent() bool`
-
-HasContent returns a boolean if a field has been set.
-
-### GetNumber
-
-`func (o *PageWorkflowRunSummaryResponse) GetNumber() int32`
-
-GetNumber returns the Number field if non-nil, zero value otherwise.
-
-### GetNumberOk
-
-`func (o *PageWorkflowRunSummaryResponse) GetNumberOk() (*int32, bool)`
-
-GetNumberOk returns a tuple with the Number field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNumber
-
-`func (o *PageWorkflowRunSummaryResponse) SetNumber(v int32)`
-
-SetNumber sets Number field to given value.
-
-### HasNumber
-
-`func (o *PageWorkflowRunSummaryResponse) HasNumber() bool`
-
-HasNumber returns a boolean if a field has been set.
 
 ### GetEmpty
 

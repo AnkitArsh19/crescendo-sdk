@@ -17,6 +17,12 @@ pub struct PageWorkflowRunSummaryResponse {
     pub total_pages: Option<i32>,
     #[serde(rename = "totalElements", skip_serializing_if = "Option::is_none")]
     pub total_elements: Option<i64>,
+    #[serde(rename = "size", skip_serializing_if = "Option::is_none")]
+    pub size: Option<i32>,
+    #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
+    pub content: Option<Vec<models::WorkflowRunSummaryResponse>>,
+    #[serde(rename = "number", skip_serializing_if = "Option::is_none")]
+    pub number: Option<i32>,
     #[serde(rename = "pageable", skip_serializing_if = "Option::is_none")]
     pub pageable: Option<Box<models::PageableObject>>,
     #[serde(rename = "sort", skip_serializing_if = "Option::is_none")]
@@ -27,12 +33,6 @@ pub struct PageWorkflowRunSummaryResponse {
     pub last: Option<bool>,
     #[serde(rename = "numberOfElements", skip_serializing_if = "Option::is_none")]
     pub number_of_elements: Option<i32>,
-    #[serde(rename = "size", skip_serializing_if = "Option::is_none")]
-    pub size: Option<i32>,
-    #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
-    pub content: Option<Vec<models::WorkflowRunSummaryResponse>>,
-    #[serde(rename = "number", skip_serializing_if = "Option::is_none")]
-    pub number: Option<i32>,
     #[serde(rename = "empty", skip_serializing_if = "Option::is_none")]
     pub empty: Option<bool>,
 }
@@ -42,14 +42,14 @@ impl PageWorkflowRunSummaryResponse {
         PageWorkflowRunSummaryResponse {
             total_pages: None,
             total_elements: None,
+            size: None,
+            content: None,
+            number: None,
             pageable: None,
             sort: None,
             first: None,
             last: None,
             number_of_elements: None,
-            size: None,
-            content: None,
-            number: None,
             empty: None,
         }
     }

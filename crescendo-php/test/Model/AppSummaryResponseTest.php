@@ -177,4 +177,40 @@ class AppSummaryResponseTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "has_triggers"
+     */
+    public function testPropertyHasTriggers()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "has_actions"
+     */
+    public function testPropertyHasActions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "trigger_count"
+     */
+    public function testPropertyTriggerCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "action_count"
+     */
+    public function testPropertyActionCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

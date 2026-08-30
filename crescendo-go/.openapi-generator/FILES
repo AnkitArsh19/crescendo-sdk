@@ -38,6 +38,7 @@ docs/DailyCount.md
 docs/DnsRecord.md
 docs/DomainResponse.md
 docs/DomainsAPI.md
+docs/EdgeResponse.md
 docs/EmailLogResponse.md
 docs/EmailsAPI.md
 docs/FireCustomEventRequest.md
@@ -99,6 +100,7 @@ model_custom_event.go
 model_daily_count.go
 model_dns_record.go
 model_domain_response.go
+model_edge_response.go
 model_email_log_response.go
 model_fire_custom_event_request.go
 model_import_suppressions_request.go

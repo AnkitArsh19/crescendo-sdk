@@ -54,6 +54,15 @@ namespace Crescendo.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Offset'
+        /// </summary>
+        [Fact]
+        public void OffsetTest()
+        {
+            // TODO unit test for the property 'Offset'
+        }
+
+        /// <summary>
         /// Test the property 'Paged'
         /// </summary>
         [Fact]
@@ -96,15 +105,6 @@ namespace Crescendo.Test.Model
         public void UnpagedTest()
         {
             // TODO unit test for the property 'Unpaged'
-        }
-
-        /// <summary>
-        /// Test the property 'Offset'
-        /// </summary>
-        [Fact]
-        public void OffsetTest()
-        {
-            // TODO unit test for the property 'Offset'
         }
     }
 }

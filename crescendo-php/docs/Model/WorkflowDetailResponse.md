@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **status** | **string** |  | [optional]
 **revision** | **int** |  | [optional]
 **steps** | [**\Crescendo\Model\StepResponse[]**](StepResponse.md) |  | [optional]
+**edges** | [**\Crescendo\Model\EdgeResponse[]**](EdgeResponse.md) |  | [optional]
 **created_at** | **\DateTime** |  | [optional]
 **updated_at** | **\DateTime** |  | [optional]
 **last_run_at** | **\DateTime** |  | [optional]

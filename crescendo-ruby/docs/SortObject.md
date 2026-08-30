@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **empty** | **Boolean** |  | [optional] |
 | **sorted** | **Boolean** |  | [optional] |
 | **unsorted** | **Boolean** |  | [optional] |
-| **empty** | **Boolean** |  | [optional] |
 
 ## Example
 
@@ -14,9 +14,9 @@
 require 'crescendo'
 
 instance = Crescendo::SortObject.new(
+  empty: null,
   sorted: null,
-  unsorted: null,
-  empty: null
+  unsorted: null
 )
 ```
 

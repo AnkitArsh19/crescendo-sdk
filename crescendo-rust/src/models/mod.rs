@@ -30,6 +30,8 @@ pub mod dns_record;
 pub use self::dns_record::DnsRecord;
 pub mod domain_response;
 pub use self::domain_response::DomainResponse;
+pub mod edge_response;
+pub use self::edge_response::EdgeResponse;
 pub mod email_log_response;
 pub use self::email_log_response::EmailLogResponse;
 pub mod fire_custom_event_request;

@@ -18,6 +18,10 @@
 |**helpUrl** | **String** |  |  [optional] |
 |**internal** | **Boolean** |  |  [optional] |
 |**hasPlatformKey** | **Boolean** |  |  [optional] |
+|**hasTriggers** | **Boolean** |  |  [optional] |
+|**hasActions** | **Boolean** |  |  [optional] |
+|**triggerCount** | **Integer** |  |  [optional] |
+|**actionCount** | **Integer** |  |  [optional] |
 
 
 

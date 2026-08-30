@@ -2291,6 +2291,24 @@ components:
           default: null
         nextCursor:
           type: string
+    EdgeResponse:
+      example:
+        id: id
+        sourceStepId: sourceStepId
+        targetStepId: targetStepId
+        sourceHandle: sourceHandle
+        targetHandle: targetHandle
+      properties:
+        id:
+          type: string
+        sourceStepId:
+          type: string
+        targetStepId:
+          type: string
+        sourceHandle:
+          type: string
+        targetHandle:
+          type: string
     StepResponse:
       example:
         id: id
@@ -2300,8 +2318,6 @@ components:
         appKey: appKey
         actionKey: actionKey
         connectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        parentStepId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        branchKey: branchKey
         configuration:
           key: ""
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2321,11 +2337,6 @@ components:
           type: string
         connectionId:
           format: uuid
-          type: string
-        parentStepId:
-          format: uuid
-          type: string
-        branchKey:
           type: string
         configuration:
           additionalProperties: {}
@@ -2351,8 +2362,6 @@ components:
           appKey: appKey
           actionKey: actionKey
           connectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          parentStepId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          branchKey: branchKey
           configuration:
             key: ""
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2364,12 +2373,21 @@ components:
           appKey: appKey
           actionKey: actionKey
           connectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          parentStepId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          branchKey: branchKey
           configuration:
             key: ""
           createdAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
+        edges:
+        - id: id
+          sourceStepId: sourceStepId
+          targetStepId: targetStepId
+          sourceHandle: sourceHandle
+          targetHandle: targetHandle
+        - id: id
+          sourceStepId: sourceStepId
+          targetStepId: targetStepId
+          sourceHandle: sourceHandle
+          targetHandle: targetHandle
         createdAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
         lastRunAt: 2000-01-23T04:56:07.000+00:00
@@ -2392,6 +2410,11 @@ components:
             $ref: "#/components/schemas/StepResponse"
           type: array
           default: null
+        edges:
+          items:
+            $ref: "#/components/schemas/EdgeResponse"
+          type: array
+          default: null
         createdAt:
           format: date-time
           type: string
@@ -2405,24 +2428,7 @@ components:
       example:
         totalPages: 0
         totalElements: 6
-        pageable:
-          paged: true
-          pageNumber: 1
-          pageSize: 5
-          sort:
-            sorted: true
-            unsorted: true
-            empty: true
-          unpaged: true
-          offset: 5
-        sort:
-          sorted: true
-          unsorted: true
-          empty: true
-        first: true
-        last: true
-        numberOfElements: 2
-        size: 7
+        size: 1
         content:
         - id: id
           workflowId: workflowId
@@ -2442,7 +2448,24 @@ components:
           failedSteps: 1
           createdAt: 2000-01-23T04:56:07.000+00:00
           completedAt: 2000-01-23T04:56:07.000+00:00
-        number: 9
+        number: 5
+        pageable:
+          offset: 5
+          paged: true
+          pageNumber: 2
+          pageSize: 7
+          sort:
+            empty: true
+            sorted: true
+            unsorted: true
+          unpaged: true
+        sort:
+          empty: true
+          sorted: true
+          unsorted: true
+        first: true
+        last: true
+        numberOfElements: 9
         empty: true
       properties:
         totalPages:
@@ -2450,17 +2473,6 @@ components:
           type: integer
         totalElements:
           format: int64
-          type: integer
-        pageable:
-          $ref: "#/components/schemas/PageableObject"
-        sort:
-          $ref: "#/components/schemas/SortObject"
-        first:
-          type: boolean
-        last:
-          type: boolean
-        numberOfElements:
-          format: int32
           type: integer
         size:
           format: int32
@@ -2473,20 +2485,34 @@ components:
         number:
           format: int32
           type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
         empty:
           type: boolean
     PageableObject:
       example:
+        offset: 5
         paged: true
-        pageNumber: 1
-        pageSize: 5
+        pageNumber: 2
+        pageSize: 7
         sort:
+          empty: true
           sorted: true
           unsorted: true
-          empty: true
         unpaged: true
-        offset: 5
       properties:
+        offset:
+          format: int64
+          type: integer
         paged:
           type: boolean
         pageNumber:
@@ -2499,20 +2525,17 @@ components:
           $ref: "#/components/schemas/SortObject"
         unpaged:
           type: boolean
-        offset:
-          format: int64
-          type: integer
     SortObject:
       example:
+        empty: true
         sorted: true
         unsorted: true
-        empty: true
       properties:
+        empty:
+          type: boolean
         sorted:
           type: boolean
         unsorted:
-          type: boolean
-        empty:
           type: boolean
     StepRunResponse:
       example:
@@ -2935,6 +2958,10 @@ components:
         helpUrl: helpUrl
         internal: true
         hasPlatformKey: true
+        hasTriggers: true
+        hasActions: true
+        triggerCount: 0
+        actionCount: 6
       properties:
         appKey:
           type: string
@@ -2961,6 +2988,16 @@ components:
           type: boolean
         hasPlatformKey:
           type: boolean
+        hasTriggers:
+          type: boolean
+        hasActions:
+          type: boolean
+        triggerCount:
+          format: int32
+          type: integer
+        actionCount:
+          format: int32
+          type: integer
     AppDetailResponse:
       example:
         appKey: appKey

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Status** | **string** |  | [optional] 
 **Revision** | **long** |  | [optional] 
 **Steps** | [**List&lt;StepResponse&gt;**](StepResponse.md) |  | [optional] 
+**Edges** | [**List&lt;EdgeResponse&gt;**](EdgeResponse.md) |  | [optional] 
 **CreatedAt** | **DateTime** |  | [optional] 
 **UpdatedAt** | **DateTime** |  | [optional] 
 **LastRunAt** | **DateTime** |  | [optional] 

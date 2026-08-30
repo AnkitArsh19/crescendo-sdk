@@ -14,6 +14,7 @@
 |**status** | **String** |  |  [optional] |
 |**revision** | **Long** |  |  [optional] |
 |**steps** | [**List&lt;StepResponse&gt;**](StepResponse.md) |  |  [optional] |
+|**edges** | [**List&lt;EdgeResponse&gt;**](EdgeResponse.md) |  |  [optional] |
 |**createdAt** | **OffsetDateTime** |  |  [optional] |
 |**updatedAt** | **OffsetDateTime** |  |  [optional] |
 |**lastRunAt** | **OffsetDateTime** |  |  [optional] |

@@ -37,6 +37,14 @@ module Crescendo
 
     attr_accessor :has_platform_key
 
+    attr_accessor :has_triggers
+
+    attr_accessor :has_actions
+
+    attr_accessor :trigger_count
+
+    attr_accessor :action_count
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -50,7 +58,11 @@ module Crescendo
         :'category' => :'category',
         :'help_url' => :'helpUrl',
         :'internal' => :'internal',
-        :'has_platform_key' => :'hasPlatformKey'
+        :'has_platform_key' => :'hasPlatformKey',
+        :'has_triggers' => :'hasTriggers',
+        :'has_actions' => :'hasActions',
+        :'trigger_count' => :'triggerCount',
+        :'action_count' => :'actionCount'
       }
     end
 
@@ -77,7 +89,11 @@ module Crescendo
         :'category' => :'String',
         :'help_url' => :'String',
         :'internal' => :'Boolean',
-        :'has_platform_key' => :'Boolean'
+        :'has_platform_key' => :'Boolean',
+        :'has_triggers' => :'Boolean',
+        :'has_actions' => :'Boolean',
+        :'trigger_count' => :'Integer',
+        :'action_count' => :'Integer'
       }
     end
 
@@ -148,6 +164,22 @@ module Crescendo
       if attributes.key?(:'has_platform_key')
         self.has_platform_key = attributes[:'has_platform_key']
       end
+
+      if attributes.key?(:'has_triggers')
+        self.has_triggers = attributes[:'has_triggers']
+      end
+
+      if attributes.key?(:'has_actions')
+        self.has_actions = attributes[:'has_actions']
+      end
+
+      if attributes.key?(:'trigger_count')
+        self.trigger_count = attributes[:'trigger_count']
+      end
+
+      if attributes.key?(:'action_count')
+        self.action_count = attributes[:'action_count']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -180,7 +212,11 @@ module Crescendo
           category == o.category &&
           help_url == o.help_url &&
           internal == o.internal &&
-          has_platform_key == o.has_platform_key
+          has_platform_key == o.has_platform_key &&
+          has_triggers == o.has_triggers &&
+          has_actions == o.has_actions &&
+          trigger_count == o.trigger_count &&
+          action_count == o.action_count
     end
 
     # @see the `==` method
@@ -192,7 +228,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [app_key, name, description, logo_url, auth_type, alt_auth_type, credential_schema, category, help_url, internal, has_platform_key].hash
+      [app_key, name, description, logo_url, auth_type, alt_auth_type, credential_schema, category, help_url, internal, has_platform_key, has_triggers, has_actions, trigger_count, action_count].hash
     end
 
     # Builds the object from hash

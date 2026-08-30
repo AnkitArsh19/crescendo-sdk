@@ -59,6 +59,30 @@ class PageWorkflowRunSummaryResponseTest {
     }
 
     /**
+     * Test the property 'size'
+     */
+    @Test
+    void sizeTest() {
+        // TODO: test size
+    }
+
+    /**
+     * Test the property 'content'
+     */
+    @Test
+    void contentTest() {
+        // TODO: test content
+    }
+
+    /**
+     * Test the property 'number'
+     */
+    @Test
+    void numberTest() {
+        // TODO: test number
+    }
+
+    /**
      * Test the property 'pageable'
      */
     @Test
@@ -96,30 +120,6 @@ class PageWorkflowRunSummaryResponseTest {
     @Test
     void numberOfElementsTest() {
         // TODO: test numberOfElements
-    }
-
-    /**
-     * Test the property 'size'
-     */
-    @Test
-    void sizeTest() {
-        // TODO: test size
-    }
-
-    /**
-     * Test the property 'content'
-     */
-    @Test
-    void contentTest() {
-        // TODO: test content
-    }
-
-    /**
-     * Test the property 'number'
-     */
-    @Test
-    void numberTest() {
-        // TODO: test number
     }
 
     /**

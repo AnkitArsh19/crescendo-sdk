@@ -29,6 +29,7 @@ docs/DailyCount.md
 docs/DnsRecord.md
 docs/DomainResponse.md
 docs/DomainsApi.md
+docs/EdgeResponse.md
 docs/EmailLogResponse.md
 docs/EmailsApi.md
 docs/FireCustomEventRequest.md
@@ -105,6 +106,7 @@ lib/crescendo/models/custom_event.rb
 lib/crescendo/models/daily_count.rb
 lib/crescendo/models/dns_record.rb
 lib/crescendo/models/domain_response.rb
+lib/crescendo/models/edge_response.rb
 lib/crescendo/models/email_log_response.rb
 lib/crescendo/models/fire_custom_event_request.rb
 lib/crescendo/models/import_suppressions_request.rb
@@ -169,6 +171,7 @@ spec/models/custom_event_spec.rb
 spec/models/daily_count_spec.rb
 spec/models/dns_record_spec.rb
 spec/models/domain_response_spec.rb
+spec/models/edge_response_spec.rb
 spec/models/email_log_response_spec.rb
 spec/models/fire_custom_event_request_spec.rb
 spec/models/import_suppressions_request_spec.rb

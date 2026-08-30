@@ -27,6 +27,7 @@ docs/DailyCount.md
 docs/DnsRecord.md
 docs/DomainResponse.md
 docs/DomainsApi.md
+docs/EdgeResponse.md
 docs/EmailLogResponse.md
 docs/EmailsApi.md
 docs/FireCustomEventRequest.md
@@ -118,6 +119,7 @@ src/main/java/io/crescendo/model/CustomEvent.java
 src/main/java/io/crescendo/model/DailyCount.java
 src/main/java/io/crescendo/model/DnsRecord.java
 src/main/java/io/crescendo/model/DomainResponse.java
+src/main/java/io/crescendo/model/EdgeResponse.java
 src/main/java/io/crescendo/model/EmailLogResponse.java
 src/main/java/io/crescendo/model/FireCustomEventRequest.java
 src/main/java/io/crescendo/model/ImportSuppressionsRequest.java
@@ -181,6 +183,7 @@ src/test/java/io/crescendo/model/CustomEventTest.java
 src/test/java/io/crescendo/model/DailyCountTest.java
 src/test/java/io/crescendo/model/DnsRecordTest.java
 src/test/java/io/crescendo/model/DomainResponseTest.java
+src/test/java/io/crescendo/model/EdgeResponseTest.java
 src/test/java/io/crescendo/model/EmailLogResponseTest.java
 src/test/java/io/crescendo/model/FireCustomEventRequestTest.java
 src/test/java/io/crescendo/model/ImportSuppressionsRequestTest.java

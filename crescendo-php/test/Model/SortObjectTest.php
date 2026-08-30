@@ -80,6 +80,15 @@ class SortObjectTest extends TestCase
     }
 
     /**
+     * Test attribute "empty"
+     */
+    public function testPropertyEmpty()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "sorted"
      */
     public function testPropertySorted()
@@ -92,15 +101,6 @@ class SortObjectTest extends TestCase
      * Test attribute "unsorted"
      */
     public function testPropertyUnsorted()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "empty"
-     */
-    public function testPropertyEmpty()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

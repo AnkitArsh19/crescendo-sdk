@@ -32,6 +32,7 @@ docs/models/CustomEvent.md
 docs/models/DailyCount.md
 docs/models/DnsRecord.md
 docs/models/DomainResponse.md
+docs/models/EdgeResponse.md
 docs/models/EmailLogResponse.md
 docs/models/FireCustomEventRequest.md
 docs/models/ImportSuppressionsRequest.md
@@ -100,6 +101,7 @@ src/Crescendo.Test/Model/CustomEventTests.cs
 src/Crescendo.Test/Model/DailyCountTests.cs
 src/Crescendo.Test/Model/DnsRecordTests.cs
 src/Crescendo.Test/Model/DomainResponseTests.cs
+src/Crescendo.Test/Model/EdgeResponseTests.cs
 src/Crescendo.Test/Model/EmailLogResponseTests.cs
 src/Crescendo.Test/Model/FireCustomEventRequestTests.cs
 src/Crescendo.Test/Model/ImportSuppressionsRequestTests.cs
@@ -189,6 +191,7 @@ src/Crescendo/Model/CustomEvent.cs
 src/Crescendo/Model/DailyCount.cs
 src/Crescendo/Model/DnsRecord.cs
 src/Crescendo/Model/DomainResponse.cs
+src/Crescendo/Model/EdgeResponse.cs
 src/Crescendo/Model/EmailLogResponse.cs
 src/Crescendo/Model/FireCustomEventRequest.cs
 src/Crescendo/Model/ImportSuppressionsRequest.cs

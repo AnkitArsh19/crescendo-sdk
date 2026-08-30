@@ -143,6 +143,15 @@ class WorkflowDetailResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "edges"
+     */
+    public function testPropertyEdges()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

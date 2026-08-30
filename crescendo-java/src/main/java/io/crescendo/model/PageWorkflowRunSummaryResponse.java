@@ -40,17 +40,17 @@ import io.crescendo.ApiClient;
 @JsonPropertyOrder({
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_TOTAL_PAGES,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_TOTAL_ELEMENTS,
+  PageWorkflowRunSummaryResponse.JSON_PROPERTY_SIZE,
+  PageWorkflowRunSummaryResponse.JSON_PROPERTY_CONTENT,
+  PageWorkflowRunSummaryResponse.JSON_PROPERTY_NUMBER,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_PAGEABLE,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_SORT,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_FIRST,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_LAST,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_NUMBER_OF_ELEMENTS,
-  PageWorkflowRunSummaryResponse.JSON_PROPERTY_SIZE,
-  PageWorkflowRunSummaryResponse.JSON_PROPERTY_CONTENT,
-  PageWorkflowRunSummaryResponse.JSON_PROPERTY_NUMBER,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_EMPTY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-07T13:05:45.810490+05:30[Asia/Kolkata]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T10:56:08.153732648Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class PageWorkflowRunSummaryResponse {
   public static final String JSON_PROPERTY_TOTAL_PAGES = "totalPages";
   @jakarta.annotation.Nullable
@@ -59,6 +59,18 @@ public class PageWorkflowRunSummaryResponse {
   public static final String JSON_PROPERTY_TOTAL_ELEMENTS = "totalElements";
   @jakarta.annotation.Nullable
   private Long totalElements;
+
+  public static final String JSON_PROPERTY_SIZE = "size";
+  @jakarta.annotation.Nullable
+  private Integer size;
+
+  public static final String JSON_PROPERTY_CONTENT = "content";
+  @jakarta.annotation.Nullable
+  private List<WorkflowRunSummaryResponse> content = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_NUMBER = "number";
+  @jakarta.annotation.Nullable
+  private Integer number;
 
   public static final String JSON_PROPERTY_PAGEABLE = "pageable";
   @jakarta.annotation.Nullable
@@ -79,18 +91,6 @@ public class PageWorkflowRunSummaryResponse {
   public static final String JSON_PROPERTY_NUMBER_OF_ELEMENTS = "numberOfElements";
   @jakarta.annotation.Nullable
   private Integer numberOfElements;
-
-  public static final String JSON_PROPERTY_SIZE = "size";
-  @jakarta.annotation.Nullable
-  private Integer size;
-
-  public static final String JSON_PROPERTY_CONTENT = "content";
-  @jakarta.annotation.Nullable
-  private List<WorkflowRunSummaryResponse> content = new ArrayList<>();
-
-  public static final String JSON_PROPERTY_NUMBER = "number";
-  @jakarta.annotation.Nullable
-  private Integer number;
 
   public static final String JSON_PROPERTY_EMPTY = "empty";
   @jakarta.annotation.Nullable
@@ -144,6 +144,86 @@ public class PageWorkflowRunSummaryResponse {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTotalElements(@jakarta.annotation.Nullable Long totalElements) {
     this.totalElements = totalElements;
+  }
+
+
+  public PageWorkflowRunSummaryResponse size(@jakarta.annotation.Nullable Integer size) {
+    this.size = size;
+    return this;
+  }
+
+  /**
+   * Get size
+   * @return size
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_SIZE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Integer getSize() {
+    return size;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_SIZE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSize(@jakarta.annotation.Nullable Integer size) {
+    this.size = size;
+  }
+
+
+  public PageWorkflowRunSummaryResponse content(@jakarta.annotation.Nullable List<WorkflowRunSummaryResponse> content) {
+    this.content = content;
+    return this;
+  }
+
+  public PageWorkflowRunSummaryResponse addContentItem(WorkflowRunSummaryResponse contentItem) {
+    if (this.content == null) {
+      this.content = new ArrayList<>();
+    }
+    this.content.add(contentItem);
+    return this;
+  }
+
+  /**
+   * Get content
+   * @return content
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_CONTENT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public List<WorkflowRunSummaryResponse> getContent() {
+    return content;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_CONTENT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setContent(@jakarta.annotation.Nullable List<WorkflowRunSummaryResponse> content) {
+    this.content = content;
+  }
+
+
+  public PageWorkflowRunSummaryResponse number(@jakarta.annotation.Nullable Integer number) {
+    this.number = number;
+    return this;
+  }
+
+  /**
+   * Get number
+   * @return number
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_NUMBER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Integer getNumber() {
+    return number;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_NUMBER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setNumber(@jakarta.annotation.Nullable Integer number) {
+    this.number = number;
   }
 
 
@@ -267,86 +347,6 @@ public class PageWorkflowRunSummaryResponse {
   }
 
 
-  public PageWorkflowRunSummaryResponse size(@jakarta.annotation.Nullable Integer size) {
-    this.size = size;
-    return this;
-  }
-
-  /**
-   * Get size
-   * @return size
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SIZE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Integer getSize() {
-    return size;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_SIZE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSize(@jakarta.annotation.Nullable Integer size) {
-    this.size = size;
-  }
-
-
-  public PageWorkflowRunSummaryResponse content(@jakarta.annotation.Nullable List<WorkflowRunSummaryResponse> content) {
-    this.content = content;
-    return this;
-  }
-
-  public PageWorkflowRunSummaryResponse addContentItem(WorkflowRunSummaryResponse contentItem) {
-    if (this.content == null) {
-      this.content = new ArrayList<>();
-    }
-    this.content.add(contentItem);
-    return this;
-  }
-
-  /**
-   * Get content
-   * @return content
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CONTENT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public List<WorkflowRunSummaryResponse> getContent() {
-    return content;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_CONTENT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setContent(@jakarta.annotation.Nullable List<WorkflowRunSummaryResponse> content) {
-    this.content = content;
-  }
-
-
-  public PageWorkflowRunSummaryResponse number(@jakarta.annotation.Nullable Integer number) {
-    this.number = number;
-    return this;
-  }
-
-  /**
-   * Get number
-   * @return number
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_NUMBER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Integer getNumber() {
-    return number;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_NUMBER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNumber(@jakarta.annotation.Nullable Integer number) {
-    this.number = number;
-  }
-
-
   public PageWorkflowRunSummaryResponse empty(@jakarta.annotation.Nullable Boolean empty) {
     this.empty = empty;
     return this;
@@ -385,20 +385,20 @@ public class PageWorkflowRunSummaryResponse {
     PageWorkflowRunSummaryResponse pageWorkflowRunSummaryResponse = (PageWorkflowRunSummaryResponse) o;
     return Objects.equals(this.totalPages, pageWorkflowRunSummaryResponse.totalPages) &&
         Objects.equals(this.totalElements, pageWorkflowRunSummaryResponse.totalElements) &&
+        Objects.equals(this.size, pageWorkflowRunSummaryResponse.size) &&
+        Objects.equals(this.content, pageWorkflowRunSummaryResponse.content) &&
+        Objects.equals(this.number, pageWorkflowRunSummaryResponse.number) &&
         Objects.equals(this.pageable, pageWorkflowRunSummaryResponse.pageable) &&
         Objects.equals(this.sort, pageWorkflowRunSummaryResponse.sort) &&
         Objects.equals(this.first, pageWorkflowRunSummaryResponse.first) &&
         Objects.equals(this.last, pageWorkflowRunSummaryResponse.last) &&
         Objects.equals(this.numberOfElements, pageWorkflowRunSummaryResponse.numberOfElements) &&
-        Objects.equals(this.size, pageWorkflowRunSummaryResponse.size) &&
-        Objects.equals(this.content, pageWorkflowRunSummaryResponse.content) &&
-        Objects.equals(this.number, pageWorkflowRunSummaryResponse.number) &&
         Objects.equals(this.empty, pageWorkflowRunSummaryResponse.empty);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(totalPages, totalElements, pageable, sort, first, last, numberOfElements, size, content, number, empty);
+    return Objects.hash(totalPages, totalElements, size, content, number, pageable, sort, first, last, numberOfElements, empty);
   }
 
   @Override
@@ -407,14 +407,14 @@ public class PageWorkflowRunSummaryResponse {
     sb.append("class PageWorkflowRunSummaryResponse {\n");
     sb.append("    totalPages: ").append(toIndentedString(totalPages)).append("\n");
     sb.append("    totalElements: ").append(toIndentedString(totalElements)).append("\n");
+    sb.append("    size: ").append(toIndentedString(size)).append("\n");
+    sb.append("    content: ").append(toIndentedString(content)).append("\n");
+    sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    pageable: ").append(toIndentedString(pageable)).append("\n");
     sb.append("    sort: ").append(toIndentedString(sort)).append("\n");
     sb.append("    first: ").append(toIndentedString(first)).append("\n");
     sb.append("    last: ").append(toIndentedString(last)).append("\n");
     sb.append("    numberOfElements: ").append(toIndentedString(numberOfElements)).append("\n");
-    sb.append("    size: ").append(toIndentedString(size)).append("\n");
-    sb.append("    content: ").append(toIndentedString(content)).append("\n");
-    sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    empty: ").append(toIndentedString(empty)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -470,6 +470,26 @@ public class PageWorkflowRunSummaryResponse {
       joiner.add(String.format(java.util.Locale.ROOT, "%stotalElements%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getTotalElements()))));
     }
 
+    // add `size` to the URL query string
+    if (getSize() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%ssize%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSize()))));
+    }
+
+    // add `content` to the URL query string
+    if (getContent() != null) {
+      for (int i = 0; i < getContent().size(); i++) {
+        if (getContent().get(i) != null) {
+          joiner.add(getContent().get(i).toUrlQueryString(String.format(java.util.Locale.ROOT, "%scontent%s%s", prefix, suffix,
+          "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix))));
+        }
+      }
+    }
+
+    // add `number` to the URL query string
+    if (getNumber() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%snumber%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getNumber()))));
+    }
+
     // add `pageable` to the URL query string
     if (getPageable() != null) {
       joiner.add(getPageable().toUrlQueryString(prefix + "pageable" + suffix));
@@ -493,26 +513,6 @@ public class PageWorkflowRunSummaryResponse {
     // add `numberOfElements` to the URL query string
     if (getNumberOfElements() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%snumberOfElements%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getNumberOfElements()))));
-    }
-
-    // add `size` to the URL query string
-    if (getSize() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%ssize%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSize()))));
-    }
-
-    // add `content` to the URL query string
-    if (getContent() != null) {
-      for (int i = 0; i < getContent().size(); i++) {
-        if (getContent().get(i) != null) {
-          joiner.add(getContent().get(i).toUrlQueryString(String.format(java.util.Locale.ROOT, "%scontent%s%s", prefix, suffix,
-          "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix))));
-        }
-      }
-    }
-
-    // add `number` to the URL query string
-    if (getNumber() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%snumber%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getNumber()))));
     }
 
     // add `empty` to the URL query string

@@ -35,6 +35,14 @@ pub struct AppSummaryResponse {
     pub internal: Option<bool>,
     #[serde(rename = "hasPlatformKey", skip_serializing_if = "Option::is_none")]
     pub has_platform_key: Option<bool>,
+    #[serde(rename = "hasTriggers", skip_serializing_if = "Option::is_none")]
+    pub has_triggers: Option<bool>,
+    #[serde(rename = "hasActions", skip_serializing_if = "Option::is_none")]
+    pub has_actions: Option<bool>,
+    #[serde(rename = "triggerCount", skip_serializing_if = "Option::is_none")]
+    pub trigger_count: Option<i32>,
+    #[serde(rename = "actionCount", skip_serializing_if = "Option::is_none")]
+    pub action_count: Option<i32>,
 }
 
 impl AppSummaryResponse {
@@ -51,6 +59,10 @@ impl AppSummaryResponse {
             help_url: None,
             internal: None,
             has_platform_key: None,
+            has_triggers: None,
+            has_actions: None,
+            trigger_count: None,
+            action_count: None,
         }
     }
 }

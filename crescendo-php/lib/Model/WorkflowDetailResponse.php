@@ -64,6 +64,7 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'string',
         'revision' => 'int',
         'steps' => '\Crescendo\Model\StepResponse[]',
+        'edges' => '\Crescendo\Model\EdgeResponse[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'last_run_at' => '\DateTime'
@@ -84,6 +85,7 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => null,
         'revision' => 'int64',
         'steps' => null,
+        'edges' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'last_run_at' => 'date-time'
@@ -102,6 +104,7 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => false,
         'revision' => false,
         'steps' => false,
+        'edges' => false,
         'created_at' => false,
         'updated_at' => false,
         'last_run_at' => false
@@ -200,6 +203,7 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'status',
         'revision' => 'revision',
         'steps' => 'steps',
+        'edges' => 'edges',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'last_run_at' => 'lastRunAt'
@@ -218,6 +222,7 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'setStatus',
         'revision' => 'setRevision',
         'steps' => 'setSteps',
+        'edges' => 'setEdges',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'last_run_at' => 'setLastRunAt'
@@ -236,6 +241,7 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'getStatus',
         'revision' => 'getRevision',
         'steps' => 'getSteps',
+        'edges' => 'getEdges',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'last_run_at' => 'getLastRunAt'
@@ -305,6 +311,7 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('revision', $data ?? [], null);
         $this->setIfExists('steps', $data ?? [], null);
+        $this->setIfExists('edges', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('last_run_at', $data ?? [], null);
@@ -537,6 +544,33 @@ class WorkflowDetailResponse implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable steps cannot be null');
         }
         $this->container['steps'] = $steps;
+
+        return $this;
+    }
+
+    /**
+     * Gets edges
+     *
+     * @return \Crescendo\Model\EdgeResponse[]|null
+     */
+    public function getEdges()
+    {
+        return $this->container['edges'];
+    }
+
+    /**
+     * Sets edges
+     *
+     * @param \Crescendo\Model\EdgeResponse[]|null $edges edges
+     *
+     * @return self
+     */
+    public function setEdges($edges)
+    {
+        if (is_null($edges)) {
+            throw new \InvalidArgumentException('non-nullable edges cannot be null');
+        }
+        $this->container['edges'] = $edges;
 
         return $this;
     }

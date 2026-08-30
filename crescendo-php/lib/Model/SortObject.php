@@ -57,9 +57,9 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
+        'empty' => 'bool',
         'sorted' => 'bool',
-        'unsorted' => 'bool',
-        'empty' => 'bool'
+        'unsorted' => 'bool'
     ];
 
     /**
@@ -70,9 +70,9 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
+        'empty' => null,
         'sorted' => null,
-        'unsorted' => null,
-        'empty' => null
+        'unsorted' => null
     ];
 
     /**
@@ -81,9 +81,9 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
+        'empty' => false,
         'sorted' => false,
-        'unsorted' => false,
-        'empty' => false
+        'unsorted' => false
     ];
 
     /**
@@ -172,9 +172,9 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'empty' => 'empty',
         'sorted' => 'sorted',
-        'unsorted' => 'unsorted',
-        'empty' => 'empty'
+        'unsorted' => 'unsorted'
     ];
 
     /**
@@ -183,9 +183,9 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'empty' => 'setEmpty',
         'sorted' => 'setSorted',
-        'unsorted' => 'setUnsorted',
-        'empty' => 'setEmpty'
+        'unsorted' => 'setUnsorted'
     ];
 
     /**
@@ -194,9 +194,9 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'empty' => 'getEmpty',
         'sorted' => 'getSorted',
-        'unsorted' => 'getUnsorted',
-        'empty' => 'getEmpty'
+        'unsorted' => 'getUnsorted'
     ];
 
     /**
@@ -256,9 +256,9 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('empty', $data ?? [], null);
         $this->setIfExists('sorted', $data ?? [], null);
         $this->setIfExists('unsorted', $data ?? [], null);
-        $this->setIfExists('empty', $data ?? [], null);
     }
 
     /**
@@ -302,6 +302,33 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets empty
+     *
+     * @return bool|null
+     */
+    public function getEmpty()
+    {
+        return $this->container['empty'];
+    }
+
+    /**
+     * Sets empty
+     *
+     * @param bool|null $empty empty
+     *
+     * @return self
+     */
+    public function setEmpty($empty)
+    {
+        if (is_null($empty)) {
+            throw new \InvalidArgumentException('non-nullable empty cannot be null');
+        }
+        $this->container['empty'] = $empty;
+
+        return $this;
+    }
 
     /**
      * Gets sorted
@@ -353,33 +380,6 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable unsorted cannot be null');
         }
         $this->container['unsorted'] = $unsorted;
-
-        return $this;
-    }
-
-    /**
-     * Gets empty
-     *
-     * @return bool|null
-     */
-    public function getEmpty()
-    {
-        return $this->container['empty'];
-    }
-
-    /**
-     * Sets empty
-     *
-     * @param bool|null $empty empty
-     *
-     * @return self
-     */
-    public function setEmpty($empty)
-    {
-        if (is_null($empty)) {
-            throw new \InvalidArgumentException('non-nullable empty cannot be null');
-        }
-        $this->container['empty'] = $empty;
 
         return $this;
     }

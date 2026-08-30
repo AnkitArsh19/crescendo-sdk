@@ -117,24 +117,6 @@ namespace Crescendo.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'ParentStepId'
-        /// </summary>
-        [Fact]
-        public void ParentStepIdTest()
-        {
-            // TODO unit test for the property 'ParentStepId'
-        }
-
-        /// <summary>
-        /// Test the property 'BranchKey'
-        /// </summary>
-        [Fact]
-        public void BranchKeyTest()
-        {
-            // TODO unit test for the property 'BranchKey'
-        }
-
-        /// <summary>
         /// Test the property 'VarConfiguration'
         /// </summary>
         [Fact]

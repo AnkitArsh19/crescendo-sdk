@@ -32,6 +32,7 @@ docs/Model/CustomEvent.md
 docs/Model/DailyCount.md
 docs/Model/DnsRecord.md
 docs/Model/DomainResponse.md
+docs/Model/EdgeResponse.md
 docs/Model/EmailLogResponse.md
 docs/Model/FireCustomEventRequest.md
 docs/Model/ImportSuppressionsRequest.md
@@ -100,6 +101,7 @@ lib/Model/CustomEvent.php
 lib/Model/DailyCount.php
 lib/Model/DnsRecord.php
 lib/Model/DomainResponse.php
+lib/Model/EdgeResponse.php
 lib/Model/EmailLogResponse.php
 lib/Model/FireCustomEventRequest.php
 lib/Model/ImportSuppressionsRequest.php
@@ -166,6 +168,7 @@ test/Model/CustomEventTest.php
 test/Model/DailyCountTest.php
 test/Model/DnsRecordTest.php
 test/Model/DomainResponseTest.php
+test/Model/EdgeResponseTest.php
 test/Model/EmailLogResponseTest.php
 test/Model/FireCustomEventRequestTest.php
 test/Model/ImportSuppressionsRequestTest.php

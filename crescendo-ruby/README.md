@@ -155,6 +155,7 @@ Class | Method | HTTP request | Description
  - [Crescendo::DailyCount](docs/DailyCount.md)
  - [Crescendo::DnsRecord](docs/DnsRecord.md)
  - [Crescendo::DomainResponse](docs/DomainResponse.md)
+ - [Crescendo::EdgeResponse](docs/EdgeResponse.md)
  - [Crescendo::EmailLogResponse](docs/EmailLogResponse.md)
  - [Crescendo::FireCustomEventRequest](docs/FireCustomEventRequest.md)
  - [Crescendo::ImportSuppressionsRequest](docs/ImportSuppressionsRequest.md)

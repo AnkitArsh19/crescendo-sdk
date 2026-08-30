@@ -38,7 +38,7 @@ import io.crescendo.ApiClient;
   CreateCustomEventRequest.JSON_PROPERTY_NAME,
   CreateCustomEventRequest.JSON_PROPERTY_JSON_SCHEMA
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-07T13:05:45.810490+05:30[Asia/Kolkata]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T10:56:08.153732648Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class CreateCustomEventRequest {
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nullable

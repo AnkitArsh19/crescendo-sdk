@@ -39,6 +39,14 @@ class PageableObjectTest {
     }
 
     /**
+     * Test the property 'offset'
+     */
+    @Test
+    void offsetTest() {
+        // TODO: test offset
+    }
+
+    /**
      * Test the property 'paged'
      */
     @Test
@@ -76,14 +84,6 @@ class PageableObjectTest {
     @Test
     void unpagedTest() {
         // TODO: test unpaged
-    }
-
-    /**
-     * Test the property 'offset'
-     */
-    @Test
-    void offsetTest() {
-        // TODO: test offset
     }
 
 }

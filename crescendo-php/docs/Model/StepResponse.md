@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **app_key** | **string** |  | [optional]
 **action_key** | **string** |  | [optional]
 **connection_id** | **string** |  | [optional]
-**parent_step_id** | **string** |  | [optional]
-**branch_key** | **string** |  | [optional]
 **configuration** | **array<string,mixed>** |  | [optional]
 **created_at** | **\DateTime** |  | [optional]
 **updated_at** | **\DateTime** |  | [optional]

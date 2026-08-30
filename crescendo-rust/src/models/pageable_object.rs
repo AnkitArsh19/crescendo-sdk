@@ -13,6 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PageableObject {
+    #[serde(rename = "offset", skip_serializing_if = "Option::is_none")]
+    pub offset: Option<i64>,
     #[serde(rename = "paged", skip_serializing_if = "Option::is_none")]
     pub paged: Option<bool>,
     #[serde(rename = "pageNumber", skip_serializing_if = "Option::is_none")]
@@ -23,19 +25,17 @@ pub struct PageableObject {
     pub sort: Option<Box<models::SortObject>>,
     #[serde(rename = "unpaged", skip_serializing_if = "Option::is_none")]
     pub unpaged: Option<bool>,
-    #[serde(rename = "offset", skip_serializing_if = "Option::is_none")]
-    pub offset: Option<i64>,
 }
 
 impl PageableObject {
     pub fn new() -> PageableObject {
         PageableObject {
+            offset: None,
             paged: None,
             page_number: None,
             page_size: None,
             sort: None,
             unpaged: None,
-            offset: None,
         }
     }
 }

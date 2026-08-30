@@ -6,12 +6,12 @@ Create a config.yaml file similar to what is below, then run the following power
 
 ```yaml
 generatorName: csharp
-inputSpec: /Users/nitukumari/Documents/crescendo-backend/sdk/spec/openapi.json
+inputSpec: /home/runner/work/crescendo-sdk/crescendo-sdk/spec/openapi.json
 outputDir: out
 
 # https://openapi-generator.tech/docs/generators/csharp
 additionalProperties:
-  packageGuid: '{43200910-FA90-4570-A70B-F2EE2E391D15}'
+  packageGuid: '{56623D0A-21DD-4D57-987E-4A0FB6681FBC}'
 
 # https://openapi-generator.tech/docs/integrations/#github-integration
 # gitHost:

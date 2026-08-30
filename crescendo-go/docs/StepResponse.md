@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **AppKey** | Pointer to **string** |  | [optional] 
 **ActionKey** | Pointer to **string** |  | [optional] 
 **ConnectionId** | Pointer to **string** |  | [optional] 
-**ParentStepId** | Pointer to **string** |  | [optional] 
-**BranchKey** | Pointer to **string** |  | [optional] 
 **Configuration** | Pointer to **map[string]interface{}** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] 
@@ -210,56 +208,6 @@ SetConnectionId sets ConnectionId field to given value.
 `func (o *StepResponse) HasConnectionId() bool`
 
 HasConnectionId returns a boolean if a field has been set.
-
-### GetParentStepId
-
-`func (o *StepResponse) GetParentStepId() string`
-
-GetParentStepId returns the ParentStepId field if non-nil, zero value otherwise.
-
-### GetParentStepIdOk
-
-`func (o *StepResponse) GetParentStepIdOk() (*string, bool)`
-
-GetParentStepIdOk returns a tuple with the ParentStepId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetParentStepId
-
-`func (o *StepResponse) SetParentStepId(v string)`
-
-SetParentStepId sets ParentStepId field to given value.
-
-### HasParentStepId
-
-`func (o *StepResponse) HasParentStepId() bool`
-
-HasParentStepId returns a boolean if a field has been set.
-
-### GetBranchKey
-
-`func (o *StepResponse) GetBranchKey() string`
-
-GetBranchKey returns the BranchKey field if non-nil, zero value otherwise.
-
-### GetBranchKeyOk
-
-`func (o *StepResponse) GetBranchKeyOk() (*string, bool)`
-
-GetBranchKeyOk returns a tuple with the BranchKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBranchKey
-
-`func (o *StepResponse) SetBranchKey(v string)`
-
-SetBranchKey sets BranchKey field to given value.
-
-### HasBranchKey
-
-`func (o *StepResponse) HasBranchKey() bool`
-
-HasBranchKey returns a boolean if a field has been set.
 
 ### GetConfiguration
 

@@ -27,8 +27,6 @@ type StepResponse struct {
 	AppKey *string `json:"appKey,omitempty"`
 	ActionKey *string `json:"actionKey,omitempty"`
 	ConnectionId *string `json:"connectionId,omitempty"`
-	ParentStepId *string `json:"parentStepId,omitempty"`
-	BranchKey *string `json:"branchKey,omitempty"`
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
@@ -275,70 +273,6 @@ func (o *StepResponse) SetConnectionId(v string) {
 	o.ConnectionId = &v
 }
 
-// GetParentStepId returns the ParentStepId field value if set, zero value otherwise.
-func (o *StepResponse) GetParentStepId() string {
-	if o == nil || IsNil(o.ParentStepId) {
-		var ret string
-		return ret
-	}
-	return *o.ParentStepId
-}
-
-// GetParentStepIdOk returns a tuple with the ParentStepId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StepResponse) GetParentStepIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ParentStepId) {
-		return nil, false
-	}
-	return o.ParentStepId, true
-}
-
-// HasParentStepId returns a boolean if a field has been set.
-func (o *StepResponse) HasParentStepId() bool {
-	if o != nil && !IsNil(o.ParentStepId) {
-		return true
-	}
-
-	return false
-}
-
-// SetParentStepId gets a reference to the given string and assigns it to the ParentStepId field.
-func (o *StepResponse) SetParentStepId(v string) {
-	o.ParentStepId = &v
-}
-
-// GetBranchKey returns the BranchKey field value if set, zero value otherwise.
-func (o *StepResponse) GetBranchKey() string {
-	if o == nil || IsNil(o.BranchKey) {
-		var ret string
-		return ret
-	}
-	return *o.BranchKey
-}
-
-// GetBranchKeyOk returns a tuple with the BranchKey field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StepResponse) GetBranchKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.BranchKey) {
-		return nil, false
-	}
-	return o.BranchKey, true
-}
-
-// HasBranchKey returns a boolean if a field has been set.
-func (o *StepResponse) HasBranchKey() bool {
-	if o != nil && !IsNil(o.BranchKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetBranchKey gets a reference to the given string and assigns it to the BranchKey field.
-func (o *StepResponse) SetBranchKey(v string) {
-	o.BranchKey = &v
-}
-
 // GetConfiguration returns the Configuration field value if set, zero value otherwise.
 func (o *StepResponse) GetConfiguration() map[string]interface{} {
 	if o == nil || IsNil(o.Configuration) {
@@ -465,12 +399,6 @@ func (o StepResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ConnectionId) {
 		toSerialize["connectionId"] = o.ConnectionId
-	}
-	if !IsNil(o.ParentStepId) {
-		toSerialize["parentStepId"] = o.ParentStepId
-	}
-	if !IsNil(o.BranchKey) {
-		toSerialize["branchKey"] = o.BranchKey
 	}
 	if !IsNil(o.Configuration) {
 		toSerialize["configuration"] = o.Configuration

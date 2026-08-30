@@ -11,6 +11,7 @@
 | **status** | **String** |  | [optional] |
 | **revision** | **Integer** |  | [optional] |
 | **steps** | [**Array&lt;StepResponse&gt;**](StepResponse.md) |  | [optional] |
+| **edges** | [**Array&lt;EdgeResponse&gt;**](EdgeResponse.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
 | **updated_at** | **Time** |  | [optional] |
 | **last_run_at** | **Time** |  | [optional] |
@@ -28,6 +29,7 @@ instance = Crescendo::WorkflowDetailResponse.new(
   status: null,
   revision: null,
   steps: null,
+  edges: null,
   created_at: null,
   updated_at: null,
   last_run_at: null

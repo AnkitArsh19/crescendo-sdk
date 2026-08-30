@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.crescendo.model.EdgeResponse;
 import io.crescendo.model.StepResponse;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -95,6 +96,14 @@ class WorkflowDetailResponseTest {
     @Test
     void stepsTest() {
         // TODO: test steps
+    }
+
+    /**
+     * Test the property 'edges'
+     */
+    @Test
+    void edgesTest() {
+        // TODO: test edges
     }
 
     /**

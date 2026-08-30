@@ -27,6 +27,7 @@ type WorkflowDetailResponse struct {
 	Status *string `json:"status,omitempty"`
 	Revision *int64 `json:"revision,omitempty"`
 	Steps []StepResponse `json:"steps,omitempty"`
+	Edges []EdgeResponse `json:"edges,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	LastRunAt *time.Time `json:"lastRunAt,omitempty"`
@@ -273,6 +274,38 @@ func (o *WorkflowDetailResponse) SetSteps(v []StepResponse) {
 	o.Steps = v
 }
 
+// GetEdges returns the Edges field value if set, zero value otherwise.
+func (o *WorkflowDetailResponse) GetEdges() []EdgeResponse {
+	if o == nil || IsNil(o.Edges) {
+		var ret []EdgeResponse
+		return ret
+	}
+	return o.Edges
+}
+
+// GetEdgesOk returns a tuple with the Edges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowDetailResponse) GetEdgesOk() ([]EdgeResponse, bool) {
+	if o == nil || IsNil(o.Edges) {
+		return nil, false
+	}
+	return o.Edges, true
+}
+
+// HasEdges returns a boolean if a field has been set.
+func (o *WorkflowDetailResponse) HasEdges() bool {
+	if o != nil && !IsNil(o.Edges) {
+		return true
+	}
+
+	return false
+}
+
+// SetEdges gets a reference to the given []EdgeResponse and assigns it to the Edges field.
+func (o *WorkflowDetailResponse) SetEdges(v []EdgeResponse) {
+	o.Edges = v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *WorkflowDetailResponse) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -399,6 +432,9 @@ func (o WorkflowDetailResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Steps) {
 		toSerialize["steps"] = o.Steps
+	}
+	if !IsNil(o.Edges) {
+		toSerialize["edges"] = o.Edges
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt

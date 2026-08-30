@@ -40,13 +40,11 @@ namespace Crescendo.Model
         /// <param name="appKey">appKey</param>
         /// <param name="actionKey">actionKey</param>
         /// <param name="connectionId">connectionId</param>
-        /// <param name="parentStepId">parentStepId</param>
-        /// <param name="branchKey">branchKey</param>
         /// <param name="varConfiguration">varConfiguration</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public StepResponse(Option<string?> id = default, Option<string?> name = default, Option<string?> type = default, Option<decimal?> order = default, Option<string?> appKey = default, Option<string?> actionKey = default, Option<Guid?> connectionId = default, Option<Guid?> parentStepId = default, Option<string?> branchKey = default, Option<Dictionary<string, Object>?> varConfiguration = default, Option<DateTime?> createdAt = default, Option<DateTime?> updatedAt = default)
+        public StepResponse(Option<string?> id = default, Option<string?> name = default, Option<string?> type = default, Option<decimal?> order = default, Option<string?> appKey = default, Option<string?> actionKey = default, Option<Guid?> connectionId = default, Option<Dictionary<string, Object>?> varConfiguration = default, Option<DateTime?> createdAt = default, Option<DateTime?> updatedAt = default)
         {
             IdOption = id;
             NameOption = name;
@@ -55,8 +53,6 @@ namespace Crescendo.Model
             AppKeyOption = appKey;
             ActionKeyOption = actionKey;
             ConnectionIdOption = connectionId;
-            ParentStepIdOption = parentStepId;
-            BranchKeyOption = branchKey;
             VarConfigurationOption = varConfiguration;
             CreatedAtOption = createdAt;
             UpdatedAtOption = updatedAt;
@@ -157,32 +153,6 @@ namespace Crescendo.Model
         public Guid? ConnectionId { get { return this.ConnectionIdOption.Value; } set { this.ConnectionIdOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of ParentStepId
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Guid?> ParentStepIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets ParentStepId
-        /// </summary>
-        [JsonPropertyName("parentStepId")]
-        public Guid? ParentStepId { get { return this.ParentStepIdOption.Value; } set { this.ParentStepIdOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of BranchKey
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> BranchKeyOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets BranchKey
-        /// </summary>
-        [JsonPropertyName("branchKey")]
-        public string? BranchKey { get { return this.BranchKeyOption.Value; } set { this.BranchKeyOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of VarConfiguration
         /// </summary>
         [JsonIgnore]
@@ -236,8 +206,6 @@ namespace Crescendo.Model
             sb.Append("  AppKey: ").Append(AppKey).Append("\n");
             sb.Append("  ActionKey: ").Append(ActionKey).Append("\n");
             sb.Append("  ConnectionId: ").Append(ConnectionId).Append("\n");
-            sb.Append("  ParentStepId: ").Append(ParentStepId).Append("\n");
-            sb.Append("  BranchKey: ").Append(BranchKey).Append("\n");
             sb.Append("  VarConfiguration: ").Append(VarConfiguration).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
@@ -295,8 +263,6 @@ namespace Crescendo.Model
             Option<string?> appKey = default;
             Option<string?> actionKey = default;
             Option<Guid?> connectionId = default;
-            Option<Guid?> parentStepId = default;
-            Option<string?> branchKey = default;
             Option<Dictionary<string, Object>?> varConfiguration = default;
             Option<DateTime?> createdAt = default;
             Option<DateTime?> updatedAt = default;
@@ -337,12 +303,6 @@ namespace Crescendo.Model
                         case "connectionId":
                             connectionId = new Option<Guid?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (Guid?)null : utf8JsonReader.GetGuid());
                             break;
-                        case "parentStepId":
-                            parentStepId = new Option<Guid?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (Guid?)null : utf8JsonReader.GetGuid());
-                            break;
-                        case "branchKey":
-                            branchKey = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "configuration":
                             varConfiguration = new Option<Dictionary<string, Object>?>(JsonSerializer.Deserialize<Dictionary<string, Object>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -379,12 +339,6 @@ namespace Crescendo.Model
             if (connectionId.IsSet && connectionId.Value == null)
                 throw new ArgumentNullException(nameof(connectionId), "Property is not nullable for class StepResponse.");
 
-            if (parentStepId.IsSet && parentStepId.Value == null)
-                throw new ArgumentNullException(nameof(parentStepId), "Property is not nullable for class StepResponse.");
-
-            if (branchKey.IsSet && branchKey.Value == null)
-                throw new ArgumentNullException(nameof(branchKey), "Property is not nullable for class StepResponse.");
-
             if (varConfiguration.IsSet && varConfiguration.Value == null)
                 throw new ArgumentNullException(nameof(varConfiguration), "Property is not nullable for class StepResponse.");
 
@@ -394,7 +348,7 @@ namespace Crescendo.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class StepResponse.");
 
-            return new StepResponse(id, name, type, order, appKey, actionKey, connectionId, parentStepId, branchKey, varConfiguration, createdAt, updatedAt);
+            return new StepResponse(id, name, type, order, appKey, actionKey, connectionId, varConfiguration, createdAt, updatedAt);
         }
 
         /// <summary>
@@ -436,9 +390,6 @@ namespace Crescendo.Model
             if (stepResponse.ActionKeyOption.IsSet && stepResponse.ActionKey == null)
                 throw new ArgumentNullException(nameof(stepResponse.ActionKey), "Property is required for class StepResponse.");
 
-            if (stepResponse.BranchKeyOption.IsSet && stepResponse.BranchKey == null)
-                throw new ArgumentNullException(nameof(stepResponse.BranchKey), "Property is required for class StepResponse.");
-
             if (stepResponse.VarConfigurationOption.IsSet && stepResponse.VarConfiguration == null)
                 throw new ArgumentNullException(nameof(stepResponse.VarConfiguration), "Property is required for class StepResponse.");
 
@@ -462,12 +413,6 @@ namespace Crescendo.Model
 
             if (stepResponse.ConnectionIdOption.IsSet)
                 writer.WriteString("connectionId", stepResponse.ConnectionIdOption.Value!.Value);
-
-            if (stepResponse.ParentStepIdOption.IsSet)
-                writer.WriteString("parentStepId", stepResponse.ParentStepIdOption.Value!.Value);
-
-            if (stepResponse.BranchKeyOption.IsSet)
-                writer.WriteString("branchKey", stepResponse.BranchKey);
 
             if (stepResponse.VarConfigurationOption.IsSet)
             {

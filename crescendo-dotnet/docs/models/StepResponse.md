@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **AppKey** | **string** |  | [optional] 
 **ActionKey** | **string** |  | [optional] 
 **ConnectionId** | **Guid** |  | [optional] 
-**ParentStepId** | **Guid** |  | [optional] 
-**BranchKey** | **string** |  | [optional] 
 **VarConfiguration** | **Dictionary&lt;string, Object&gt;** |  | [optional] 
 **CreatedAt** | **DateTime** |  | [optional] 
 **UpdatedAt** | **DateTime** |  | [optional] 

@@ -99,22 +99,6 @@ class StepResponseTest {
     }
 
     /**
-     * Test the property 'parentStepId'
-     */
-    @Test
-    void parentStepIdTest() {
-        // TODO: test parentStepId
-    }
-
-    /**
-     * Test the property 'branchKey'
-     */
-    @Test
-    void branchKeyTest() {
-        // TODO: test branchKey
-    }
-
-    /**
      * Test the property '_configuration'
      */
     @Test

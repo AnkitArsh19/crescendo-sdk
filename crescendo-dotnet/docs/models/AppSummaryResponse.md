@@ -15,6 +15,10 @@ Name | Type | Description | Notes
 **HelpUrl** | **string** |  | [optional] 
 **Internal** | **bool** |  | [optional] 
 **HasPlatformKey** | **bool** |  | [optional] 
+**HasTriggers** | **bool** |  | [optional] 
+**HasActions** | **bool** |  | [optional] 
+**TriggerCount** | **int** |  | [optional] 
+**ActionCount** | **int** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

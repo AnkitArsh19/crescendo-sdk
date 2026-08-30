@@ -150,6 +150,7 @@ Class | Method | HTTP request | Description
  - [DailyCount](docs/DailyCount.md)
  - [DnsRecord](docs/DnsRecord.md)
  - [DomainResponse](docs/DomainResponse.md)
+ - [EdgeResponse](docs/EdgeResponse.md)
  - [EmailLogResponse](docs/EmailLogResponse.md)
  - [FireCustomEventRequest](docs/FireCustomEventRequest.md)
  - [ImportSuppressionsRequest](docs/ImportSuppressionsRequest.md)

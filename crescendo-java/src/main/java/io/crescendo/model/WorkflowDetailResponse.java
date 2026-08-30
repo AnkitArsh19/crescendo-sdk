@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.crescendo.model.EdgeResponse;
 import io.crescendo.model.StepResponse;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -44,11 +45,12 @@ import io.crescendo.ApiClient;
   WorkflowDetailResponse.JSON_PROPERTY_STATUS,
   WorkflowDetailResponse.JSON_PROPERTY_REVISION,
   WorkflowDetailResponse.JSON_PROPERTY_STEPS,
+  WorkflowDetailResponse.JSON_PROPERTY_EDGES,
   WorkflowDetailResponse.JSON_PROPERTY_CREATED_AT,
   WorkflowDetailResponse.JSON_PROPERTY_UPDATED_AT,
   WorkflowDetailResponse.JSON_PROPERTY_LAST_RUN_AT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-07T13:05:45.810490+05:30[Asia/Kolkata]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T10:56:08.153732648Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class WorkflowDetailResponse {
   public static final String JSON_PROPERTY_ID = "id";
   @jakarta.annotation.Nullable
@@ -77,6 +79,10 @@ public class WorkflowDetailResponse {
   public static final String JSON_PROPERTY_STEPS = "steps";
   @jakarta.annotation.Nullable
   private List<StepResponse> steps = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_EDGES = "edges";
+  @jakarta.annotation.Nullable
+  private List<EdgeResponse> edges = new ArrayList<>();
 
   public static final String JSON_PROPERTY_CREATED_AT = "createdAt";
   @jakarta.annotation.Nullable
@@ -269,6 +275,38 @@ public class WorkflowDetailResponse {
   }
 
 
+  public WorkflowDetailResponse edges(@jakarta.annotation.Nullable List<EdgeResponse> edges) {
+    this.edges = edges;
+    return this;
+  }
+
+  public WorkflowDetailResponse addEdgesItem(EdgeResponse edgesItem) {
+    if (this.edges == null) {
+      this.edges = new ArrayList<>();
+    }
+    this.edges.add(edgesItem);
+    return this;
+  }
+
+  /**
+   * Get edges
+   * @return edges
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_EDGES, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public List<EdgeResponse> getEdges() {
+    return edges;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_EDGES, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setEdges(@jakarta.annotation.Nullable List<EdgeResponse> edges) {
+    this.edges = edges;
+  }
+
+
   public WorkflowDetailResponse createdAt(@jakarta.annotation.Nullable OffsetDateTime createdAt) {
     this.createdAt = createdAt;
     return this;
@@ -360,6 +398,7 @@ public class WorkflowDetailResponse {
         Objects.equals(this.status, workflowDetailResponse.status) &&
         Objects.equals(this.revision, workflowDetailResponse.revision) &&
         Objects.equals(this.steps, workflowDetailResponse.steps) &&
+        Objects.equals(this.edges, workflowDetailResponse.edges) &&
         Objects.equals(this.createdAt, workflowDetailResponse.createdAt) &&
         Objects.equals(this.updatedAt, workflowDetailResponse.updatedAt) &&
         Objects.equals(this.lastRunAt, workflowDetailResponse.lastRunAt);
@@ -367,7 +406,7 @@ public class WorkflowDetailResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description, isActive, status, revision, steps, createdAt, updatedAt, lastRunAt);
+    return Objects.hash(id, name, description, isActive, status, revision, steps, edges, createdAt, updatedAt, lastRunAt);
   }
 
   @Override
@@ -381,6 +420,7 @@ public class WorkflowDetailResponse {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    revision: ").append(toIndentedString(revision)).append("\n");
     sb.append("    steps: ").append(toIndentedString(steps)).append("\n");
+    sb.append("    edges: ").append(toIndentedString(edges)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    lastRunAt: ").append(toIndentedString(lastRunAt)).append("\n");
@@ -463,6 +503,16 @@ public class WorkflowDetailResponse {
       for (int i = 0; i < getSteps().size(); i++) {
         if (getSteps().get(i) != null) {
           joiner.add(getSteps().get(i).toUrlQueryString(String.format(java.util.Locale.ROOT, "%ssteps%s%s", prefix, suffix,
+          "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix))));
+        }
+      }
+    }
+
+    // add `edges` to the URL query string
+    if (getEdges() != null) {
+      for (int i = 0; i < getEdges().size(); i++) {
+        if (getEdges().get(i) != null) {
+          joiner.add(getEdges().get(i).toUrlQueryString(String.format(java.util.Locale.ROOT, "%sedges%s%s", prefix, suffix,
           "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix))));
         }
       }

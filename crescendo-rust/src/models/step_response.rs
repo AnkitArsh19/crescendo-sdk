@@ -27,10 +27,6 @@ pub struct StepResponse {
     pub action_key: Option<String>,
     #[serde(rename = "connectionId", skip_serializing_if = "Option::is_none")]
     pub connection_id: Option<uuid::Uuid>,
-    #[serde(rename = "parentStepId", skip_serializing_if = "Option::is_none")]
-    pub parent_step_id: Option<uuid::Uuid>,
-    #[serde(rename = "branchKey", skip_serializing_if = "Option::is_none")]
-    pub branch_key: Option<String>,
     #[serde(rename = "configuration", skip_serializing_if = "Option::is_none")]
     pub configuration: Option<std::collections::HashMap<String, serde_json::Value>>,
     #[serde(rename = "createdAt", skip_serializing_if = "Option::is_none")]
@@ -49,8 +45,6 @@ impl StepResponse {
             app_key: None,
             action_key: None,
             connection_id: None,
-            parent_step_id: None,
-            branch_key: None,
             configuration: None,
             created_at: None,
             updated_at: None,

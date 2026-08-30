@@ -30,6 +30,10 @@ type AppSummaryResponse struct {
 	HelpUrl *string `json:"helpUrl,omitempty"`
 	Internal *bool `json:"internal,omitempty"`
 	HasPlatformKey *bool `json:"hasPlatformKey,omitempty"`
+	HasTriggers *bool `json:"hasTriggers,omitempty"`
+	HasActions *bool `json:"hasActions,omitempty"`
+	TriggerCount *int32 `json:"triggerCount,omitempty"`
+	ActionCount *int32 `json:"actionCount,omitempty"`
 }
 
 // NewAppSummaryResponse instantiates a new AppSummaryResponse object
@@ -401,6 +405,134 @@ func (o *AppSummaryResponse) SetHasPlatformKey(v bool) {
 	o.HasPlatformKey = &v
 }
 
+// GetHasTriggers returns the HasTriggers field value if set, zero value otherwise.
+func (o *AppSummaryResponse) GetHasTriggers() bool {
+	if o == nil || IsNil(o.HasTriggers) {
+		var ret bool
+		return ret
+	}
+	return *o.HasTriggers
+}
+
+// GetHasTriggersOk returns a tuple with the HasTriggers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AppSummaryResponse) GetHasTriggersOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasTriggers) {
+		return nil, false
+	}
+	return o.HasTriggers, true
+}
+
+// HasHasTriggers returns a boolean if a field has been set.
+func (o *AppSummaryResponse) HasHasTriggers() bool {
+	if o != nil && !IsNil(o.HasTriggers) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasTriggers gets a reference to the given bool and assigns it to the HasTriggers field.
+func (o *AppSummaryResponse) SetHasTriggers(v bool) {
+	o.HasTriggers = &v
+}
+
+// GetHasActions returns the HasActions field value if set, zero value otherwise.
+func (o *AppSummaryResponse) GetHasActions() bool {
+	if o == nil || IsNil(o.HasActions) {
+		var ret bool
+		return ret
+	}
+	return *o.HasActions
+}
+
+// GetHasActionsOk returns a tuple with the HasActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AppSummaryResponse) GetHasActionsOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasActions) {
+		return nil, false
+	}
+	return o.HasActions, true
+}
+
+// HasHasActions returns a boolean if a field has been set.
+func (o *AppSummaryResponse) HasHasActions() bool {
+	if o != nil && !IsNil(o.HasActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasActions gets a reference to the given bool and assigns it to the HasActions field.
+func (o *AppSummaryResponse) SetHasActions(v bool) {
+	o.HasActions = &v
+}
+
+// GetTriggerCount returns the TriggerCount field value if set, zero value otherwise.
+func (o *AppSummaryResponse) GetTriggerCount() int32 {
+	if o == nil || IsNil(o.TriggerCount) {
+		var ret int32
+		return ret
+	}
+	return *o.TriggerCount
+}
+
+// GetTriggerCountOk returns a tuple with the TriggerCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AppSummaryResponse) GetTriggerCountOk() (*int32, bool) {
+	if o == nil || IsNil(o.TriggerCount) {
+		return nil, false
+	}
+	return o.TriggerCount, true
+}
+
+// HasTriggerCount returns a boolean if a field has been set.
+func (o *AppSummaryResponse) HasTriggerCount() bool {
+	if o != nil && !IsNil(o.TriggerCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetTriggerCount gets a reference to the given int32 and assigns it to the TriggerCount field.
+func (o *AppSummaryResponse) SetTriggerCount(v int32) {
+	o.TriggerCount = &v
+}
+
+// GetActionCount returns the ActionCount field value if set, zero value otherwise.
+func (o *AppSummaryResponse) GetActionCount() int32 {
+	if o == nil || IsNil(o.ActionCount) {
+		var ret int32
+		return ret
+	}
+	return *o.ActionCount
+}
+
+// GetActionCountOk returns a tuple with the ActionCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AppSummaryResponse) GetActionCountOk() (*int32, bool) {
+	if o == nil || IsNil(o.ActionCount) {
+		return nil, false
+	}
+	return o.ActionCount, true
+}
+
+// HasActionCount returns a boolean if a field has been set.
+func (o *AppSummaryResponse) HasActionCount() bool {
+	if o != nil && !IsNil(o.ActionCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetActionCount gets a reference to the given int32 and assigns it to the ActionCount field.
+func (o *AppSummaryResponse) SetActionCount(v int32) {
+	o.ActionCount = &v
+}
+
 func (o AppSummaryResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -443,6 +575,18 @@ func (o AppSummaryResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.HasPlatformKey) {
 		toSerialize["hasPlatformKey"] = o.HasPlatformKey
+	}
+	if !IsNil(o.HasTriggers) {
+		toSerialize["hasTriggers"] = o.HasTriggers
+	}
+	if !IsNil(o.HasActions) {
+		toSerialize["hasActions"] = o.HasActions
+	}
+	if !IsNil(o.TriggerCount) {
+		toSerialize["triggerCount"] = o.TriggerCount
+	}
+	if !IsNil(o.ActionCount) {
+		toSerialize["actionCount"] = o.ActionCount
 	}
 	return toSerialize, nil
 }

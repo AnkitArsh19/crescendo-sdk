@@ -15,18 +15,18 @@ require 'time'
 
 module Crescendo
   class SortObject < ApiModelBase
+    attr_accessor :empty
+
     attr_accessor :sorted
 
     attr_accessor :unsorted
 
-    attr_accessor :empty
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'empty' => :'empty',
         :'sorted' => :'sorted',
-        :'unsorted' => :'unsorted',
-        :'empty' => :'empty'
+        :'unsorted' => :'unsorted'
       }
     end
 
@@ -43,9 +43,9 @@ module Crescendo
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'empty' => :'Boolean',
         :'sorted' => :'Boolean',
-        :'unsorted' => :'Boolean',
-        :'empty' => :'Boolean'
+        :'unsorted' => :'Boolean'
       }
     end
 
@@ -71,16 +71,16 @@ module Crescendo
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'empty')
+        self.empty = attributes[:'empty']
+      end
+
       if attributes.key?(:'sorted')
         self.sorted = attributes[:'sorted']
       end
 
       if attributes.key?(:'unsorted')
         self.unsorted = attributes[:'unsorted']
-      end
-
-      if attributes.key?(:'empty')
-        self.empty = attributes[:'empty']
       end
     end
 
@@ -104,9 +104,9 @@ module Crescendo
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          empty == o.empty &&
           sorted == o.sorted &&
-          unsorted == o.unsorted &&
-          empty == o.empty
+          unsorted == o.unsorted
     end
 
     # @see the `==` method
@@ -118,7 +118,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [sorted, unsorted, empty].hash
+      [empty, sorted, unsorted].hash
     end
 
     # Builds the object from hash

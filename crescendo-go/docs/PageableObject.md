@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Offset** | Pointer to **int64** |  | [optional] 
 **Paged** | Pointer to **bool** |  | [optional] 
 **PageNumber** | Pointer to **int32** |  | [optional] 
 **PageSize** | Pointer to **int32** |  | [optional] 
 **Sort** | Pointer to [**SortObject**](SortObject.md) |  | [optional] 
 **Unpaged** | Pointer to **bool** |  | [optional] 
-**Offset** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -29,6 +29,31 @@ will change when the set of required properties is changed
 NewPageableObjectWithDefaults instantiates a new PageableObject object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetOffset
+
+`func (o *PageableObject) GetOffset() int64`
+
+GetOffset returns the Offset field if non-nil, zero value otherwise.
+
+### GetOffsetOk
+
+`func (o *PageableObject) GetOffsetOk() (*int64, bool)`
+
+GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOffset
+
+`func (o *PageableObject) SetOffset(v int64)`
+
+SetOffset sets Offset field to given value.
+
+### HasOffset
+
+`func (o *PageableObject) HasOffset() bool`
+
+HasOffset returns a boolean if a field has been set.
 
 ### GetPaged
 
@@ -154,31 +179,6 @@ SetUnpaged sets Unpaged field to given value.
 `func (o *PageableObject) HasUnpaged() bool`
 
 HasUnpaged returns a boolean if a field has been set.
-
-### GetOffset
-
-`func (o *PageableObject) GetOffset() int64`
-
-GetOffset returns the Offset field if non-nil, zero value otherwise.
-
-### GetOffsetOk
-
-`func (o *PageableObject) GetOffsetOk() (*int64, bool)`
-
-GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOffset
-
-`func (o *PageableObject) SetOffset(v int64)`
-
-SetOffset sets Offset field to given value.
-
-### HasOffset
-
-`func (o *PageableObject) HasOffset() bool`
-
-HasOffset returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
