@@ -69,6 +69,12 @@ describe Crescendo::PageWorkflowRunSummaryResponse do
     end
   end
 
+  describe 'test attribute "number_of_elements"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "first"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -76,12 +82,6 @@ describe Crescendo::PageWorkflowRunSummaryResponse do
   end
 
   describe 'test attribute "last"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "number_of_elements"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

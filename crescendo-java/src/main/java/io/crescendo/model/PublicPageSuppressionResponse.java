@@ -40,7 +40,7 @@ import io.crescendo.ApiClient;
   PublicPageSuppressionResponse.JSON_PROPERTY_HAS_MORE,
   PublicPageSuppressionResponse.JSON_PROPERTY_NEXT_CURSOR
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T13:00:51.500757868Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T13:06:35.689156432Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class PublicPageSuppressionResponse {
   public static final String JSON_PROPERTY_DATA = "data";
   @jakarta.annotation.Nullable
