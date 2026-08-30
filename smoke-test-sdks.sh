@@ -41,7 +41,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 run_test "Java"     crescendo-java    mvn compile -q
 
 # PHP — dependency install + syntax check all generated files
-run_test "PHP"      crescendo-php     sh -c "composer install --no-interaction -q && find . -name '*.php' -not -path './vendor/*' | xargs php -l | grep -v 'No syntax errors' | head -20; [ \$(find . -name '*.php' -not -path './vendor/*' | xargs php -l 2>&1 | grep -c 'error') -eq 0 ]"
+run_test "PHP"      crescendo-php     sh -c "composer install --no-interaction -q && find . -name '*.php' -not -path './vendor/*' -exec php -l {} + > /dev/null"
 
 # Go — full build
 run_test "Go"       crescendo-go      go build ./...
@@ -53,7 +53,7 @@ run_test "Rust"     crescendo-rust    cargo build --quiet
 run_test "Ruby"     crescendo-ruby    sh -c "bundle install --quiet && ruby -Ilib -e \"require 'crescendo'\""
 
 # .NET — full Release build
-run_test "C#/.NET"  crescendo-dotnet  dotnet build -c Release --nologo -q
+run_test "C#/.NET"  crescendo-dotnet  dotnet build -c Release --nologo -v q
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
