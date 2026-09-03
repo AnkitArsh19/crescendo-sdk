@@ -45,12 +45,12 @@ import io.crescendo.ApiClient;
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_NUMBER,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_PAGEABLE,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_SORT,
-  PageWorkflowRunSummaryResponse.JSON_PROPERTY_NUMBER_OF_ELEMENTS,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_FIRST,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_LAST,
+  PageWorkflowRunSummaryResponse.JSON_PROPERTY_NUMBER_OF_ELEMENTS,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_EMPTY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T13:06:35.689156432Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-03T17:16:06.571549546Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class PageWorkflowRunSummaryResponse {
   public static final String JSON_PROPERTY_TOTAL_PAGES = "totalPages";
   @jakarta.annotation.Nullable
@@ -80,10 +80,6 @@ public class PageWorkflowRunSummaryResponse {
   @jakarta.annotation.Nullable
   private SortObject sort;
 
-  public static final String JSON_PROPERTY_NUMBER_OF_ELEMENTS = "numberOfElements";
-  @jakarta.annotation.Nullable
-  private Integer numberOfElements;
-
   public static final String JSON_PROPERTY_FIRST = "first";
   @jakarta.annotation.Nullable
   private Boolean first;
@@ -91,6 +87,10 @@ public class PageWorkflowRunSummaryResponse {
   public static final String JSON_PROPERTY_LAST = "last";
   @jakarta.annotation.Nullable
   private Boolean last;
+
+  public static final String JSON_PROPERTY_NUMBER_OF_ELEMENTS = "numberOfElements";
+  @jakarta.annotation.Nullable
+  private Integer numberOfElements;
 
   public static final String JSON_PROPERTY_EMPTY = "empty";
   @jakarta.annotation.Nullable
@@ -275,30 +275,6 @@ public class PageWorkflowRunSummaryResponse {
   }
 
 
-  public PageWorkflowRunSummaryResponse numberOfElements(@jakarta.annotation.Nullable Integer numberOfElements) {
-    this.numberOfElements = numberOfElements;
-    return this;
-  }
-
-  /**
-   * Get numberOfElements
-   * @return numberOfElements
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_NUMBER_OF_ELEMENTS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Integer getNumberOfElements() {
-    return numberOfElements;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_NUMBER_OF_ELEMENTS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNumberOfElements(@jakarta.annotation.Nullable Integer numberOfElements) {
-    this.numberOfElements = numberOfElements;
-  }
-
-
   public PageWorkflowRunSummaryResponse first(@jakarta.annotation.Nullable Boolean first) {
     this.first = first;
     return this;
@@ -347,6 +323,30 @@ public class PageWorkflowRunSummaryResponse {
   }
 
 
+  public PageWorkflowRunSummaryResponse numberOfElements(@jakarta.annotation.Nullable Integer numberOfElements) {
+    this.numberOfElements = numberOfElements;
+    return this;
+  }
+
+  /**
+   * Get numberOfElements
+   * @return numberOfElements
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_NUMBER_OF_ELEMENTS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Integer getNumberOfElements() {
+    return numberOfElements;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_NUMBER_OF_ELEMENTS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setNumberOfElements(@jakarta.annotation.Nullable Integer numberOfElements) {
+    this.numberOfElements = numberOfElements;
+  }
+
+
   public PageWorkflowRunSummaryResponse empty(@jakarta.annotation.Nullable Boolean empty) {
     this.empty = empty;
     return this;
@@ -390,15 +390,15 @@ public class PageWorkflowRunSummaryResponse {
         Objects.equals(this.number, pageWorkflowRunSummaryResponse.number) &&
         Objects.equals(this.pageable, pageWorkflowRunSummaryResponse.pageable) &&
         Objects.equals(this.sort, pageWorkflowRunSummaryResponse.sort) &&
-        Objects.equals(this.numberOfElements, pageWorkflowRunSummaryResponse.numberOfElements) &&
         Objects.equals(this.first, pageWorkflowRunSummaryResponse.first) &&
         Objects.equals(this.last, pageWorkflowRunSummaryResponse.last) &&
+        Objects.equals(this.numberOfElements, pageWorkflowRunSummaryResponse.numberOfElements) &&
         Objects.equals(this.empty, pageWorkflowRunSummaryResponse.empty);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(totalPages, totalElements, size, content, number, pageable, sort, numberOfElements, first, last, empty);
+    return Objects.hash(totalPages, totalElements, size, content, number, pageable, sort, first, last, numberOfElements, empty);
   }
 
   @Override
@@ -412,9 +412,9 @@ public class PageWorkflowRunSummaryResponse {
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    pageable: ").append(toIndentedString(pageable)).append("\n");
     sb.append("    sort: ").append(toIndentedString(sort)).append("\n");
-    sb.append("    numberOfElements: ").append(toIndentedString(numberOfElements)).append("\n");
     sb.append("    first: ").append(toIndentedString(first)).append("\n");
     sb.append("    last: ").append(toIndentedString(last)).append("\n");
+    sb.append("    numberOfElements: ").append(toIndentedString(numberOfElements)).append("\n");
     sb.append("    empty: ").append(toIndentedString(empty)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -500,11 +500,6 @@ public class PageWorkflowRunSummaryResponse {
       joiner.add(getSort().toUrlQueryString(prefix + "sort" + suffix));
     }
 
-    // add `numberOfElements` to the URL query string
-    if (getNumberOfElements() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%snumberOfElements%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getNumberOfElements()))));
-    }
-
     // add `first` to the URL query string
     if (getFirst() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sfirst%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getFirst()))));
@@ -513,6 +508,11 @@ public class PageWorkflowRunSummaryResponse {
     // add `last` to the URL query string
     if (getLast() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%slast%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getLast()))));
+    }
+
+    // add `numberOfElements` to the URL query string
+    if (getNumberOfElements() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%snumberOfElements%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getNumberOfElements()))));
     }
 
     // add `empty` to the URL query string

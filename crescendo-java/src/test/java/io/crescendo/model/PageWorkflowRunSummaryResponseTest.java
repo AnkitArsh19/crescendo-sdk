@@ -99,14 +99,6 @@ class PageWorkflowRunSummaryResponseTest {
     }
 
     /**
-     * Test the property 'numberOfElements'
-     */
-    @Test
-    void numberOfElementsTest() {
-        // TODO: test numberOfElements
-    }
-
-    /**
      * Test the property 'first'
      */
     @Test
@@ -120,6 +112,14 @@ class PageWorkflowRunSummaryResponseTest {
     @Test
     void lastTest() {
         // TODO: test last
+    }
+
+    /**
+     * Test the property 'numberOfElements'
+     */
+    @Test
+    void numberOfElementsTest() {
+        // TODO: test numberOfElements
     }
 
     /**

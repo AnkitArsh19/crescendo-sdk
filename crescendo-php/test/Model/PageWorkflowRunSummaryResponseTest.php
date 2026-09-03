@@ -143,15 +143,6 @@ class PageWorkflowRunSummaryResponseTest extends TestCase
     }
 
     /**
-     * Test attribute "number_of_elements"
-     */
-    public function testPropertyNumberOfElements()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "first"
      */
     public function testPropertyFirst()
@@ -164,6 +155,15 @@ class PageWorkflowRunSummaryResponseTest extends TestCase
      * Test attribute "last"
      */
     public function testPropertyLast()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "number_of_elements"
+     */
+    public function testPropertyNumberOfElements()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

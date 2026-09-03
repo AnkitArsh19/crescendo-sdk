@@ -47,7 +47,7 @@ import io.crescendo.ApiClient;
   SendBatchRequest.JSON_PROPERTY_EMAIL_TYPE,
   SendBatchRequest.JSON_PROPERTY_TO
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T13:06:35.689156432Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-03T17:16:06.571549546Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class SendBatchRequest {
   public static final String JSON_PROPERTY_FROM = "from";
   @jakarta.annotation.Nonnull

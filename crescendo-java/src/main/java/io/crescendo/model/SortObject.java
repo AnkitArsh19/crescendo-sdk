@@ -37,7 +37,7 @@ import io.crescendo.ApiClient;
   SortObject.JSON_PROPERTY_SORTED,
   SortObject.JSON_PROPERTY_UNSORTED
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-30T13:06:35.689156432Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-03T17:16:06.571549546Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class SortObject {
   public static final String JSON_PROPERTY_EMPTY = "empty";
   @jakarta.annotation.Nullable
