@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **Number** | Pointer to **int32** |  | [optional] 
 **Pageable** | Pointer to [**PageableObject**](PageableObject.md) |  | [optional] 
 **Sort** | Pointer to [**SortObject**](SortObject.md) |  | [optional] 
+**NumberOfElements** | Pointer to **int32** |  | [optional] 
 **First** | Pointer to **bool** |  | [optional] 
 **Last** | Pointer to **bool** |  | [optional] 
-**NumberOfElements** | Pointer to **int32** |  | [optional] 
 **Empty** | Pointer to **bool** |  | [optional] 
 
 ## Methods
@@ -210,6 +210,31 @@ SetSort sets Sort field to given value.
 
 HasSort returns a boolean if a field has been set.
 
+### GetNumberOfElements
+
+`func (o *PageWorkflowRunSummaryResponse) GetNumberOfElements() int32`
+
+GetNumberOfElements returns the NumberOfElements field if non-nil, zero value otherwise.
+
+### GetNumberOfElementsOk
+
+`func (o *PageWorkflowRunSummaryResponse) GetNumberOfElementsOk() (*int32, bool)`
+
+GetNumberOfElementsOk returns a tuple with the NumberOfElements field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfElements
+
+`func (o *PageWorkflowRunSummaryResponse) SetNumberOfElements(v int32)`
+
+SetNumberOfElements sets NumberOfElements field to given value.
+
+### HasNumberOfElements
+
+`func (o *PageWorkflowRunSummaryResponse) HasNumberOfElements() bool`
+
+HasNumberOfElements returns a boolean if a field has been set.
+
 ### GetFirst
 
 `func (o *PageWorkflowRunSummaryResponse) GetFirst() bool`
@@ -259,31 +284,6 @@ SetLast sets Last field to given value.
 `func (o *PageWorkflowRunSummaryResponse) HasLast() bool`
 
 HasLast returns a boolean if a field has been set.
-
-### GetNumberOfElements
-
-`func (o *PageWorkflowRunSummaryResponse) GetNumberOfElements() int32`
-
-GetNumberOfElements returns the NumberOfElements field if non-nil, zero value otherwise.
-
-### GetNumberOfElementsOk
-
-`func (o *PageWorkflowRunSummaryResponse) GetNumberOfElementsOk() (*int32, bool)`
-
-GetNumberOfElementsOk returns a tuple with the NumberOfElements field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNumberOfElements
-
-`func (o *PageWorkflowRunSummaryResponse) SetNumberOfElements(v int32)`
-
-SetNumberOfElements sets NumberOfElements field to given value.
-
-### HasNumberOfElements
-
-`func (o *PageWorkflowRunSummaryResponse) HasNumberOfElements() bool`
-
-HasNumberOfElements returns a boolean if a field has been set.
 
 ### GetEmpty
 
