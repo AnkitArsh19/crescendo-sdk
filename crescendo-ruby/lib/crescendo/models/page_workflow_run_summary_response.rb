@@ -29,11 +29,11 @@ module Crescendo
 
     attr_accessor :sort
 
-    attr_accessor :number_of_elements
-
     attr_accessor :first
 
     attr_accessor :last
+
+    attr_accessor :number_of_elements
 
     attr_accessor :empty
 
@@ -47,9 +47,9 @@ module Crescendo
         :'number' => :'number',
         :'pageable' => :'pageable',
         :'sort' => :'sort',
-        :'number_of_elements' => :'numberOfElements',
         :'first' => :'first',
         :'last' => :'last',
+        :'number_of_elements' => :'numberOfElements',
         :'empty' => :'empty'
       }
     end
@@ -74,9 +74,9 @@ module Crescendo
         :'number' => :'Integer',
         :'pageable' => :'PageableObject',
         :'sort' => :'SortObject',
-        :'number_of_elements' => :'Integer',
         :'first' => :'Boolean',
         :'last' => :'Boolean',
+        :'number_of_elements' => :'Integer',
         :'empty' => :'Boolean'
       }
     end
@@ -133,16 +133,16 @@ module Crescendo
         self.sort = attributes[:'sort']
       end
 
-      if attributes.key?(:'number_of_elements')
-        self.number_of_elements = attributes[:'number_of_elements']
-      end
-
       if attributes.key?(:'first')
         self.first = attributes[:'first']
       end
 
       if attributes.key?(:'last')
         self.last = attributes[:'last']
+      end
+
+      if attributes.key?(:'number_of_elements')
+        self.number_of_elements = attributes[:'number_of_elements']
       end
 
       if attributes.key?(:'empty')
@@ -177,9 +177,9 @@ module Crescendo
           number == o.number &&
           pageable == o.pageable &&
           sort == o.sort &&
-          number_of_elements == o.number_of_elements &&
           first == o.first &&
           last == o.last &&
+          number_of_elements == o.number_of_elements &&
           empty == o.empty
     end
 
@@ -192,7 +192,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_pages, total_elements, size, content, number, pageable, sort, number_of_elements, first, last, empty].hash
+      [total_pages, total_elements, size, content, number, pageable, sort, first, last, number_of_elements, empty].hash
     end
 
     # Builds the object from hash

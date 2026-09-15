@@ -37,7 +37,7 @@ import io.crescendo.ApiClient;
 @JsonPropertyOrder({
   ImportSuppressionsRequest.JSON_PROPERTY_EMAILS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-14T21:38:50.451587877Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-15T13:18:16.359662524Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class ImportSuppressionsRequest {
   public static final String JSON_PROPERTY_EMAILS = "emails";
   @jakarta.annotation.Nullable
