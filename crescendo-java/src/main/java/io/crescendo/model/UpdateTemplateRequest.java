@@ -42,7 +42,7 @@ import io.crescendo.ApiClient;
   UpdateTemplateRequest.JSON_PROPERTY_TEXT_BODY,
   UpdateTemplateRequest.JSON_PROPERTY_VARIABLES
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-15T13:18:16.359662524Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T07:10:45.416760317Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class UpdateTemplateRequest {
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nullable

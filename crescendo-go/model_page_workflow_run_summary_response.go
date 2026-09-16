@@ -26,9 +26,9 @@ type PageWorkflowRunSummaryResponse struct {
 	Number *int32 `json:"number,omitempty"`
 	Pageable *PageableObject `json:"pageable,omitempty"`
 	Sort *SortObject `json:"sort,omitempty"`
+	NumberOfElements *int32 `json:"numberOfElements,omitempty"`
 	First *bool `json:"first,omitempty"`
 	Last *bool `json:"last,omitempty"`
-	NumberOfElements *int32 `json:"numberOfElements,omitempty"`
 	Empty *bool `json:"empty,omitempty"`
 }
 
@@ -273,6 +273,38 @@ func (o *PageWorkflowRunSummaryResponse) SetSort(v SortObject) {
 	o.Sort = &v
 }
 
+// GetNumberOfElements returns the NumberOfElements field value if set, zero value otherwise.
+func (o *PageWorkflowRunSummaryResponse) GetNumberOfElements() int32 {
+	if o == nil || IsNil(o.NumberOfElements) {
+		var ret int32
+		return ret
+	}
+	return *o.NumberOfElements
+}
+
+// GetNumberOfElementsOk returns a tuple with the NumberOfElements field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PageWorkflowRunSummaryResponse) GetNumberOfElementsOk() (*int32, bool) {
+	if o == nil || IsNil(o.NumberOfElements) {
+		return nil, false
+	}
+	return o.NumberOfElements, true
+}
+
+// HasNumberOfElements returns a boolean if a field has been set.
+func (o *PageWorkflowRunSummaryResponse) HasNumberOfElements() bool {
+	if o != nil && !IsNil(o.NumberOfElements) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumberOfElements gets a reference to the given int32 and assigns it to the NumberOfElements field.
+func (o *PageWorkflowRunSummaryResponse) SetNumberOfElements(v int32) {
+	o.NumberOfElements = &v
+}
+
 // GetFirst returns the First field value if set, zero value otherwise.
 func (o *PageWorkflowRunSummaryResponse) GetFirst() bool {
 	if o == nil || IsNil(o.First) {
@@ -335,38 +367,6 @@ func (o *PageWorkflowRunSummaryResponse) HasLast() bool {
 // SetLast gets a reference to the given bool and assigns it to the Last field.
 func (o *PageWorkflowRunSummaryResponse) SetLast(v bool) {
 	o.Last = &v
-}
-
-// GetNumberOfElements returns the NumberOfElements field value if set, zero value otherwise.
-func (o *PageWorkflowRunSummaryResponse) GetNumberOfElements() int32 {
-	if o == nil || IsNil(o.NumberOfElements) {
-		var ret int32
-		return ret
-	}
-	return *o.NumberOfElements
-}
-
-// GetNumberOfElementsOk returns a tuple with the NumberOfElements field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PageWorkflowRunSummaryResponse) GetNumberOfElementsOk() (*int32, bool) {
-	if o == nil || IsNil(o.NumberOfElements) {
-		return nil, false
-	}
-	return o.NumberOfElements, true
-}
-
-// HasNumberOfElements returns a boolean if a field has been set.
-func (o *PageWorkflowRunSummaryResponse) HasNumberOfElements() bool {
-	if o != nil && !IsNil(o.NumberOfElements) {
-		return true
-	}
-
-	return false
-}
-
-// SetNumberOfElements gets a reference to the given int32 and assigns it to the NumberOfElements field.
-func (o *PageWorkflowRunSummaryResponse) SetNumberOfElements(v int32) {
-	o.NumberOfElements = &v
 }
 
 // GetEmpty returns the Empty field value if set, zero value otherwise.
@@ -432,14 +432,14 @@ func (o PageWorkflowRunSummaryResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Sort) {
 		toSerialize["sort"] = o.Sort
 	}
+	if !IsNil(o.NumberOfElements) {
+		toSerialize["numberOfElements"] = o.NumberOfElements
+	}
 	if !IsNil(o.First) {
 		toSerialize["first"] = o.First
 	}
 	if !IsNil(o.Last) {
 		toSerialize["last"] = o.Last
-	}
-	if !IsNil(o.NumberOfElements) {
-		toSerialize["numberOfElements"] = o.NumberOfElements
 	}
 	if !IsNil(o.Empty) {
 		toSerialize["empty"] = o.Empty

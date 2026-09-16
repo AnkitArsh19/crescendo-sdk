@@ -11,9 +11,9 @@
 | **number** | **Integer** |  | [optional] |
 | **pageable** | [**PageableObject**](PageableObject.md) |  | [optional] |
 | **sort** | [**SortObject**](SortObject.md) |  | [optional] |
+| **number_of_elements** | **Integer** |  | [optional] |
 | **first** | **Boolean** |  | [optional] |
 | **last** | **Boolean** |  | [optional] |
-| **number_of_elements** | **Integer** |  | [optional] |
 | **empty** | **Boolean** |  | [optional] |
 
 ## Example
@@ -29,9 +29,9 @@ instance = Crescendo::PageWorkflowRunSummaryResponse.new(
   number: null,
   pageable: null,
   sort: null,
+  number_of_elements: null,
   first: null,
   last: null,
-  number_of_elements: null,
   empty: null
 )
 ```

@@ -38,7 +38,7 @@ import io.crescendo.ApiClient;
   FireCustomEventRequest.JSON_PROPERTY_CORRELATION_KEY,
   FireCustomEventRequest.JSON_PROPERTY_PAYLOAD
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-15T13:18:16.359662524Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T07:10:45.416760317Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class FireCustomEventRequest {
   public static final String JSON_PROPERTY_CORRELATION_KEY = "correlationKey";
   @jakarta.annotation.Nullable

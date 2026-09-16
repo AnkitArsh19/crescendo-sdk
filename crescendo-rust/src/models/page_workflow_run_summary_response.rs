@@ -27,12 +27,12 @@ pub struct PageWorkflowRunSummaryResponse {
     pub pageable: Option<Box<models::PageableObject>>,
     #[serde(rename = "sort", skip_serializing_if = "Option::is_none")]
     pub sort: Option<Box<models::SortObject>>,
+    #[serde(rename = "numberOfElements", skip_serializing_if = "Option::is_none")]
+    pub number_of_elements: Option<i32>,
     #[serde(rename = "first", skip_serializing_if = "Option::is_none")]
     pub first: Option<bool>,
     #[serde(rename = "last", skip_serializing_if = "Option::is_none")]
     pub last: Option<bool>,
-    #[serde(rename = "numberOfElements", skip_serializing_if = "Option::is_none")]
-    pub number_of_elements: Option<i32>,
     #[serde(rename = "empty", skip_serializing_if = "Option::is_none")]
     pub empty: Option<bool>,
 }
@@ -47,9 +47,9 @@ impl PageWorkflowRunSummaryResponse {
             number: None,
             pageable: None,
             sort: None,
+            number_of_elements: None,
             first: None,
             last: None,
-            number_of_elements: None,
             empty: None,
         }
     }
