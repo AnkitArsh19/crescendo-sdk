@@ -13,7 +13,7 @@
 
 package io.crescendo;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T23:47:39.737192920Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T13:27:02.550278473Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class Pair {
   private final String name;
   private final String value;

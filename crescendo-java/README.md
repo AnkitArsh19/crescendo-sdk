@@ -4,7 +4,7 @@ Crescendo API
 
 - API version: v1
 
-- Build date: 2026-09-16T23:47:39.737192920Z[Etc/UTC]
+- Build date: 2026-09-17T13:27:02.550278473Z[Etc/UTC]
 
 - Generator version: 7.23.0
 

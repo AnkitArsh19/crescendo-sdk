@@ -2328,9 +2328,9 @@ components:
           empty: true
           sorted: true
           unsorted: true
-        numberOfElements: 9
         first: true
         last: true
+        numberOfElements: 9
         empty: true
       properties:
         totalPages:
@@ -2354,13 +2354,13 @@ components:
           $ref: "#/components/schemas/PageableObject"
         sort:
           $ref: "#/components/schemas/SortObject"
-        numberOfElements:
-          format: int32
-          type: integer
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
         empty:
           type: boolean
     PageableObject:
