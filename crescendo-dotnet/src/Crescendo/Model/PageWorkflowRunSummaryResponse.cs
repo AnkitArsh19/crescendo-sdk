@@ -40,12 +40,12 @@ namespace Crescendo.Model
         /// <param name="number">number</param>
         /// <param name="pageable">pageable</param>
         /// <param name="sort">sort</param>
-        /// <param name="numberOfElements">numberOfElements</param>
         /// <param name="first">first</param>
         /// <param name="last">last</param>
+        /// <param name="numberOfElements">numberOfElements</param>
         /// <param name="empty">empty</param>
         [JsonConstructor]
-        public PageWorkflowRunSummaryResponse(Option<int?> totalPages = default, Option<long?> totalElements = default, Option<int?> size = default, Option<List<WorkflowRunSummaryResponse>?> content = default, Option<int?> number = default, Option<PageableObject?> pageable = default, Option<SortObject?> sort = default, Option<int?> numberOfElements = default, Option<bool?> first = default, Option<bool?> last = default, Option<bool?> empty = default)
+        public PageWorkflowRunSummaryResponse(Option<int?> totalPages = default, Option<long?> totalElements = default, Option<int?> size = default, Option<List<WorkflowRunSummaryResponse>?> content = default, Option<int?> number = default, Option<PageableObject?> pageable = default, Option<SortObject?> sort = default, Option<bool?> first = default, Option<bool?> last = default, Option<int?> numberOfElements = default, Option<bool?> empty = default)
         {
             TotalPagesOption = totalPages;
             TotalElementsOption = totalElements;
@@ -54,9 +54,9 @@ namespace Crescendo.Model
             NumberOption = number;
             PageableOption = pageable;
             SortOption = sort;
-            NumberOfElementsOption = numberOfElements;
             FirstOption = first;
             LastOption = last;
+            NumberOfElementsOption = numberOfElements;
             EmptyOption = empty;
             OnCreated();
         }
@@ -155,19 +155,6 @@ namespace Crescendo.Model
         public SortObject? Sort { get { return this.SortOption.Value; } set { this.SortOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of NumberOfElements
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> NumberOfElementsOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets NumberOfElements
-        /// </summary>
-        [JsonPropertyName("numberOfElements")]
-        public int? NumberOfElements { get { return this.NumberOfElementsOption.Value; } set { this.NumberOfElementsOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of First
         /// </summary>
         [JsonIgnore]
@@ -192,6 +179,19 @@ namespace Crescendo.Model
         /// </summary>
         [JsonPropertyName("last")]
         public bool? Last { get { return this.LastOption.Value; } set { this.LastOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of NumberOfElements
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> NumberOfElementsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets NumberOfElements
+        /// </summary>
+        [JsonPropertyName("numberOfElements")]
+        public int? NumberOfElements { get { return this.NumberOfElementsOption.Value; } set { this.NumberOfElementsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Empty
@@ -221,9 +221,9 @@ namespace Crescendo.Model
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  Pageable: ").Append(Pageable).Append("\n");
             sb.Append("  Sort: ").Append(Sort).Append("\n");
-            sb.Append("  NumberOfElements: ").Append(NumberOfElements).Append("\n");
             sb.Append("  First: ").Append(First).Append("\n");
             sb.Append("  Last: ").Append(Last).Append("\n");
+            sb.Append("  NumberOfElements: ").Append(NumberOfElements).Append("\n");
             sb.Append("  Empty: ").Append(Empty).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -269,9 +269,9 @@ namespace Crescendo.Model
             Option<int?> number = default;
             Option<PageableObject?> pageable = default;
             Option<SortObject?> sort = default;
-            Option<int?> numberOfElements = default;
             Option<bool?> first = default;
             Option<bool?> last = default;
+            Option<int?> numberOfElements = default;
             Option<bool?> empty = default;
 
             while (utf8JsonReader.Read())
@@ -310,14 +310,14 @@ namespace Crescendo.Model
                         case "sort":
                             sort = new Option<SortObject?>(JsonSerializer.Deserialize<SortObject>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "numberOfElements":
-                            numberOfElements = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
-                            break;
                         case "first":
                             first = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "last":
                             last = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "numberOfElements":
+                            numberOfElements = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "empty":
                             empty = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -349,19 +349,19 @@ namespace Crescendo.Model
             if (sort.IsSet && sort.Value == null)
                 throw new ArgumentNullException(nameof(sort), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
 
-            if (numberOfElements.IsSet && numberOfElements.Value == null)
-                throw new ArgumentNullException(nameof(numberOfElements), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
-
             if (first.IsSet && first.Value == null)
                 throw new ArgumentNullException(nameof(first), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
 
             if (last.IsSet && last.Value == null)
                 throw new ArgumentNullException(nameof(last), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
 
+            if (numberOfElements.IsSet && numberOfElements.Value == null)
+                throw new ArgumentNullException(nameof(numberOfElements), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
+
             if (empty.IsSet && empty.Value == null)
                 throw new ArgumentNullException(nameof(empty), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
 
-            return new PageWorkflowRunSummaryResponse(totalPages, totalElements, size, content, number, pageable, sort, numberOfElements, first, last, empty);
+            return new PageWorkflowRunSummaryResponse(totalPages, totalElements, size, content, number, pageable, sort, first, last, numberOfElements, empty);
         }
 
         /// <summary>
@@ -424,14 +424,14 @@ namespace Crescendo.Model
                 writer.WritePropertyName("sort");
                 JsonSerializer.Serialize(writer, pageWorkflowRunSummaryResponse.Sort, jsonSerializerOptions);
             }
-            if (pageWorkflowRunSummaryResponse.NumberOfElementsOption.IsSet)
-                writer.WriteNumber("numberOfElements", pageWorkflowRunSummaryResponse.NumberOfElementsOption.Value!.Value);
-
             if (pageWorkflowRunSummaryResponse.FirstOption.IsSet)
                 writer.WriteBoolean("first", pageWorkflowRunSummaryResponse.FirstOption.Value!.Value);
 
             if (pageWorkflowRunSummaryResponse.LastOption.IsSet)
                 writer.WriteBoolean("last", pageWorkflowRunSummaryResponse.LastOption.Value!.Value);
+
+            if (pageWorkflowRunSummaryResponse.NumberOfElementsOption.IsSet)
+                writer.WriteNumber("numberOfElements", pageWorkflowRunSummaryResponse.NumberOfElementsOption.Value!.Value);
 
             if (pageWorkflowRunSummaryResponse.EmptyOption.IsSet)
                 writer.WriteBoolean("empty", pageWorkflowRunSummaryResponse.EmptyOption.Value!.Value);
