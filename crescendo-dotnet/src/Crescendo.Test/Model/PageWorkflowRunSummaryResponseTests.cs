@@ -117,6 +117,15 @@ namespace Crescendo.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'NumberOfElements'
+        /// </summary>
+        [Fact]
+        public void NumberOfElementsTest()
+        {
+            // TODO unit test for the property 'NumberOfElements'
+        }
+
+        /// <summary>
         /// Test the property 'First'
         /// </summary>
         [Fact]
@@ -132,15 +141,6 @@ namespace Crescendo.Test.Model
         public void LastTest()
         {
             // TODO unit test for the property 'Last'
-        }
-
-        /// <summary>
-        /// Test the property 'NumberOfElements'
-        /// </summary>
-        [Fact]
-        public void NumberOfElementsTest()
-        {
-            // TODO unit test for the property 'NumberOfElements'
         }
 
         /// <summary>

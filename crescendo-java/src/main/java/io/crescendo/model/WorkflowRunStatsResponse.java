@@ -39,7 +39,7 @@ import io.crescendo.ApiClient;
   WorkflowRunStatsResponse.JSON_PROPERTY_RUNNING_COUNT,
   WorkflowRunStatsResponse.JSON_PROPERTY_PENDING_COUNT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T13:27:02.550278473Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T14:51:18.071257777Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class WorkflowRunStatsResponse {
   public static final String JSON_PROPERTY_TOTAL_RUNS = "totalRuns";
   @jakarta.annotation.Nullable

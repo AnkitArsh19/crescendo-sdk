@@ -52,7 +52,7 @@ import io.crescendo.ApiClient;
   AppSummaryResponse.JSON_PROPERTY_TRIGGER_COUNT,
   AppSummaryResponse.JSON_PROPERTY_ACTION_COUNT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T13:27:02.550278473Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T14:51:18.071257777Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class AppSummaryResponse {
   public static final String JSON_PROPERTY_APP_KEY = "appKey";
   @jakarta.annotation.Nullable
