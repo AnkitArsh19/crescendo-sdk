@@ -19,8 +19,8 @@ var _ MappedNullable = &PageWorkflowRunSummaryResponse{}
 
 // PageWorkflowRunSummaryResponse struct for PageWorkflowRunSummaryResponse
 type PageWorkflowRunSummaryResponse struct {
-	TotalElements *int64 `json:"totalElements,omitempty"`
 	TotalPages *int32 `json:"totalPages,omitempty"`
+	TotalElements *int64 `json:"totalElements,omitempty"`
 	Size *int32 `json:"size,omitempty"`
 	Content []WorkflowRunSummaryResponse `json:"content,omitempty"`
 	Number *int32 `json:"number,omitempty"`
@@ -47,38 +47,6 @@ func NewPageWorkflowRunSummaryResponse() *PageWorkflowRunSummaryResponse {
 func NewPageWorkflowRunSummaryResponseWithDefaults() *PageWorkflowRunSummaryResponse {
 	this := PageWorkflowRunSummaryResponse{}
 	return &this
-}
-
-// GetTotalElements returns the TotalElements field value if set, zero value otherwise.
-func (o *PageWorkflowRunSummaryResponse) GetTotalElements() int64 {
-	if o == nil || IsNil(o.TotalElements) {
-		var ret int64
-		return ret
-	}
-	return *o.TotalElements
-}
-
-// GetTotalElementsOk returns a tuple with the TotalElements field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PageWorkflowRunSummaryResponse) GetTotalElementsOk() (*int64, bool) {
-	if o == nil || IsNil(o.TotalElements) {
-		return nil, false
-	}
-	return o.TotalElements, true
-}
-
-// HasTotalElements returns a boolean if a field has been set.
-func (o *PageWorkflowRunSummaryResponse) HasTotalElements() bool {
-	if o != nil && !IsNil(o.TotalElements) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalElements gets a reference to the given int64 and assigns it to the TotalElements field.
-func (o *PageWorkflowRunSummaryResponse) SetTotalElements(v int64) {
-	o.TotalElements = &v
 }
 
 // GetTotalPages returns the TotalPages field value if set, zero value otherwise.
@@ -111,6 +79,38 @@ func (o *PageWorkflowRunSummaryResponse) HasTotalPages() bool {
 // SetTotalPages gets a reference to the given int32 and assigns it to the TotalPages field.
 func (o *PageWorkflowRunSummaryResponse) SetTotalPages(v int32) {
 	o.TotalPages = &v
+}
+
+// GetTotalElements returns the TotalElements field value if set, zero value otherwise.
+func (o *PageWorkflowRunSummaryResponse) GetTotalElements() int64 {
+	if o == nil || IsNil(o.TotalElements) {
+		var ret int64
+		return ret
+	}
+	return *o.TotalElements
+}
+
+// GetTotalElementsOk returns a tuple with the TotalElements field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PageWorkflowRunSummaryResponse) GetTotalElementsOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalElements) {
+		return nil, false
+	}
+	return o.TotalElements, true
+}
+
+// HasTotalElements returns a boolean if a field has been set.
+func (o *PageWorkflowRunSummaryResponse) HasTotalElements() bool {
+	if o != nil && !IsNil(o.TotalElements) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalElements gets a reference to the given int64 and assigns it to the TotalElements field.
+func (o *PageWorkflowRunSummaryResponse) SetTotalElements(v int64) {
+	o.TotalElements = &v
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
@@ -411,11 +411,11 @@ func (o PageWorkflowRunSummaryResponse) MarshalJSON() ([]byte, error) {
 
 func (o PageWorkflowRunSummaryResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TotalElements) {
-		toSerialize["totalElements"] = o.TotalElements
-	}
 	if !IsNil(o.TotalPages) {
 		toSerialize["totalPages"] = o.TotalPages
+	}
+	if !IsNil(o.TotalElements) {
+		toSerialize["totalElements"] = o.TotalElements
 	}
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size

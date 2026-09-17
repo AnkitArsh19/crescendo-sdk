@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **total_elements** | **Integer** |  | [optional] |
 | **total_pages** | **Integer** |  | [optional] |
+| **total_elements** | **Integer** |  | [optional] |
 | **size** | **Integer** |  | [optional] |
 | **content** | [**Array&lt;WorkflowRunSummaryResponse&gt;**](WorkflowRunSummaryResponse.md) |  | [optional] |
 | **number** | **Integer** |  | [optional] |
@@ -22,8 +22,8 @@
 require 'crescendo'
 
 instance = Crescendo::PageWorkflowRunSummaryResponse.new(
-  total_elements: null,
   total_pages: null,
+  total_elements: null,
   size: null,
   content: null,
   number: null,

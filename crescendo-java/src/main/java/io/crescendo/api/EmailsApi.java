@@ -51,7 +51,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T18:06:21.143589357Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T19:02:24.164351079Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class EmailsApi {
   /**
    * Utility class for extending HttpRequest.Builder functionality.

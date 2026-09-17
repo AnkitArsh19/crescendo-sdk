@@ -43,19 +43,19 @@ class PageWorkflowRunSummaryResponseTest {
     }
 
     /**
-     * Test the property 'totalElements'
-     */
-    @Test
-    void totalElementsTest() {
-        // TODO: test totalElements
-    }
-
-    /**
      * Test the property 'totalPages'
      */
     @Test
     void totalPagesTest() {
         // TODO: test totalPages
+    }
+
+    /**
+     * Test the property 'totalElements'
+     */
+    @Test
+    void totalElementsTest() {
+        // TODO: test totalElements
     }
 
     /**

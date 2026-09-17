@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_elements** | Option<**i64**> |  | [optional]
 **total_pages** | Option<**i32**> |  | [optional]
+**total_elements** | Option<**i64**> |  | [optional]
 **size** | Option<**i32**> |  | [optional]
 **content** | Option<[**Vec<models::WorkflowRunSummaryResponse>**](WorkflowRunSummaryResponse.md)> |  | [optional]
 **number** | Option<**i32**> |  | [optional]

@@ -39,7 +39,7 @@ import io.crescendo.ApiClient;
   CreateWebhookRequest.JSON_PROPERTY_URL,
   CreateWebhookRequest.JSON_PROPERTY_SUBSCRIBED_EVENTS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T18:06:21.143589357Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T19:02:24.164351079Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class CreateWebhookRequest {
   public static final String JSON_PROPERTY_URL = "url";
   @jakarta.annotation.Nonnull

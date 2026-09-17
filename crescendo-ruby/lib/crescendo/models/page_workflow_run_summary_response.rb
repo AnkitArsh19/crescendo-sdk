@@ -15,9 +15,9 @@ require 'time'
 
 module Crescendo
   class PageWorkflowRunSummaryResponse < ApiModelBase
-    attr_accessor :total_elements
-
     attr_accessor :total_pages
+
+    attr_accessor :total_elements
 
     attr_accessor :size
 
@@ -40,8 +40,8 @@ module Crescendo
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'total_elements' => :'totalElements',
         :'total_pages' => :'totalPages',
+        :'total_elements' => :'totalElements',
         :'size' => :'size',
         :'content' => :'content',
         :'number' => :'number',
@@ -67,8 +67,8 @@ module Crescendo
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'total_elements' => :'Integer',
         :'total_pages' => :'Integer',
+        :'total_elements' => :'Integer',
         :'size' => :'Integer',
         :'content' => :'Array<WorkflowRunSummaryResponse>',
         :'number' => :'Integer',
@@ -103,12 +103,12 @@ module Crescendo
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'total_elements')
-        self.total_elements = attributes[:'total_elements']
-      end
-
       if attributes.key?(:'total_pages')
         self.total_pages = attributes[:'total_pages']
+      end
+
+      if attributes.key?(:'total_elements')
+        self.total_elements = attributes[:'total_elements']
       end
 
       if attributes.key?(:'size')
@@ -170,8 +170,8 @@ module Crescendo
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          total_elements == o.total_elements &&
           total_pages == o.total_pages &&
+          total_elements == o.total_elements &&
           size == o.size &&
           content == o.content &&
           number == o.number &&
@@ -192,7 +192,7 @@ module Crescendo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_elements, total_pages, size, content, number, pageable, sort, number_of_elements, first, last, empty].hash
+      [total_pages, total_elements, size, content, number, pageable, sort, number_of_elements, first, last, empty].hash
     end
 
     # Builds the object from hash

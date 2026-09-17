@@ -80,18 +80,18 @@ class PageWorkflowRunSummaryResponseTest extends TestCase
     }
 
     /**
-     * Test attribute "total_elements"
+     * Test attribute "total_pages"
      */
-    public function testPropertyTotalElements()
+    public function testPropertyTotalPages()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "total_pages"
+     * Test attribute "total_elements"
      */
-    public function testPropertyTotalPages()
+    public function testPropertyTotalElements()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

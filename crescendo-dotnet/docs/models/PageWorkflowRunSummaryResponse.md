@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TotalElements** | **long** |  | [optional] 
 **TotalPages** | **int** |  | [optional] 
+**TotalElements** | **long** |  | [optional] 
 **Size** | **int** |  | [optional] 
 **Content** | [**List&lt;WorkflowRunSummaryResponse&gt;**](WorkflowRunSummaryResponse.md) |  | [optional] 
 **Number** | **int** |  | [optional] 

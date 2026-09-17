@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TotalElements** | Pointer to **int64** |  | [optional] 
 **TotalPages** | Pointer to **int32** |  | [optional] 
+**TotalElements** | Pointer to **int64** |  | [optional] 
 **Size** | Pointer to **int32** |  | [optional] 
 **Content** | Pointer to [**[]WorkflowRunSummaryResponse**](WorkflowRunSummaryResponse.md) |  | [optional] 
 **Number** | Pointer to **int32** |  | [optional] 
@@ -35,31 +35,6 @@ NewPageWorkflowRunSummaryResponseWithDefaults instantiates a new PageWorkflowRun
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetTotalElements
-
-`func (o *PageWorkflowRunSummaryResponse) GetTotalElements() int64`
-
-GetTotalElements returns the TotalElements field if non-nil, zero value otherwise.
-
-### GetTotalElementsOk
-
-`func (o *PageWorkflowRunSummaryResponse) GetTotalElementsOk() (*int64, bool)`
-
-GetTotalElementsOk returns a tuple with the TotalElements field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTotalElements
-
-`func (o *PageWorkflowRunSummaryResponse) SetTotalElements(v int64)`
-
-SetTotalElements sets TotalElements field to given value.
-
-### HasTotalElements
-
-`func (o *PageWorkflowRunSummaryResponse) HasTotalElements() bool`
-
-HasTotalElements returns a boolean if a field has been set.
-
 ### GetTotalPages
 
 `func (o *PageWorkflowRunSummaryResponse) GetTotalPages() int32`
@@ -84,6 +59,31 @@ SetTotalPages sets TotalPages field to given value.
 `func (o *PageWorkflowRunSummaryResponse) HasTotalPages() bool`
 
 HasTotalPages returns a boolean if a field has been set.
+
+### GetTotalElements
+
+`func (o *PageWorkflowRunSummaryResponse) GetTotalElements() int64`
+
+GetTotalElements returns the TotalElements field if non-nil, zero value otherwise.
+
+### GetTotalElementsOk
+
+`func (o *PageWorkflowRunSummaryResponse) GetTotalElementsOk() (*int64, bool)`
+
+GetTotalElementsOk returns a tuple with the TotalElements field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalElements
+
+`func (o *PageWorkflowRunSummaryResponse) SetTotalElements(v int64)`
+
+SetTotalElements sets TotalElements field to given value.
+
+### HasTotalElements
+
+`func (o *PageWorkflowRunSummaryResponse) HasTotalElements() bool`
+
+HasTotalElements returns a boolean if a field has been set.
 
 ### GetSize
 

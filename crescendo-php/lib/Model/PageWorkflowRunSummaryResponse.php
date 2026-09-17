@@ -57,8 +57,8 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $openAPITypes = [
-        'total_elements' => 'int',
         'total_pages' => 'int',
+        'total_elements' => 'int',
         'size' => 'int',
         'content' => '\Crescendo\Model\WorkflowRunSummaryResponse[]',
         'number' => 'int',
@@ -78,8 +78,8 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'total_elements' => 'int64',
         'total_pages' => 'int32',
+        'total_elements' => 'int64',
         'size' => 'int32',
         'content' => null,
         'number' => 'int32',
@@ -97,8 +97,8 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'total_elements' => false,
         'total_pages' => false,
+        'total_elements' => false,
         'size' => false,
         'content' => false,
         'number' => false,
@@ -196,8 +196,8 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'total_elements' => 'totalElements',
         'total_pages' => 'totalPages',
+        'total_elements' => 'totalElements',
         'size' => 'size',
         'content' => 'content',
         'number' => 'number',
@@ -215,8 +215,8 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'total_elements' => 'setTotalElements',
         'total_pages' => 'setTotalPages',
+        'total_elements' => 'setTotalElements',
         'size' => 'setSize',
         'content' => 'setContent',
         'number' => 'setNumber',
@@ -234,8 +234,8 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'total_elements' => 'getTotalElements',
         'total_pages' => 'getTotalPages',
+        'total_elements' => 'getTotalElements',
         'size' => 'getSize',
         'content' => 'getContent',
         'number' => 'getNumber',
@@ -304,8 +304,8 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('total_elements', $data ?? [], null);
         $this->setIfExists('total_pages', $data ?? [], null);
+        $this->setIfExists('total_elements', $data ?? [], null);
         $this->setIfExists('size', $data ?? [], null);
         $this->setIfExists('content', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
@@ -360,33 +360,6 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets total_elements
-     *
-     * @return int|null
-     */
-    public function getTotalElements()
-    {
-        return $this->container['total_elements'];
-    }
-
-    /**
-     * Sets total_elements
-     *
-     * @param int|null $total_elements total_elements
-     *
-     * @return self
-     */
-    public function setTotalElements($total_elements)
-    {
-        if (is_null($total_elements)) {
-            throw new \InvalidArgumentException('non-nullable total_elements cannot be null');
-        }
-        $this->container['total_elements'] = $total_elements;
-
-        return $this;
-    }
-
-    /**
      * Gets total_pages
      *
      * @return int|null
@@ -409,6 +382,33 @@ class PageWorkflowRunSummaryResponse implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
         }
         $this->container['total_pages'] = $total_pages;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_elements
+     *
+     * @return int|null
+     */
+    public function getTotalElements()
+    {
+        return $this->container['total_elements'];
+    }
+
+    /**
+     * Sets total_elements
+     *
+     * @param int|null $total_elements total_elements
+     *
+     * @return self
+     */
+    public function setTotalElements($total_elements)
+    {
+        if (is_null($total_elements)) {
+            throw new \InvalidArgumentException('non-nullable total_elements cannot be null');
+        }
+        $this->container['total_elements'] = $total_elements;
 
         return $this;
     }

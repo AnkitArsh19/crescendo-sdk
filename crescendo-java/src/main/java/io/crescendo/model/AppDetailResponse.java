@@ -50,7 +50,7 @@ import io.crescendo.ApiClient;
   AppDetailResponse.JSON_PROPERTY_INTERNAL,
   AppDetailResponse.JSON_PROPERTY_HAS_PLATFORM_KEY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T18:06:21.143589357Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T19:02:24.164351079Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class AppDetailResponse {
   public static final String JSON_PROPERTY_APP_KEY = "appKey";
   @jakarta.annotation.Nullable

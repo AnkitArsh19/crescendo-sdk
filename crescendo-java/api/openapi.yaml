@@ -2426,8 +2426,8 @@ components:
           type: string
     PageWorkflowRunSummaryResponse:
       example:
-        totalElements: 0
-        totalPages: 6
+        totalPages: 0
+        totalElements: 6
         size: 1
         content:
         - id: id
@@ -2468,11 +2468,11 @@ components:
         last: true
         empty: true
       properties:
-        totalElements:
-          format: int64
-          type: integer
         totalPages:
           format: int32
+          type: integer
+        totalElements:
+          format: int64
           type: integer
         size:
           format: int32

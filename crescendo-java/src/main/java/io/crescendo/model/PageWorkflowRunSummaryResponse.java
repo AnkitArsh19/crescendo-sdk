@@ -38,8 +38,8 @@ import io.crescendo.ApiClient;
  * PageWorkflowRunSummaryResponse
  */
 @JsonPropertyOrder({
-  PageWorkflowRunSummaryResponse.JSON_PROPERTY_TOTAL_ELEMENTS,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_TOTAL_PAGES,
+  PageWorkflowRunSummaryResponse.JSON_PROPERTY_TOTAL_ELEMENTS,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_SIZE,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_CONTENT,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_NUMBER,
@@ -50,15 +50,15 @@ import io.crescendo.ApiClient;
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_LAST,
   PageWorkflowRunSummaryResponse.JSON_PROPERTY_EMPTY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T18:06:21.143589357Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T19:02:24.164351079Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class PageWorkflowRunSummaryResponse {
-  public static final String JSON_PROPERTY_TOTAL_ELEMENTS = "totalElements";
-  @jakarta.annotation.Nullable
-  private Long totalElements;
-
   public static final String JSON_PROPERTY_TOTAL_PAGES = "totalPages";
   @jakarta.annotation.Nullable
   private Integer totalPages;
+
+  public static final String JSON_PROPERTY_TOTAL_ELEMENTS = "totalElements";
+  @jakarta.annotation.Nullable
+  private Long totalElements;
 
   public static final String JSON_PROPERTY_SIZE = "size";
   @jakarta.annotation.Nullable
@@ -99,30 +99,6 @@ public class PageWorkflowRunSummaryResponse {
   public PageWorkflowRunSummaryResponse() { 
   }
 
-  public PageWorkflowRunSummaryResponse totalElements(@jakarta.annotation.Nullable Long totalElements) {
-    this.totalElements = totalElements;
-    return this;
-  }
-
-  /**
-   * Get totalElements
-   * @return totalElements
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_TOTAL_ELEMENTS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Long getTotalElements() {
-    return totalElements;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_TOTAL_ELEMENTS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTotalElements(@jakarta.annotation.Nullable Long totalElements) {
-    this.totalElements = totalElements;
-  }
-
-
   public PageWorkflowRunSummaryResponse totalPages(@jakarta.annotation.Nullable Integer totalPages) {
     this.totalPages = totalPages;
     return this;
@@ -144,6 +120,30 @@ public class PageWorkflowRunSummaryResponse {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTotalPages(@jakarta.annotation.Nullable Integer totalPages) {
     this.totalPages = totalPages;
+  }
+
+
+  public PageWorkflowRunSummaryResponse totalElements(@jakarta.annotation.Nullable Long totalElements) {
+    this.totalElements = totalElements;
+    return this;
+  }
+
+  /**
+   * Get totalElements
+   * @return totalElements
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TOTAL_ELEMENTS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Long getTotalElements() {
+    return totalElements;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_TOTAL_ELEMENTS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTotalElements(@jakarta.annotation.Nullable Long totalElements) {
+    this.totalElements = totalElements;
   }
 
 
@@ -383,8 +383,8 @@ public class PageWorkflowRunSummaryResponse {
       return false;
     }
     PageWorkflowRunSummaryResponse pageWorkflowRunSummaryResponse = (PageWorkflowRunSummaryResponse) o;
-    return Objects.equals(this.totalElements, pageWorkflowRunSummaryResponse.totalElements) &&
-        Objects.equals(this.totalPages, pageWorkflowRunSummaryResponse.totalPages) &&
+    return Objects.equals(this.totalPages, pageWorkflowRunSummaryResponse.totalPages) &&
+        Objects.equals(this.totalElements, pageWorkflowRunSummaryResponse.totalElements) &&
         Objects.equals(this.size, pageWorkflowRunSummaryResponse.size) &&
         Objects.equals(this.content, pageWorkflowRunSummaryResponse.content) &&
         Objects.equals(this.number, pageWorkflowRunSummaryResponse.number) &&
@@ -398,15 +398,15 @@ public class PageWorkflowRunSummaryResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(totalElements, totalPages, size, content, number, pageable, sort, numberOfElements, first, last, empty);
+    return Objects.hash(totalPages, totalElements, size, content, number, pageable, sort, numberOfElements, first, last, empty);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PageWorkflowRunSummaryResponse {\n");
-    sb.append("    totalElements: ").append(toIndentedString(totalElements)).append("\n");
     sb.append("    totalPages: ").append(toIndentedString(totalPages)).append("\n");
+    sb.append("    totalElements: ").append(toIndentedString(totalElements)).append("\n");
     sb.append("    size: ").append(toIndentedString(size)).append("\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
@@ -460,14 +460,14 @@ public class PageWorkflowRunSummaryResponse {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `totalElements` to the URL query string
-    if (getTotalElements() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%stotalElements%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getTotalElements()))));
-    }
-
     // add `totalPages` to the URL query string
     if (getTotalPages() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%stotalPages%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getTotalPages()))));
+    }
+
+    // add `totalElements` to the URL query string
+    if (getTotalElements() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%stotalElements%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getTotalElements()))));
     }
 
     // add `size` to the URL query string

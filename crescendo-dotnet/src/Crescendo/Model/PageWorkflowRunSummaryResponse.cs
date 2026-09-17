@@ -33,8 +33,8 @@ namespace Crescendo.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PageWorkflowRunSummaryResponse" /> class.
         /// </summary>
-        /// <param name="totalElements">totalElements</param>
         /// <param name="totalPages">totalPages</param>
+        /// <param name="totalElements">totalElements</param>
         /// <param name="size">size</param>
         /// <param name="content">content</param>
         /// <param name="number">number</param>
@@ -45,10 +45,10 @@ namespace Crescendo.Model
         /// <param name="last">last</param>
         /// <param name="empty">empty</param>
         [JsonConstructor]
-        public PageWorkflowRunSummaryResponse(Option<long?> totalElements = default, Option<int?> totalPages = default, Option<int?> size = default, Option<List<WorkflowRunSummaryResponse>?> content = default, Option<int?> number = default, Option<PageableObject?> pageable = default, Option<SortObject?> sort = default, Option<int?> numberOfElements = default, Option<bool?> first = default, Option<bool?> last = default, Option<bool?> empty = default)
+        public PageWorkflowRunSummaryResponse(Option<int?> totalPages = default, Option<long?> totalElements = default, Option<int?> size = default, Option<List<WorkflowRunSummaryResponse>?> content = default, Option<int?> number = default, Option<PageableObject?> pageable = default, Option<SortObject?> sort = default, Option<int?> numberOfElements = default, Option<bool?> first = default, Option<bool?> last = default, Option<bool?> empty = default)
         {
-            TotalElementsOption = totalElements;
             TotalPagesOption = totalPages;
+            TotalElementsOption = totalElements;
             SizeOption = size;
             ContentOption = content;
             NumberOption = number;
@@ -64,19 +64,6 @@ namespace Crescendo.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Used to track the state of TotalElements
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<long?> TotalElementsOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets TotalElements
-        /// </summary>
-        [JsonPropertyName("totalElements")]
-        public long? TotalElements { get { return this.TotalElementsOption.Value; } set { this.TotalElementsOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of TotalPages
         /// </summary>
         [JsonIgnore]
@@ -88,6 +75,19 @@ namespace Crescendo.Model
         /// </summary>
         [JsonPropertyName("totalPages")]
         public int? TotalPages { get { return this.TotalPagesOption.Value; } set { this.TotalPagesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TotalElements
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> TotalElementsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TotalElements
+        /// </summary>
+        [JsonPropertyName("totalElements")]
+        public long? TotalElements { get { return this.TotalElementsOption.Value; } set { this.TotalElementsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Size
@@ -214,8 +214,8 @@ namespace Crescendo.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PageWorkflowRunSummaryResponse {\n");
-            sb.Append("  TotalElements: ").Append(TotalElements).Append("\n");
             sb.Append("  TotalPages: ").Append(TotalPages).Append("\n");
+            sb.Append("  TotalElements: ").Append(TotalElements).Append("\n");
             sb.Append("  Size: ").Append(Size).Append("\n");
             sb.Append("  Content: ").Append(Content).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
@@ -262,8 +262,8 @@ namespace Crescendo.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<long?> totalElements = default;
             Option<int?> totalPages = default;
+            Option<long?> totalElements = default;
             Option<int?> size = default;
             Option<List<WorkflowRunSummaryResponse>?> content = default;
             Option<int?> number = default;
@@ -289,11 +289,11 @@ namespace Crescendo.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "totalElements":
-                            totalElements = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
-                            break;
                         case "totalPages":
                             totalPages = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "totalElements":
+                            totalElements = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
                             break;
                         case "size":
                             size = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -328,11 +328,11 @@ namespace Crescendo.Model
                 }
             }
 
-            if (totalElements.IsSet && totalElements.Value == null)
-                throw new ArgumentNullException(nameof(totalElements), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
-
             if (totalPages.IsSet && totalPages.Value == null)
                 throw new ArgumentNullException(nameof(totalPages), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
+
+            if (totalElements.IsSet && totalElements.Value == null)
+                throw new ArgumentNullException(nameof(totalElements), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
 
             if (size.IsSet && size.Value == null)
                 throw new ArgumentNullException(nameof(size), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
@@ -361,7 +361,7 @@ namespace Crescendo.Model
             if (empty.IsSet && empty.Value == null)
                 throw new ArgumentNullException(nameof(empty), "Property is not nullable for class PageWorkflowRunSummaryResponse.");
 
-            return new PageWorkflowRunSummaryResponse(totalElements, totalPages, size, content, number, pageable, sort, numberOfElements, first, last, empty);
+            return new PageWorkflowRunSummaryResponse(totalPages, totalElements, size, content, number, pageable, sort, numberOfElements, first, last, empty);
         }
 
         /// <summary>
@@ -397,11 +397,11 @@ namespace Crescendo.Model
             if (pageWorkflowRunSummaryResponse.SortOption.IsSet && pageWorkflowRunSummaryResponse.Sort == null)
                 throw new ArgumentNullException(nameof(pageWorkflowRunSummaryResponse.Sort), "Property is required for class PageWorkflowRunSummaryResponse.");
 
-            if (pageWorkflowRunSummaryResponse.TotalElementsOption.IsSet)
-                writer.WriteNumber("totalElements", pageWorkflowRunSummaryResponse.TotalElementsOption.Value!.Value);
-
             if (pageWorkflowRunSummaryResponse.TotalPagesOption.IsSet)
                 writer.WriteNumber("totalPages", pageWorkflowRunSummaryResponse.TotalPagesOption.Value!.Value);
+
+            if (pageWorkflowRunSummaryResponse.TotalElementsOption.IsSet)
+                writer.WriteNumber("totalElements", pageWorkflowRunSummaryResponse.TotalElementsOption.Value!.Value);
 
             if (pageWorkflowRunSummaryResponse.SizeOption.IsSet)
                 writer.WriteNumber("size", pageWorkflowRunSummaryResponse.SizeOption.Value!.Value);

@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**totalElements** | **Long** |  |  [optional] |
 |**totalPages** | **Integer** |  |  [optional] |
+|**totalElements** | **Long** |  |  [optional] |
 |**size** | **Integer** |  |  [optional] |
 |**content** | [**List&lt;WorkflowRunSummaryResponse&gt;**](WorkflowRunSummaryResponse.md) |  |  [optional] |
 |**number** | **Integer** |  |  [optional] |
