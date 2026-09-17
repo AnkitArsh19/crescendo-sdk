@@ -54,21 +54,21 @@ namespace Crescendo.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'TotalPages'
-        /// </summary>
-        [Fact]
-        public void TotalPagesTest()
-        {
-            // TODO unit test for the property 'TotalPages'
-        }
-
-        /// <summary>
         /// Test the property 'TotalElements'
         /// </summary>
         [Fact]
         public void TotalElementsTest()
         {
             // TODO unit test for the property 'TotalElements'
+        }
+
+        /// <summary>
+        /// Test the property 'TotalPages'
+        /// </summary>
+        [Fact]
+        public void TotalPagesTest()
+        {
+            // TODO unit test for the property 'TotalPages'
         }
 
         /// <summary>

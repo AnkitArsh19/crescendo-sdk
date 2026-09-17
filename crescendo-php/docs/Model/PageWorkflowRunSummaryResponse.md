@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_pages** | **int** |  | [optional]
 **total_elements** | **int** |  | [optional]
+**total_pages** | **int** |  | [optional]
 **size** | **int** |  | [optional]
 **content** | [**\Crescendo\Model\WorkflowRunSummaryResponse[]**](WorkflowRunSummaryResponse.md) |  | [optional]
 **number** | **int** |  | [optional]

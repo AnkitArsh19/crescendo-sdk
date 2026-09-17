@@ -13,10 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PageWorkflowRunSummaryResponse {
-    #[serde(rename = "totalPages", skip_serializing_if = "Option::is_none")]
-    pub total_pages: Option<i32>,
     #[serde(rename = "totalElements", skip_serializing_if = "Option::is_none")]
     pub total_elements: Option<i64>,
+    #[serde(rename = "totalPages", skip_serializing_if = "Option::is_none")]
+    pub total_pages: Option<i32>,
     #[serde(rename = "size", skip_serializing_if = "Option::is_none")]
     pub size: Option<i32>,
     #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
@@ -40,8 +40,8 @@ pub struct PageWorkflowRunSummaryResponse {
 impl PageWorkflowRunSummaryResponse {
     pub fn new() -> PageWorkflowRunSummaryResponse {
         PageWorkflowRunSummaryResponse {
-            total_pages: None,
             total_elements: None,
+            total_pages: None,
             size: None,
             content: None,
             number: None,
